@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Stateless
 @LocalBean
@@ -25,5 +25,4 @@ public class AdminBusiness {
         em.persist(object);
     }
     
-
 }

@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "kich_thuoc_man_hinh")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "KichThuocManHinh.findAll", query = "SELECT k FROM KichThuocManHinh k"),
-    @NamedQuery(name = "KichThuocManHinh.findById", query = "SELECT k FROM KichThuocManHinh k WHERE k.id = :id"),
-    @NamedQuery(name = "KichThuocManHinh.findByLoaiKichThuoc", query = "SELECT k FROM KichThuocManHinh k WHERE k.loaiKichThuoc = :loaiKichThuoc"),
-    @NamedQuery(name = "KichThuocManHinh.findByAnHien", query = "SELECT k FROM KichThuocManHinh k WHERE k.anHien = :anHien")})
+    @NamedQuery(name = "KichThuocManHinh.findAll", query = "SELECT k FROM KichThuocManHinh k")
+    , @NamedQuery(name = "KichThuocManHinh.findById", query = "SELECT k FROM KichThuocManHinh k WHERE k.id = :id")
+    , @NamedQuery(name = "KichThuocManHinh.findByLoaiKichThuoc", query = "SELECT k FROM KichThuocManHinh k WHERE k.loaiKichThuoc = :loaiKichThuoc")
+    , @NamedQuery(name = "KichThuocManHinh.findByAnHien", query = "SELECT k FROM KichThuocManHinh k WHERE k.anHien = :anHien")})
 public class KichThuocManHinh implements Serializable {
 
     private static final long serialVersionUID = 1L;
