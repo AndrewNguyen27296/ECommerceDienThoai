@@ -9,13 +9,17 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -23,180 +27,212 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "thongsokythuat")
+@Table(name = "thong_so_ky_thuat")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Thongsokythuat.findAll", query = "SELECT t FROM Thongsokythuat t"),
-    @NamedQuery(name = "Thongsokythuat.findByMaThongSoKyThuat", query = "SELECT t FROM Thongsokythuat t WHERE t.maThongSoKyThuat = :maThongSoKyThuat"),
-    @NamedQuery(name = "Thongsokythuat.findByMaSP", query = "SELECT t FROM Thongsokythuat t WHERE t.maSP = :maSP"),
-    @NamedQuery(name = "Thongsokythuat.findByMaMau", query = "SELECT t FROM Thongsokythuat t WHERE t.maMau = :maMau"),
-    @NamedQuery(name = "Thongsokythuat.findByMaManHinh", query = "SELECT t FROM Thongsokythuat t WHERE t.maManHinh = :maManHinh"),
-    @NamedQuery(name = "Thongsokythuat.findByMaDungLuong", query = "SELECT t FROM Thongsokythuat t WHERE t.maDungLuong = :maDungLuong"),
-    @NamedQuery(name = "Thongsokythuat.findByMaRam", query = "SELECT t FROM Thongsokythuat t WHERE t.maRam = :maRam"),
-    @NamedQuery(name = "Thongsokythuat.findByMaChip", query = "SELECT t FROM Thongsokythuat t WHERE t.maChip = :maChip"),
-    @NamedQuery(name = "Thongsokythuat.findByMaHDH", query = "SELECT t FROM Thongsokythuat t WHERE t.maHDH = :maHDH"),
-    @NamedQuery(name = "Thongsokythuat.findByMaDoPhanGiai", query = "SELECT t FROM Thongsokythuat t WHERE t.maDoPhanGiai = :maDoPhanGiai"),
-    @NamedQuery(name = "Thongsokythuat.findByMaChipDoHoa", query = "SELECT t FROM Thongsokythuat t WHERE t.maChipDoHoa = :maChipDoHoa")})
-public class Thongsokythuat implements Serializable {
+    @NamedQuery(name = "ThongSoKyThuat.findAll", query = "SELECT t FROM ThongSoKyThuat t"),
+    @NamedQuery(name = "ThongSoKyThuat.findById", query = "SELECT t FROM ThongSoKyThuat t WHERE t.id = :id"),
+    @NamedQuery(name = "ThongSoKyThuat.findByCameraTruoc", query = "SELECT t FROM ThongSoKyThuat t WHERE t.cameraTruoc = :cameraTruoc"),
+    @NamedQuery(name = "ThongSoKyThuat.findByCameraSau", query = "SELECT t FROM ThongSoKyThuat t WHERE t.cameraSau = :cameraSau"),
+    @NamedQuery(name = "ThongSoKyThuat.findByDungLuongPin", query = "SELECT t FROM ThongSoKyThuat t WHERE t.dungLuongPin = :dungLuongPin"),
+    @NamedQuery(name = "ThongSoKyThuat.findByTheNho", query = "SELECT t FROM ThongSoKyThuat t WHERE t.theNho = :theNho")})
+public class ThongSoKyThuat implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaThongSoKyThuat")
-    private Integer maThongSoKyThuat;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaSP")
-    private int maSP;
+    @Size(min = 1, max = 250)
+    @Column(name = "camera_truoc")
+    private String cameraTruoc;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaMau")
-    private int maMau;
+    @Size(min = 1, max = 250)
+    @Column(name = "camera_sau")
+    private String cameraSau;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaManHinh")
-    private int maManHinh;
+    @Size(min = 1, max = 250)
+    @Column(name = "dung_luong_pin")
+    private String dungLuongPin;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaDungLuong")
-    private int maDungLuong;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaRam")
-    private int maRam;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaChip")
-    private int maChip;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaHDH")
-    private int maHDH;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaDoPhanGiai")
-    private int maDoPhanGiai;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaChipDoHoa")
-    private int maChipDoHoa;
+    @Column(name = "the_nho")
+    private boolean theNho;
+    @JoinColumn(name = "id_bo_nho_trong", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private BoNhoTrong idBoNhoTrong;
+    @JoinColumn(name = "id_chip_do_hoa", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ChipDoHoa idChipDoHoa;
+    @JoinColumn(name = "id_cpu", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Cpu idCpu;
+    @JoinColumn(name = "id_do_phan_giai", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private DoPhanGiai idDoPhanGiai;
+    @JoinColumn(name = "id_he_dieu_hanh", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private HeDieuHanh idHeDieuHanh;
+    @JoinColumn(name = "id_kich_thuoc_man_hinh", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private KichThuocManHinh idKichThuocManHinh;
+    @JoinColumn(name = "id_loai_man_hinh", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private LoaiManHinh idLoaiManHinh;
+    @JoinColumn(name = "id_ram", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Ram idRam;
+    @JoinColumn(name = "id_san_pham", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private SanPham idSanPham;
 
-    public Thongsokythuat() {
+    public ThongSoKyThuat() {
     }
 
-    public Thongsokythuat(Integer maThongSoKyThuat) {
-        this.maThongSoKyThuat = maThongSoKyThuat;
+    public ThongSoKyThuat(Integer id) {
+        this.id = id;
     }
 
-    public Thongsokythuat(Integer maThongSoKyThuat, int maSP, int maMau, int maManHinh, int maDungLuong, int maRam, int maChip, int maHDH, int maDoPhanGiai, int maChipDoHoa) {
-        this.maThongSoKyThuat = maThongSoKyThuat;
-        this.maSP = maSP;
-        this.maMau = maMau;
-        this.maManHinh = maManHinh;
-        this.maDungLuong = maDungLuong;
-        this.maRam = maRam;
-        this.maChip = maChip;
-        this.maHDH = maHDH;
-        this.maDoPhanGiai = maDoPhanGiai;
-        this.maChipDoHoa = maChipDoHoa;
+    public ThongSoKyThuat(Integer id, String cameraTruoc, String cameraSau, String dungLuongPin, boolean theNho) {
+        this.id = id;
+        this.cameraTruoc = cameraTruoc;
+        this.cameraSau = cameraSau;
+        this.dungLuongPin = dungLuongPin;
+        this.theNho = theNho;
     }
 
-    public Integer getMaThongSoKyThuat() {
-        return maThongSoKyThuat;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaThongSoKyThuat(Integer maThongSoKyThuat) {
-        this.maThongSoKyThuat = maThongSoKyThuat;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public int getMaSP() {
-        return maSP;
+    public String getCameraTruoc() {
+        return cameraTruoc;
     }
 
-    public void setMaSP(int maSP) {
-        this.maSP = maSP;
+    public void setCameraTruoc(String cameraTruoc) {
+        this.cameraTruoc = cameraTruoc;
     }
 
-    public int getMaMau() {
-        return maMau;
+    public String getCameraSau() {
+        return cameraSau;
     }
 
-    public void setMaMau(int maMau) {
-        this.maMau = maMau;
+    public void setCameraSau(String cameraSau) {
+        this.cameraSau = cameraSau;
     }
 
-    public int getMaManHinh() {
-        return maManHinh;
+    public String getDungLuongPin() {
+        return dungLuongPin;
     }
 
-    public void setMaManHinh(int maManHinh) {
-        this.maManHinh = maManHinh;
+    public void setDungLuongPin(String dungLuongPin) {
+        this.dungLuongPin = dungLuongPin;
     }
 
-    public int getMaDungLuong() {
-        return maDungLuong;
+    public boolean getTheNho() {
+        return theNho;
     }
 
-    public void setMaDungLuong(int maDungLuong) {
-        this.maDungLuong = maDungLuong;
+    public void setTheNho(boolean theNho) {
+        this.theNho = theNho;
     }
 
-    public int getMaRam() {
-        return maRam;
+    public BoNhoTrong getIdBoNhoTrong() {
+        return idBoNhoTrong;
     }
 
-    public void setMaRam(int maRam) {
-        this.maRam = maRam;
+    public void setIdBoNhoTrong(BoNhoTrong idBoNhoTrong) {
+        this.idBoNhoTrong = idBoNhoTrong;
     }
 
-    public int getMaChip() {
-        return maChip;
+    public ChipDoHoa getIdChipDoHoa() {
+        return idChipDoHoa;
     }
 
-    public void setMaChip(int maChip) {
-        this.maChip = maChip;
+    public void setIdChipDoHoa(ChipDoHoa idChipDoHoa) {
+        this.idChipDoHoa = idChipDoHoa;
     }
 
-    public int getMaHDH() {
-        return maHDH;
+    public Cpu getIdCpu() {
+        return idCpu;
     }
 
-    public void setMaHDH(int maHDH) {
-        this.maHDH = maHDH;
+    public void setIdCpu(Cpu idCpu) {
+        this.idCpu = idCpu;
     }
 
-    public int getMaDoPhanGiai() {
-        return maDoPhanGiai;
+    public DoPhanGiai getIdDoPhanGiai() {
+        return idDoPhanGiai;
     }
 
-    public void setMaDoPhanGiai(int maDoPhanGiai) {
-        this.maDoPhanGiai = maDoPhanGiai;
+    public void setIdDoPhanGiai(DoPhanGiai idDoPhanGiai) {
+        this.idDoPhanGiai = idDoPhanGiai;
     }
 
-    public int getMaChipDoHoa() {
-        return maChipDoHoa;
+    public HeDieuHanh getIdHeDieuHanh() {
+        return idHeDieuHanh;
     }
 
-    public void setMaChipDoHoa(int maChipDoHoa) {
-        this.maChipDoHoa = maChipDoHoa;
+    public void setIdHeDieuHanh(HeDieuHanh idHeDieuHanh) {
+        this.idHeDieuHanh = idHeDieuHanh;
+    }
+
+    public KichThuocManHinh getIdKichThuocManHinh() {
+        return idKichThuocManHinh;
+    }
+
+    public void setIdKichThuocManHinh(KichThuocManHinh idKichThuocManHinh) {
+        this.idKichThuocManHinh = idKichThuocManHinh;
+    }
+
+    public LoaiManHinh getIdLoaiManHinh() {
+        return idLoaiManHinh;
+    }
+
+    public void setIdLoaiManHinh(LoaiManHinh idLoaiManHinh) {
+        this.idLoaiManHinh = idLoaiManHinh;
+    }
+
+    public Ram getIdRam() {
+        return idRam;
+    }
+
+    public void setIdRam(Ram idRam) {
+        this.idRam = idRam;
+    }
+
+    public SanPham getIdSanPham() {
+        return idSanPham;
+    }
+
+    public void setIdSanPham(SanPham idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maThongSoKyThuat != null ? maThongSoKyThuat.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Thongsokythuat)) {
+        if (!(object instanceof ThongSoKyThuat)) {
             return false;
         }
-        Thongsokythuat other = (Thongsokythuat) object;
-        if ((this.maThongSoKyThuat == null && other.maThongSoKyThuat != null) || (this.maThongSoKyThuat != null && !this.maThongSoKyThuat.equals(other.maThongSoKyThuat))) {
+        ThongSoKyThuat other = (ThongSoKyThuat) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -204,7 +240,7 @@ public class Thongsokythuat implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Thongsokythuat[ maThongSoKyThuat=" + maThongSoKyThuat + " ]";
+        return "ejb.entities.ThongSoKyThuat[ id=" + id + " ]";
     }
     
 }

@@ -6,89 +6,97 @@
 package ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author XinKaChu
  */
 @Entity
-@Table(name = "goitin")
+@Table(name = "goi_tin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Goitin.findAll", query = "SELECT g FROM Goitin g"),
-    @NamedQuery(name = "Goitin.findByMaGoi", query = "SELECT g FROM Goitin g WHERE g.maGoi = :maGoi"),
-    @NamedQuery(name = "Goitin.findByTenGoi", query = "SELECT g FROM Goitin g WHERE g.tenGoi = :tenGoi"),
-    @NamedQuery(name = "Goitin.findBySoLuongTin", query = "SELECT g FROM Goitin g WHERE g.soLuongTin = :soLuongTin"),
-    @NamedQuery(name = "Goitin.findByGiaBan", query = "SELECT g FROM Goitin g WHERE g.giaBan = :giaBan")})
-public class Goitin implements Serializable {
+    @NamedQuery(name = "GoiTin.findAll", query = "SELECT g FROM GoiTin g"),
+    @NamedQuery(name = "GoiTin.findById", query = "SELECT g FROM GoiTin g WHERE g.id = :id"),
+    @NamedQuery(name = "GoiTin.findByTenGoiTin", query = "SELECT g FROM GoiTin g WHERE g.tenGoiTin = :tenGoiTin"),
+    @NamedQuery(name = "GoiTin.findBySoTin", query = "SELECT g FROM GoiTin g WHERE g.soTin = :soTin"),
+    @NamedQuery(name = "GoiTin.findByGiaBan", query = "SELECT g FROM GoiTin g WHERE g.giaBan = :giaBan")})
+public class GoiTin implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "MaGoi")
-    private String maGoi;
+    @Size(min = 1, max = 250)
+    @Column(name = "ten_goi_tin")
+    private String tenGoiTin;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "TenGoi")
-    private String tenGoi;
+    @Column(name = "so_tin")
+    private int soTin;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "SoLuongTin")
-    private int soLuongTin;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "GiaBan")
+    @Column(name = "gia_ban")
     private float giaBan;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGoiTin", fetch = FetchType.LAZY)
+    private List<PhieuMuaTin> phieuMuaTinList;
 
-    public Goitin() {
+    public GoiTin() {
     }
 
-    public Goitin(String maGoi) {
-        this.maGoi = maGoi;
+    public GoiTin(Integer id) {
+        this.id = id;
     }
 
-    public Goitin(String maGoi, String tenGoi, int soLuongTin, float giaBan) {
-        this.maGoi = maGoi;
-        this.tenGoi = tenGoi;
-        this.soLuongTin = soLuongTin;
+    public GoiTin(Integer id, String tenGoiTin, int soTin, float giaBan) {
+        this.id = id;
+        this.tenGoiTin = tenGoiTin;
+        this.soTin = soTin;
         this.giaBan = giaBan;
     }
 
-    public String getMaGoi() {
-        return maGoi;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaGoi(String maGoi) {
-        this.maGoi = maGoi;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getTenGoi() {
-        return tenGoi;
+    public String getTenGoiTin() {
+        return tenGoiTin;
     }
 
-    public void setTenGoi(String tenGoi) {
-        this.tenGoi = tenGoi;
+    public void setTenGoiTin(String tenGoiTin) {
+        this.tenGoiTin = tenGoiTin;
     }
 
-    public int getSoLuongTin() {
-        return soLuongTin;
+    public int getSoTin() {
+        return soTin;
     }
 
-    public void setSoLuongTin(int soLuongTin) {
-        this.soLuongTin = soLuongTin;
+    public void setSoTin(int soTin) {
+        this.soTin = soTin;
     }
 
     public float getGiaBan() {
@@ -99,21 +107,30 @@ public class Goitin implements Serializable {
         this.giaBan = giaBan;
     }
 
+    @XmlTransient
+    public List<PhieuMuaTin> getPhieuMuaTinList() {
+        return phieuMuaTinList;
+    }
+
+    public void setPhieuMuaTinList(List<PhieuMuaTin> phieuMuaTinList) {
+        this.phieuMuaTinList = phieuMuaTinList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maGoi != null ? maGoi.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Goitin)) {
+        if (!(object instanceof GoiTin)) {
             return false;
         }
-        Goitin other = (Goitin) object;
-        if ((this.maGoi == null && other.maGoi != null) || (this.maGoi != null && !this.maGoi.equals(other.maGoi))) {
+        GoiTin other = (GoiTin) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -121,7 +138,7 @@ public class Goitin implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Goitin[ maGoi=" + maGoi + " ]";
+        return "ejb.entities.GoiTin[ id=" + id + " ]";
     }
     
 }

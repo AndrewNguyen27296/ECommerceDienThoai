@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Danhgia;
+import ejb.entities.DanhGia;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class DanhgiaFacade extends AbstractFacade<Danhgia> {
+public class DanhGiaFacade extends AbstractFacade<DanhGia> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class DanhgiaFacade extends AbstractFacade<Danhgia> {
         return em;
     }
 
-    public DanhgiaFacade() {
-        super(Danhgia.class);
+    public DanhGiaFacade() {
+        super(DanhGia.class);
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Nguoiban;
+import ejb.entities.NguoiBan;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class NguoibanFacade extends AbstractFacade<Nguoiban> {
+public class NguoiBanFacade extends AbstractFacade<NguoiBan> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class NguoibanFacade extends AbstractFacade<Nguoiban> {
         return em;
     }
 
-    public NguoibanFacade() {
-        super(Nguoiban.class);
+    public NguoiBanFacade() {
+        super(NguoiBan.class);
     }
     
 }

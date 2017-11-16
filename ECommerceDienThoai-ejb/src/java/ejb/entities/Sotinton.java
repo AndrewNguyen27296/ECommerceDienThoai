@@ -10,9 +10,12 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -26,70 +29,59 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "sotinton")
+@Table(name = "so_tin_ton")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sotinton.findAll", query = "SELECT s FROM Sotinton s"),
-    @NamedQuery(name = "Sotinton.findByMaTinTon", query = "SELECT s FROM Sotinton s WHERE s.maTinTon = :maTinTon"),
-    @NamedQuery(name = "Sotinton.findByMaNguoiBan", query = "SELECT s FROM Sotinton s WHERE s.maNguoiBan = :maNguoiBan"),
-    @NamedQuery(name = "Sotinton.findBySoTinTon", query = "SELECT s FROM Sotinton s WHERE s.soTinTon = :soTinTon"),
-    @NamedQuery(name = "Sotinton.findBySoTinDaDung", query = "SELECT s FROM Sotinton s WHERE s.soTinDaDung = :soTinDaDung"),
-    @NamedQuery(name = "Sotinton.findByNgayCapNhat", query = "SELECT s FROM Sotinton s WHERE s.ngayCapNhat = :ngayCapNhat")})
-public class Sotinton implements Serializable {
+    @NamedQuery(name = "SoTinTon.findAll", query = "SELECT s FROM SoTinTon s"),
+    @NamedQuery(name = "SoTinTon.findById", query = "SELECT s FROM SoTinTon s WHERE s.id = :id"),
+    @NamedQuery(name = "SoTinTon.findBySoTinTon", query = "SELECT s FROM SoTinTon s WHERE s.soTinTon = :soTinTon"),
+    @NamedQuery(name = "SoTinTon.findBySoTinDaDung", query = "SELECT s FROM SoTinTon s WHERE s.soTinDaDung = :soTinDaDung"),
+    @NamedQuery(name = "SoTinTon.findByNgayCapNhat", query = "SELECT s FROM SoTinTon s WHERE s.ngayCapNhat = :ngayCapNhat")})
+public class SoTinTon implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaTinTon")
-    private Integer maTinTon;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaNguoiBan")
-    private int maNguoiBan;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SoTinTon")
+    @Column(name = "so_tin_ton")
     private int soTinTon;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "SoTinDaDung")
+    @Column(name = "so_tin_da_dung")
     private int soTinDaDung;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "NgayCapNhat")
+    @Column(name = "ngay_cap_nhat")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayCapNhat;
+    @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private NguoiBan idNguoiBan;
 
-    public Sotinton() {
+    public SoTinTon() {
     }
 
-    public Sotinton(Integer maTinTon) {
-        this.maTinTon = maTinTon;
+    public SoTinTon(Integer id) {
+        this.id = id;
     }
 
-    public Sotinton(Integer maTinTon, int maNguoiBan, int soTinTon, int soTinDaDung, Date ngayCapNhat) {
-        this.maTinTon = maTinTon;
-        this.maNguoiBan = maNguoiBan;
+    public SoTinTon(Integer id, int soTinTon, int soTinDaDung, Date ngayCapNhat) {
+        this.id = id;
         this.soTinTon = soTinTon;
         this.soTinDaDung = soTinDaDung;
         this.ngayCapNhat = ngayCapNhat;
     }
 
-    public Integer getMaTinTon() {
-        return maTinTon;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaTinTon(Integer maTinTon) {
-        this.maTinTon = maTinTon;
-    }
-
-    public int getMaNguoiBan() {
-        return maNguoiBan;
-    }
-
-    public void setMaNguoiBan(int maNguoiBan) {
-        this.maNguoiBan = maNguoiBan;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getSoTinTon() {
@@ -116,21 +108,29 @@ public class Sotinton implements Serializable {
         this.ngayCapNhat = ngayCapNhat;
     }
 
+    public NguoiBan getIdNguoiBan() {
+        return idNguoiBan;
+    }
+
+    public void setIdNguoiBan(NguoiBan idNguoiBan) {
+        this.idNguoiBan = idNguoiBan;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maTinTon != null ? maTinTon.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sotinton)) {
+        if (!(object instanceof SoTinTon)) {
             return false;
         }
-        Sotinton other = (Sotinton) object;
-        if ((this.maTinTon == null && other.maTinTon != null) || (this.maTinTon != null && !this.maTinTon.equals(other.maTinTon))) {
+        SoTinTon other = (SoTinTon) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -138,7 +138,7 @@ public class Sotinton implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Sotinton[ maTinTon=" + maTinTon + " ]";
+        return "ejb.entities.SoTinTon[ id=" + id + " ]";
     }
     
 }

@@ -1,0 +1,94 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 16, 2017, 1:21:07 PM
+    Author     : XinKaChu
+*/
+
+.header{
+	background-image : url("pic/header.png");
+	height: 72px;
+	width: 100%;
+	z-index: 10;
+	display: inline-block;
+	position: relative;
+}
+.row{
+	display: inline-flex;
+}
+.logo{
+	background-image: url("pic/2.png");
+	height: 72px;
+	width: 100px;
+	margin-left: 10px;
+}
+.DIGIWORLD {
+  font-size: 36px;
+  font-family: fantasy;
+  color: rgb(252, 212, 88);
+  line-height: 2;
+  text-align: left;
+  z-index: 6;
+}
+.logo2{
+	font-size: 30px;
+  font-family: Helvetica, sans-serif;
+  color: rgb(252, 212, 88);
+  line-height: 2.5;
+  text-align: right;
+  z-index: 6;
+  float: right;
+}
+#slogan1{
+	font-size: 30px;
+  font-family: Helvetica, sans-serif;
+  color: #FF5722;
+  line-height: 2.5;
+  text-align: center;
+  z-index: 6;
+}
+#slogan2{
+	font-size: 20px;
+  font-family: Helvetica, sans-serif;
+  color: #333333;
+  line-height: 1;
+  text-align: center;
+  z-index: 6;
+}
+#bg{
+	margin-top: 40px;
+}
+.panel, .panel-info{
+	width: 125%;
+}
+
+.panel-info>.panel-heading {
+    color: #eeeeee	;
+    background-color: #FF5722;
+    border-color: #FCD458;
+}
+a{
+    color: #eeeeee;
+    text-decoration: none;
+}
+.panel-info {
+    border-color: #FF5722;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #ffffff;
+    text-align: center;
+    background-color: #FF5722;
+    border: 1px solid #FF5722;
+    border-radius: 4px;
+}
+.panel, .panel-info{
+	    width: 175%;
+    margin-left: -5em;
+}

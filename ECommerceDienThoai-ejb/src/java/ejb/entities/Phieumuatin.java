@@ -10,16 +10,18 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,91 +29,68 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "phieumuatin")
+@Table(name = "phieu_mua_tin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Phieumuatin.findAll", query = "SELECT p FROM Phieumuatin p"),
-    @NamedQuery(name = "Phieumuatin.findByMaPhieuMuaTin", query = "SELECT p FROM Phieumuatin p WHERE p.maPhieuMuaTin = :maPhieuMuaTin"),
-    @NamedQuery(name = "Phieumuatin.findByMaNguoiBan", query = "SELECT p FROM Phieumuatin p WHERE p.maNguoiBan = :maNguoiBan"),
-    @NamedQuery(name = "Phieumuatin.findByMaGoi", query = "SELECT p FROM Phieumuatin p WHERE p.maGoi = :maGoi"),
-    @NamedQuery(name = "Phieumuatin.findByGiaBan", query = "SELECT p FROM Phieumuatin p WHERE p.giaBan = :giaBan"),
-    @NamedQuery(name = "Phieumuatin.findByNgayGiaoDich", query = "SELECT p FROM Phieumuatin p WHERE p.ngayGiaoDich = :ngayGiaoDich"),
-    @NamedQuery(name = "Phieumuatin.findByPhuongThucThanhToan", query = "SELECT p FROM Phieumuatin p WHERE p.phuongThucThanhToan = :phuongThucThanhToan"),
-    @NamedQuery(name = "Phieumuatin.findByTrangThai", query = "SELECT p FROM Phieumuatin p WHERE p.trangThai = :trangThai")})
-public class Phieumuatin implements Serializable {
+    @NamedQuery(name = "PhieuMuaTin.findAll", query = "SELECT p FROM PhieuMuaTin p"),
+    @NamedQuery(name = "PhieuMuaTin.findById", query = "SELECT p FROM PhieuMuaTin p WHERE p.id = :id"),
+    @NamedQuery(name = "PhieuMuaTin.findByGiaBan", query = "SELECT p FROM PhieuMuaTin p WHERE p.giaBan = :giaBan"),
+    @NamedQuery(name = "PhieuMuaTin.findByNgayMua", query = "SELECT p FROM PhieuMuaTin p WHERE p.ngayMua = :ngayMua"),
+    @NamedQuery(name = "PhieuMuaTin.findByPhuongThucThanhToan", query = "SELECT p FROM PhieuMuaTin p WHERE p.phuongThucThanhToan = :phuongThucThanhToan"),
+    @NamedQuery(name = "PhieuMuaTin.findByTrangThai", query = "SELECT p FROM PhieuMuaTin p WHERE p.trangThai = :trangThai")})
+public class PhieuMuaTin implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaPhieuMuaTin")
-    private Integer maPhieuMuaTin;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaNguoiBan")
-    private int maNguoiBan;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
-    @Column(name = "MaGoi")
-    private String maGoi;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "GiaBan")
+    @Column(name = "gia_ban")
     private float giaBan;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "NgayGiaoDich")
+    @Column(name = "ngay_mua")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayGiaoDich;
+    private Date ngayMua;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "PhuongThucThanhToan")
+    @Column(name = "phuong_thuc_thanh_toan")
     private int phuongThucThanhToan;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TrangThai")
+    @Column(name = "trang_thai")
     private boolean trangThai;
+    @JoinColumn(name = "id_goi_tin", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private GoiTin idGoiTin;
+    @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private NguoiBan idNguoiBan;
 
-    public Phieumuatin() {
+    public PhieuMuaTin() {
     }
 
-    public Phieumuatin(Integer maPhieuMuaTin) {
-        this.maPhieuMuaTin = maPhieuMuaTin;
+    public PhieuMuaTin(Integer id) {
+        this.id = id;
     }
 
-    public Phieumuatin(Integer maPhieuMuaTin, int maNguoiBan, String maGoi, float giaBan, Date ngayGiaoDich, int phuongThucThanhToan, boolean trangThai) {
-        this.maPhieuMuaTin = maPhieuMuaTin;
-        this.maNguoiBan = maNguoiBan;
-        this.maGoi = maGoi;
+    public PhieuMuaTin(Integer id, float giaBan, Date ngayMua, int phuongThucThanhToan, boolean trangThai) {
+        this.id = id;
         this.giaBan = giaBan;
-        this.ngayGiaoDich = ngayGiaoDich;
+        this.ngayMua = ngayMua;
         this.phuongThucThanhToan = phuongThucThanhToan;
         this.trangThai = trangThai;
     }
 
-    public Integer getMaPhieuMuaTin() {
-        return maPhieuMuaTin;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaPhieuMuaTin(Integer maPhieuMuaTin) {
-        this.maPhieuMuaTin = maPhieuMuaTin;
-    }
-
-    public int getMaNguoiBan() {
-        return maNguoiBan;
-    }
-
-    public void setMaNguoiBan(int maNguoiBan) {
-        this.maNguoiBan = maNguoiBan;
-    }
-
-    public String getMaGoi() {
-        return maGoi;
-    }
-
-    public void setMaGoi(String maGoi) {
-        this.maGoi = maGoi;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public float getGiaBan() {
@@ -122,12 +101,12 @@ public class Phieumuatin implements Serializable {
         this.giaBan = giaBan;
     }
 
-    public Date getNgayGiaoDich() {
-        return ngayGiaoDich;
+    public Date getNgayMua() {
+        return ngayMua;
     }
 
-    public void setNgayGiaoDich(Date ngayGiaoDich) {
-        this.ngayGiaoDich = ngayGiaoDich;
+    public void setNgayMua(Date ngayMua) {
+        this.ngayMua = ngayMua;
     }
 
     public int getPhuongThucThanhToan() {
@@ -146,21 +125,37 @@ public class Phieumuatin implements Serializable {
         this.trangThai = trangThai;
     }
 
+    public GoiTin getIdGoiTin() {
+        return idGoiTin;
+    }
+
+    public void setIdGoiTin(GoiTin idGoiTin) {
+        this.idGoiTin = idGoiTin;
+    }
+
+    public NguoiBan getIdNguoiBan() {
+        return idNguoiBan;
+    }
+
+    public void setIdNguoiBan(NguoiBan idNguoiBan) {
+        this.idNguoiBan = idNguoiBan;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maPhieuMuaTin != null ? maPhieuMuaTin.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Phieumuatin)) {
+        if (!(object instanceof PhieuMuaTin)) {
             return false;
         }
-        Phieumuatin other = (Phieumuatin) object;
-        if ((this.maPhieuMuaTin == null && other.maPhieuMuaTin != null) || (this.maPhieuMuaTin != null && !this.maPhieuMuaTin.equals(other.maPhieuMuaTin))) {
+        PhieuMuaTin other = (PhieuMuaTin) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -168,7 +163,7 @@ public class Phieumuatin implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Phieumuatin[ maPhieuMuaTin=" + maPhieuMuaTin + " ]";
+        return "ejb.entities.PhieuMuaTin[ id=" + id + " ]";
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Goitin;
+import ejb.entities.GoiTin;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class GoitinFacade extends AbstractFacade<Goitin> {
+public class GoiTinFacade extends AbstractFacade<GoiTin> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class GoitinFacade extends AbstractFacade<Goitin> {
         return em;
     }
 
-    public GoitinFacade() {
-        super(Goitin.class);
+    public GoiTinFacade() {
+        super(GoiTin.class);
     }
     
 }

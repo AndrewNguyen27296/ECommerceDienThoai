@@ -9,9 +9,12 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -23,77 +26,55 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "danhgia")
+@Table(name = "danh_gia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Danhgia.findAll", query = "SELECT d FROM Danhgia d"),
-    @NamedQuery(name = "Danhgia.findByMaDanhGia", query = "SELECT d FROM Danhgia d WHERE d.maDanhGia = :maDanhGia"),
-    @NamedQuery(name = "Danhgia.findByMaPhieuMuaHang", query = "SELECT d FROM Danhgia d WHERE d.maPhieuMuaHang = :maPhieuMuaHang"),
-    @NamedQuery(name = "Danhgia.findByMaNguoiMua", query = "SELECT d FROM Danhgia d WHERE d.maNguoiMua = :maNguoiMua"),
-    @NamedQuery(name = "Danhgia.findBySoDiem", query = "SELECT d FROM Danhgia d WHERE d.soDiem = :soDiem"),
-    @NamedQuery(name = "Danhgia.findBySuDung", query = "SELECT d FROM Danhgia d WHERE d.suDung = :suDung")})
-public class Danhgia implements Serializable {
+    @NamedQuery(name = "DanhGia.findAll", query = "SELECT d FROM DanhGia d"),
+    @NamedQuery(name = "DanhGia.findById", query = "SELECT d FROM DanhGia d WHERE d.id = :id"),
+    @NamedQuery(name = "DanhGia.findBySoDiem", query = "SELECT d FROM DanhGia d WHERE d.soDiem = :soDiem"),
+    @NamedQuery(name = "DanhGia.findBySuDung", query = "SELECT d FROM DanhGia d WHERE d.suDung = :suDung")})
+public class DanhGia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaDanhGia")
-    private Integer maDanhGia;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaPhieuMuaHang")
-    private int maPhieuMuaHang;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaNguoiMua")
-    private int maNguoiMua;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SoDiem")
+    @Column(name = "so_diem")
     private int soDiem;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "SuDung")
+    @Column(name = "su_dung")
     private boolean suDung;
+    @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private NguoiBan idNguoiBan;
+    @JoinColumn(name = "id_don_hang", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private PhieuMuaHang idDonHang;
 
-    public Danhgia() {
+    public DanhGia() {
     }
 
-    public Danhgia(Integer maDanhGia) {
-        this.maDanhGia = maDanhGia;
+    public DanhGia(Integer id) {
+        this.id = id;
     }
 
-    public Danhgia(Integer maDanhGia, int maPhieuMuaHang, int maNguoiMua, int soDiem, boolean suDung) {
-        this.maDanhGia = maDanhGia;
-        this.maPhieuMuaHang = maPhieuMuaHang;
-        this.maNguoiMua = maNguoiMua;
+    public DanhGia(Integer id, int soDiem, boolean suDung) {
+        this.id = id;
         this.soDiem = soDiem;
         this.suDung = suDung;
     }
 
-    public Integer getMaDanhGia() {
-        return maDanhGia;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaDanhGia(Integer maDanhGia) {
-        this.maDanhGia = maDanhGia;
-    }
-
-    public int getMaPhieuMuaHang() {
-        return maPhieuMuaHang;
-    }
-
-    public void setMaPhieuMuaHang(int maPhieuMuaHang) {
-        this.maPhieuMuaHang = maPhieuMuaHang;
-    }
-
-    public int getMaNguoiMua() {
-        return maNguoiMua;
-    }
-
-    public void setMaNguoiMua(int maNguoiMua) {
-        this.maNguoiMua = maNguoiMua;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getSoDiem() {
@@ -112,21 +93,37 @@ public class Danhgia implements Serializable {
         this.suDung = suDung;
     }
 
+    public NguoiBan getIdNguoiBan() {
+        return idNguoiBan;
+    }
+
+    public void setIdNguoiBan(NguoiBan idNguoiBan) {
+        this.idNguoiBan = idNguoiBan;
+    }
+
+    public PhieuMuaHang getIdDonHang() {
+        return idDonHang;
+    }
+
+    public void setIdDonHang(PhieuMuaHang idDonHang) {
+        this.idDonHang = idDonHang;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maDanhGia != null ? maDanhGia.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Danhgia)) {
+        if (!(object instanceof DanhGia)) {
             return false;
         }
-        Danhgia other = (Danhgia) object;
-        if ((this.maDanhGia == null && other.maDanhGia != null) || (this.maDanhGia != null && !this.maDanhGia.equals(other.maDanhGia))) {
+        DanhGia other = (DanhGia) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -134,7 +131,7 @@ public class Danhgia implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Danhgia[ maDanhGia=" + maDanhGia + " ]";
+        return "ejb.entities.DanhGia[ id=" + id + " ]";
     }
     
 }

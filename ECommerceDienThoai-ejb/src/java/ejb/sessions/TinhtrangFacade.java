@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Tinhtrang;
+import ejb.entities.TinhTrang;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class TinhtrangFacade extends AbstractFacade<Tinhtrang> {
+public class TinhTrangFacade extends AbstractFacade<TinhTrang> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class TinhtrangFacade extends AbstractFacade<Tinhtrang> {
         return em;
     }
 
-    public TinhtrangFacade() {
-        super(Tinhtrang.class);
+    public TinhTrangFacade() {
+        super(TinhTrang.class);
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Khuvuc;
+import ejb.entities.KhuVuc;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class KhuvucFacade extends AbstractFacade<Khuvuc> {
+public class KhuVucFacade extends AbstractFacade<KhuVuc> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class KhuvucFacade extends AbstractFacade<Khuvuc> {
         return em;
     }
 
-    public KhuvucFacade() {
-        super(Khuvuc.class);
+    public KhuVucFacade() {
+        super(KhuVuc.class);
     }
     
 }

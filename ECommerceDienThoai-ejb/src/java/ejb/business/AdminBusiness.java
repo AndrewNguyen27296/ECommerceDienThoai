@@ -24,9 +24,6 @@ public class AdminBusiness {
     public void persist(Object object) {
         em.persist(object);
     }
+    
 
-    //public List<Admin> 
-    
-    
-    
 }

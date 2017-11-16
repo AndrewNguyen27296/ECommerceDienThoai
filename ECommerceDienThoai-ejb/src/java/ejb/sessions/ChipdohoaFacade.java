@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Chipdohoa;
+import ejb.entities.ChipDoHoa;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class ChipdohoaFacade extends AbstractFacade<Chipdohoa> {
+public class ChipDoHoaFacade extends AbstractFacade<ChipDoHoa> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class ChipdohoaFacade extends AbstractFacade<Chipdohoa> {
         return em;
     }
 
-    public ChipdohoaFacade() {
-        super(Chipdohoa.class);
+    public ChipDoHoaFacade() {
+        super(ChipDoHoa.class);
     }
     
 }

@@ -28,12 +28,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
-    @NamedQuery(name = "Admin.findByMaAdmin", query = "SELECT a FROM Admin a WHERE a.maAdmin = :maAdmin"),
+    @NamedQuery(name = "Admin.findById", query = "SELECT a FROM Admin a WHERE a.id = :id"),
     @NamedQuery(name = "Admin.findByEmail", query = "SELECT a FROM Admin a WHERE a.email = :email"),
     @NamedQuery(name = "Admin.findByMatKhau", query = "SELECT a FROM Admin a WHERE a.matKhau = :matKhau"),
     @NamedQuery(name = "Admin.findByHoTen", query = "SELECT a FROM Admin a WHERE a.hoTen = :hoTen"),
-    @NamedQuery(name = "Admin.findBySoDT", query = "SELECT a FROM Admin a WHERE a.soDT = :soDT"),
-    @NamedQuery(name = "Admin.findBySoTK", query = "SELECT a FROM Admin a WHERE a.soTK = :soTK"),
+    @NamedQuery(name = "Admin.findBySoDienThoai", query = "SELECT a FROM Admin a WHERE a.soDienThoai = :soDienThoai"),
+    @NamedQuery(name = "Admin.findBySoTaiKhoan", query = "SELECT a FROM Admin a WHERE a.soTaiKhoan = :soTaiKhoan"),
     @NamedQuery(name = "Admin.findByDiaChi", query = "SELECT a FROM Admin a WHERE a.diaChi = :diaChi"),
     @NamedQuery(name = "Admin.findByTrangThai", query = "SELECT a FROM Admin a WHERE a.trangThai = :trangThai")})
 public class Admin implements Serializable {
@@ -42,68 +42,68 @@ public class Admin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaAdmin")
-    private Integer maAdmin;
+    @Column(name = "id")
+    private Integer id;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "Email")
+    @Size(min = 1, max = 250)
+    @Column(name = "email")
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "MatKhau")
+    @Size(min = 1, max = 250)
+    @Column(name = "mat_khau")
     private String matKhau;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "HoTen")
+    @Size(min = 1, max = 250)
+    @Column(name = "ho_ten")
     private String hoTen;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
-    @Column(name = "SoDT")
-    private String soDT;
+    @Column(name = "so_dien_thoai")
+    private String soDienThoai;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 12)
-    @Column(name = "SoTK")
-    private String soTK;
+    @Column(name = "so_tai_khoan")
+    private String soTaiKhoan;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "DiaChi")
+    @Size(min = 1, max = 250)
+    @Column(name = "dia_chi")
     private String diaChi;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TrangThai")
+    @Column(name = "trang_thai")
     private boolean trangThai;
 
     public Admin() {
     }
 
-    public Admin(Integer maAdmin) {
-        this.maAdmin = maAdmin;
+    public Admin(Integer id) {
+        this.id = id;
     }
 
-    public Admin(Integer maAdmin, String email, String matKhau, String hoTen, String soDT, String soTK, String diaChi, boolean trangThai) {
-        this.maAdmin = maAdmin;
+    public Admin(Integer id, String email, String matKhau, String hoTen, String soDienThoai, String soTaiKhoan, String diaChi, boolean trangThai) {
+        this.id = id;
         this.email = email;
         this.matKhau = matKhau;
         this.hoTen = hoTen;
-        this.soDT = soDT;
-        this.soTK = soTK;
+        this.soDienThoai = soDienThoai;
+        this.soTaiKhoan = soTaiKhoan;
         this.diaChi = diaChi;
         this.trangThai = trangThai;
     }
 
-    public Integer getMaAdmin() {
-        return maAdmin;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaAdmin(Integer maAdmin) {
-        this.maAdmin = maAdmin;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -130,20 +130,20 @@ public class Admin implements Serializable {
         this.hoTen = hoTen;
     }
 
-    public String getSoDT() {
-        return soDT;
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
 
-    public void setSoDT(String soDT) {
-        this.soDT = soDT;
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 
-    public String getSoTK() {
-        return soTK;
+    public String getSoTaiKhoan() {
+        return soTaiKhoan;
     }
 
-    public void setSoTK(String soTK) {
-        this.soTK = soTK;
+    public void setSoTaiKhoan(String soTaiKhoan) {
+        this.soTaiKhoan = soTaiKhoan;
     }
 
     public String getDiaChi() {
@@ -165,7 +165,7 @@ public class Admin implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maAdmin != null ? maAdmin.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -176,7 +176,7 @@ public class Admin implements Serializable {
             return false;
         }
         Admin other = (Admin) object;
-        if ((this.maAdmin == null && other.maAdmin != null) || (this.maAdmin != null && !this.maAdmin.equals(other.maAdmin))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -184,7 +184,7 @@ public class Admin implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Admin[ maAdmin=" + maAdmin + " ]";
+        return "ejb.entities.Admin[ id=" + id + " ]";
     }
     
 }

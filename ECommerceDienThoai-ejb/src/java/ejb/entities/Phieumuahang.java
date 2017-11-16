@@ -7,153 +7,152 @@ package ejb.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author XinKaChu
  */
 @Entity
-@Table(name = "phieumuahang")
+@Table(name = "phieu_mua_hang")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Phieumuahang.findAll", query = "SELECT p FROM Phieumuahang p"),
-    @NamedQuery(name = "Phieumuahang.findByMaPhieuMuaHang", query = "SELECT p FROM Phieumuahang p WHERE p.maPhieuMuaHang = :maPhieuMuaHang"),
-    @NamedQuery(name = "Phieumuahang.findByMaNguoiMua", query = "SELECT p FROM Phieumuahang p WHERE p.maNguoiMua = :maNguoiMua"),
-    @NamedQuery(name = "Phieumuahang.findByEmailNguoiMua", query = "SELECT p FROM Phieumuahang p WHERE p.emailNguoiMua = :emailNguoiMua"),
-    @NamedQuery(name = "Phieumuahang.findBySoDT", query = "SELECT p FROM Phieumuahang p WHERE p.soDT = :soDT"),
-    @NamedQuery(name = "Phieumuahang.findByTenNguoiNhan", query = "SELECT p FROM Phieumuahang p WHERE p.tenNguoiNhan = :tenNguoiNhan"),
-    @NamedQuery(name = "Phieumuahang.findByDiaChiGiao", query = "SELECT p FROM Phieumuahang p WHERE p.diaChiGiao = :diaChiGiao"),
-    @NamedQuery(name = "Phieumuahang.findByMaQuanHuyen", query = "SELECT p FROM Phieumuahang p WHERE p.maQuanHuyen = :maQuanHuyen"),
-    @NamedQuery(name = "Phieumuahang.findByMaKhuVuc", query = "SELECT p FROM Phieumuahang p WHERE p.maKhuVuc = :maKhuVuc"),
-    @NamedQuery(name = "Phieumuahang.findByGhiChu", query = "SELECT p FROM Phieumuahang p WHERE p.ghiChu = :ghiChu"),
-    @NamedQuery(name = "Phieumuahang.findByNgayDatHang", query = "SELECT p FROM Phieumuahang p WHERE p.ngayDatHang = :ngayDatHang"),
-    @NamedQuery(name = "Phieumuahang.findByNgayGiaoHang", query = "SELECT p FROM Phieumuahang p WHERE p.ngayGiaoHang = :ngayGiaoHang"),
-    @NamedQuery(name = "Phieumuahang.findByTrangThai", query = "SELECT p FROM Phieumuahang p WHERE p.trangThai = :trangThai")})
-public class Phieumuahang implements Serializable {
+    @NamedQuery(name = "PhieuMuaHang.findAll", query = "SELECT p FROM PhieuMuaHang p"),
+    @NamedQuery(name = "PhieuMuaHang.findById", query = "SELECT p FROM PhieuMuaHang p WHERE p.id = :id"),
+    @NamedQuery(name = "PhieuMuaHang.findByEmail", query = "SELECT p FROM PhieuMuaHang p WHERE p.email = :email"),
+    @NamedQuery(name = "PhieuMuaHang.findBySoDienThoai", query = "SELECT p FROM PhieuMuaHang p WHERE p.soDienThoai = :soDienThoai"),
+    @NamedQuery(name = "PhieuMuaHang.findByTenNguoiNhan", query = "SELECT p FROM PhieuMuaHang p WHERE p.tenNguoiNhan = :tenNguoiNhan"),
+    @NamedQuery(name = "PhieuMuaHang.findByDiaChiGiao", query = "SELECT p FROM PhieuMuaHang p WHERE p.diaChiGiao = :diaChiGiao"),
+    @NamedQuery(name = "PhieuMuaHang.findByGhiChu", query = "SELECT p FROM PhieuMuaHang p WHERE p.ghiChu = :ghiChu"),
+    @NamedQuery(name = "PhieuMuaHang.findByNgayDatHang", query = "SELECT p FROM PhieuMuaHang p WHERE p.ngayDatHang = :ngayDatHang"),
+    @NamedQuery(name = "PhieuMuaHang.findByNgayGiaoHang", query = "SELECT p FROM PhieuMuaHang p WHERE p.ngayGiaoHang = :ngayGiaoHang"),
+    @NamedQuery(name = "PhieuMuaHang.findByTrangThai", query = "SELECT p FROM PhieuMuaHang p WHERE p.trangThai = :trangThai")})
+public class PhieuMuaHang implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaPhieuMuaHang")
-    private Integer maPhieuMuaHang;
+    @Column(name = "id")
+    private Integer id;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaNguoiMua")
-    private int maNguoiMua;
+    @Size(min = 1, max = 250)
+    @Column(name = "email")
+    private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "EmailNguoiMua")
-    private String emailNguoiMua;
+    @Size(min = 1, max = 11)
+    @Column(name = "so_dien_thoai")
+    private String soDienThoai;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "SoDT")
-    private int soDT;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "TenNguoiNhan")
+    @Size(min = 1, max = 250)
+    @Column(name = "ten_nguoi_nhan")
     private String tenNguoiNhan;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "DiaChiGiao")
+    @Size(min = 1, max = 250)
+    @Column(name = "dia_chi_giao")
     private String diaChiGiao;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaQuanHuyen")
-    private int maQuanHuyen;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaKhuVuc")
-    private int maKhuVuc;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "GhiChu")
+    @Size(min = 1, max = 250)
+    @Column(name = "ghi_chu")
     private String ghiChu;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "NgayDatHang")
+    @Column(name = "ngay_dat_hang")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayDatHang;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "NgayGiaoHang")
+    @Column(name = "ngay_giao_hang")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayGiaoHang;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TrangThai")
+    @Column(name = "trang_thai")
     private boolean trangThai;
+    @JoinColumn(name = "id_nguoi_mua", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private NguoiMua idNguoiMua;
+    @JoinColumn(name = "id_phuong_xa", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private PhuongXa idPhuongXa;
+    @JoinColumn(name = "id_quan_huyen", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private QuanHuyen idQuanHuyen;
+    @JoinColumn(name = "id_thanh_pho", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ThanhPho idThanhPho;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPhieuMuaHang", fetch = FetchType.LAZY)
+    private List<CtPhieuMuaHang> ctPhieuMuaHangList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDonHang", fetch = FetchType.LAZY)
+    private List<DanhGia> danhGiaList;
 
-    public Phieumuahang() {
+    public PhieuMuaHang() {
     }
 
-    public Phieumuahang(Integer maPhieuMuaHang) {
-        this.maPhieuMuaHang = maPhieuMuaHang;
+    public PhieuMuaHang(Integer id) {
+        this.id = id;
     }
 
-    public Phieumuahang(Integer maPhieuMuaHang, int maNguoiMua, String emailNguoiMua, int soDT, String tenNguoiNhan, String diaChiGiao, int maQuanHuyen, int maKhuVuc, String ghiChu, Date ngayDatHang, Date ngayGiaoHang, boolean trangThai) {
-        this.maPhieuMuaHang = maPhieuMuaHang;
-        this.maNguoiMua = maNguoiMua;
-        this.emailNguoiMua = emailNguoiMua;
-        this.soDT = soDT;
+    public PhieuMuaHang(Integer id, String email, String soDienThoai, String tenNguoiNhan, String diaChiGiao, String ghiChu, Date ngayDatHang, Date ngayGiaoHang, boolean trangThai) {
+        this.id = id;
+        this.email = email;
+        this.soDienThoai = soDienThoai;
         this.tenNguoiNhan = tenNguoiNhan;
         this.diaChiGiao = diaChiGiao;
-        this.maQuanHuyen = maQuanHuyen;
-        this.maKhuVuc = maKhuVuc;
         this.ghiChu = ghiChu;
         this.ngayDatHang = ngayDatHang;
         this.ngayGiaoHang = ngayGiaoHang;
         this.trangThai = trangThai;
     }
 
-    public Integer getMaPhieuMuaHang() {
-        return maPhieuMuaHang;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaPhieuMuaHang(Integer maPhieuMuaHang) {
-        this.maPhieuMuaHang = maPhieuMuaHang;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public int getMaNguoiMua() {
-        return maNguoiMua;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMaNguoiMua(int maNguoiMua) {
-        this.maNguoiMua = maNguoiMua;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getEmailNguoiMua() {
-        return emailNguoiMua;
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
 
-    public void setEmailNguoiMua(String emailNguoiMua) {
-        this.emailNguoiMua = emailNguoiMua;
-    }
-
-    public int getSoDT() {
-        return soDT;
-    }
-
-    public void setSoDT(int soDT) {
-        this.soDT = soDT;
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 
     public String getTenNguoiNhan() {
@@ -170,22 +169,6 @@ public class Phieumuahang implements Serializable {
 
     public void setDiaChiGiao(String diaChiGiao) {
         this.diaChiGiao = diaChiGiao;
-    }
-
-    public int getMaQuanHuyen() {
-        return maQuanHuyen;
-    }
-
-    public void setMaQuanHuyen(int maQuanHuyen) {
-        this.maQuanHuyen = maQuanHuyen;
-    }
-
-    public int getMaKhuVuc() {
-        return maKhuVuc;
-    }
-
-    public void setMaKhuVuc(int maKhuVuc) {
-        this.maKhuVuc = maKhuVuc;
     }
 
     public String getGhiChu() {
@@ -220,21 +203,71 @@ public class Phieumuahang implements Serializable {
         this.trangThai = trangThai;
     }
 
+    public NguoiMua getIdNguoiMua() {
+        return idNguoiMua;
+    }
+
+    public void setIdNguoiMua(NguoiMua idNguoiMua) {
+        this.idNguoiMua = idNguoiMua;
+    }
+
+    public PhuongXa getIdPhuongXa() {
+        return idPhuongXa;
+    }
+
+    public void setIdPhuongXa(PhuongXa idPhuongXa) {
+        this.idPhuongXa = idPhuongXa;
+    }
+
+    public QuanHuyen getIdQuanHuyen() {
+        return idQuanHuyen;
+    }
+
+    public void setIdQuanHuyen(QuanHuyen idQuanHuyen) {
+        this.idQuanHuyen = idQuanHuyen;
+    }
+
+    public ThanhPho getIdThanhPho() {
+        return idThanhPho;
+    }
+
+    public void setIdThanhPho(ThanhPho idThanhPho) {
+        this.idThanhPho = idThanhPho;
+    }
+
+    @XmlTransient
+    public List<CtPhieuMuaHang> getCtPhieuMuaHangList() {
+        return ctPhieuMuaHangList;
+    }
+
+    public void setCtPhieuMuaHangList(List<CtPhieuMuaHang> ctPhieuMuaHangList) {
+        this.ctPhieuMuaHangList = ctPhieuMuaHangList;
+    }
+
+    @XmlTransient
+    public List<DanhGia> getDanhGiaList() {
+        return danhGiaList;
+    }
+
+    public void setDanhGiaList(List<DanhGia> danhGiaList) {
+        this.danhGiaList = danhGiaList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maPhieuMuaHang != null ? maPhieuMuaHang.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Phieumuahang)) {
+        if (!(object instanceof PhieuMuaHang)) {
             return false;
         }
-        Phieumuahang other = (Phieumuahang) object;
-        if ((this.maPhieuMuaHang == null && other.maPhieuMuaHang != null) || (this.maPhieuMuaHang != null && !this.maPhieuMuaHang.equals(other.maPhieuMuaHang))) {
+        PhieuMuaHang other = (PhieuMuaHang) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -242,7 +275,7 @@ public class Phieumuahang implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Phieumuahang[ maPhieuMuaHang=" + maPhieuMuaHang + " ]";
+        return "ejb.entities.PhieuMuaHang[ id=" + id + " ]";
     }
     
 }

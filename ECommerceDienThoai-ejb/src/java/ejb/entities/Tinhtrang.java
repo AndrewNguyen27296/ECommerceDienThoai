@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,44 +22,45 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "tinhtrang")
+@Table(name = "tinh_trang")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tinhtrang.findAll", query = "SELECT t FROM Tinhtrang t"),
-    @NamedQuery(name = "Tinhtrang.findByMaTinhTrang", query = "SELECT t FROM Tinhtrang t WHERE t.maTinhTrang = :maTinhTrang"),
-    @NamedQuery(name = "Tinhtrang.findByTenMoTa", query = "SELECT t FROM Tinhtrang t WHERE t.tenMoTa = :tenMoTa")})
-public class Tinhtrang implements Serializable {
+    @NamedQuery(name = "TinhTrang.findAll", query = "SELECT t FROM TinhTrang t"),
+    @NamedQuery(name = "TinhTrang.findById", query = "SELECT t FROM TinhTrang t WHERE t.id = :id"),
+    @NamedQuery(name = "TinhTrang.findByTenMoTa", query = "SELECT t FROM TinhTrang t WHERE t.tenMoTa = :tenMoTa")})
+public class TinhTrang implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "MaTinhTrang")
-    private Integer maTinhTrang;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "TenMoTa")
+    @Size(min = 1, max = 2)
+    @Column(name = "id")
+    private String id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 250)
+    @Column(name = "ten_mo_ta")
     private String tenMoTa;
 
-    public Tinhtrang() {
+    public TinhTrang() {
     }
 
-    public Tinhtrang(Integer maTinhTrang) {
-        this.maTinhTrang = maTinhTrang;
+    public TinhTrang(String id) {
+        this.id = id;
     }
 
-    public Tinhtrang(Integer maTinhTrang, String tenMoTa) {
-        this.maTinhTrang = maTinhTrang;
+    public TinhTrang(String id, String tenMoTa) {
+        this.id = id;
         this.tenMoTa = tenMoTa;
     }
 
-    public Integer getMaTinhTrang() {
-        return maTinhTrang;
+    public String getId() {
+        return id;
     }
 
-    public void setMaTinhTrang(Integer maTinhTrang) {
-        this.maTinhTrang = maTinhTrang;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTenMoTa() {
@@ -75,18 +74,18 @@ public class Tinhtrang implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maTinhTrang != null ? maTinhTrang.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tinhtrang)) {
+        if (!(object instanceof TinhTrang)) {
             return false;
         }
-        Tinhtrang other = (Tinhtrang) object;
-        if ((this.maTinhTrang == null && other.maTinhTrang != null) || (this.maTinhTrang != null && !this.maTinhTrang.equals(other.maTinhTrang))) {
+        TinhTrang other = (TinhTrang) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -94,7 +93,7 @@ public class Tinhtrang implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Tinhtrang[ maTinhTrang=" + maTinhTrang + " ]";
+        return "ejb.entities.TinhTrang[ id=" + id + " ]";
     }
     
 }

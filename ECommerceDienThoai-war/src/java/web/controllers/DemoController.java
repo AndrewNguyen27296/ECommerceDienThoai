@@ -6,7 +6,6 @@
 package web.controllers;
 
 import com.google.gson.Gson;
-import ejb.entities.Admin;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,15 +29,15 @@ public class DemoController {
         return "demo/index";
     }
 
-    @ModelAttribute("dsAdmin")
-    public List<Admin> layDanhSachAdmin() {
-        return adminService.layDanhSachAdmin();
-    }
+//    @ModelAttribute("dsAdmin")
+//    public List<Admin> layDanhSachAdmin() {
+//        return adminService.layDanhSachAdmin();
+//    }
     
-    @ResponseBody
-    @RequestMapping("api")
-    public String layDanhSachAdminJSON() {
-        return new Gson().toJson(adminService.layDanhSachAdmin());
-    }
+//    @ResponseBody
+//    @RequestMapping("api")
+//    public String layDanhSachAdminJSON() {
+//        return new Gson().toJson(adminService.layDanhSachAdmin());
+//    }
 
 }

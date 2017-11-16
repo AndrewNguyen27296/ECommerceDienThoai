@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Quanhuyen;
+import ejb.entities.QuanHuyen;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class QuanhuyenFacade extends AbstractFacade<Quanhuyen> {
+public class QuanHuyenFacade extends AbstractFacade<QuanHuyen> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class QuanhuyenFacade extends AbstractFacade<Quanhuyen> {
         return em;
     }
 
-    public QuanhuyenFacade() {
-        super(Quanhuyen.class);
+    public QuanHuyenFacade() {
+        super(QuanHuyen.class);
     }
     
 }

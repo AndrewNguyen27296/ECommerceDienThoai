@@ -9,9 +9,12 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -24,153 +27,130 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "ct_phieumuahang")
+@Table(name = "ct_phieu_mua_hang")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CtPhieumuahang.findAll", query = "SELECT c FROM CtPhieumuahang c"),
-    @NamedQuery(name = "CtPhieumuahang.findByMaCTPhieuMuaHang", query = "SELECT c FROM CtPhieumuahang c WHERE c.maCTPhieuMuaHang = :maCTPhieuMuaHang"),
-    @NamedQuery(name = "CtPhieumuahang.findByMaPhieuMuaHang", query = "SELECT c FROM CtPhieumuahang c WHERE c.maPhieuMuaHang = :maPhieuMuaHang"),
-    @NamedQuery(name = "CtPhieumuahang.findByMaNguoiBan", query = "SELECT c FROM CtPhieumuahang c WHERE c.maNguoiBan = :maNguoiBan"),
-    @NamedQuery(name = "CtPhieumuahang.findByMaSP", query = "SELECT c FROM CtPhieumuahang c WHERE c.maSP = :maSP"),
-    @NamedQuery(name = "CtPhieumuahang.findBySoLuong", query = "SELECT c FROM CtPhieumuahang c WHERE c.soLuong = :soLuong"),
-    @NamedQuery(name = "CtPhieumuahang.findByDonGia", query = "SELECT c FROM CtPhieumuahang c WHERE c.donGia = :donGia"),
-    @NamedQuery(name = "CtPhieumuahang.findByThanhTien", query = "SELECT c FROM CtPhieumuahang c WHERE c.thanhTien = :thanhTien"),
-    @NamedQuery(name = "CtPhieumuahang.findByMaTinhTrang", query = "SELECT c FROM CtPhieumuahang c WHERE c.maTinhTrang = :maTinhTrang")})
-public class CtPhieumuahang implements Serializable {
+    @NamedQuery(name = "CtPhieuMuaHang.findAll", query = "SELECT c FROM CtPhieuMuaHang c"),
+    @NamedQuery(name = "CtPhieuMuaHang.findById", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.id = :id"),
+    @NamedQuery(name = "CtPhieuMuaHang.findByGiaBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.giaBan = :giaBan"),
+    @NamedQuery(name = "CtPhieuMuaHang.findBySoLuongBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.soLuongBan = :soLuongBan"),
+    @NamedQuery(name = "CtPhieuMuaHang.findByIdTinhTrang", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.idTinhTrang = :idTinhTrang")})
+public class CtPhieuMuaHang implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaCT_PhieuMuaHang")
-    private Integer maCTPhieuMuaHang;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaPhieuMuaHang")
-    private int maPhieuMuaHang;
+    @Column(name = "gia_ban")
+    private float giaBan;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "MaNguoiBan")
-    private int maNguoiBan;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaSP")
-    private int maSP;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SoLuong")
-    private int soLuong;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "DonGia")
-    private float donGia;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ThanhTien")
-    private float thanhTien;
+    @Column(name = "so_luong_ban")
+    private int soLuongBan;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "MaTinhTrang")
-    private String maTinhTrang;
+    @Column(name = "id_tinh_trang")
+    private String idTinhTrang;
+    @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private NguoiBan idNguoiBan;
+    @JoinColumn(name = "id_phieu_mua_hang", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private PhieuMuaHang idPhieuMuaHang;
+    @JoinColumn(name = "id_san_pham", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private SanPham idSanPham;
 
-    public CtPhieumuahang() {
+    public CtPhieuMuaHang() {
     }
 
-    public CtPhieumuahang(Integer maCTPhieuMuaHang) {
-        this.maCTPhieuMuaHang = maCTPhieuMuaHang;
+    public CtPhieuMuaHang(Integer id) {
+        this.id = id;
     }
 
-    public CtPhieumuahang(Integer maCTPhieuMuaHang, int maPhieuMuaHang, int maNguoiBan, int maSP, int soLuong, float donGia, float thanhTien, String maTinhTrang) {
-        this.maCTPhieuMuaHang = maCTPhieuMuaHang;
-        this.maPhieuMuaHang = maPhieuMuaHang;
-        this.maNguoiBan = maNguoiBan;
-        this.maSP = maSP;
-        this.soLuong = soLuong;
-        this.donGia = donGia;
-        this.thanhTien = thanhTien;
-        this.maTinhTrang = maTinhTrang;
+    public CtPhieuMuaHang(Integer id, float giaBan, int soLuongBan, String idTinhTrang) {
+        this.id = id;
+        this.giaBan = giaBan;
+        this.soLuongBan = soLuongBan;
+        this.idTinhTrang = idTinhTrang;
     }
 
-    public Integer getMaCTPhieuMuaHang() {
-        return maCTPhieuMuaHang;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaCTPhieuMuaHang(Integer maCTPhieuMuaHang) {
-        this.maCTPhieuMuaHang = maCTPhieuMuaHang;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public int getMaPhieuMuaHang() {
-        return maPhieuMuaHang;
+    public float getGiaBan() {
+        return giaBan;
     }
 
-    public void setMaPhieuMuaHang(int maPhieuMuaHang) {
-        this.maPhieuMuaHang = maPhieuMuaHang;
+    public void setGiaBan(float giaBan) {
+        this.giaBan = giaBan;
     }
 
-    public int getMaNguoiBan() {
-        return maNguoiBan;
+    public int getSoLuongBan() {
+        return soLuongBan;
     }
 
-    public void setMaNguoiBan(int maNguoiBan) {
-        this.maNguoiBan = maNguoiBan;
+    public void setSoLuongBan(int soLuongBan) {
+        this.soLuongBan = soLuongBan;
     }
 
-    public int getMaSP() {
-        return maSP;
+    public String getIdTinhTrang() {
+        return idTinhTrang;
     }
 
-    public void setMaSP(int maSP) {
-        this.maSP = maSP;
+    public void setIdTinhTrang(String idTinhTrang) {
+        this.idTinhTrang = idTinhTrang;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public NguoiBan getIdNguoiBan() {
+        return idNguoiBan;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setIdNguoiBan(NguoiBan idNguoiBan) {
+        this.idNguoiBan = idNguoiBan;
     }
 
-    public float getDonGia() {
-        return donGia;
+    public PhieuMuaHang getIdPhieuMuaHang() {
+        return idPhieuMuaHang;
     }
 
-    public void setDonGia(float donGia) {
-        this.donGia = donGia;
+    public void setIdPhieuMuaHang(PhieuMuaHang idPhieuMuaHang) {
+        this.idPhieuMuaHang = idPhieuMuaHang;
     }
 
-    public float getThanhTien() {
-        return thanhTien;
+    public SanPham getIdSanPham() {
+        return idSanPham;
     }
 
-    public void setThanhTien(float thanhTien) {
-        this.thanhTien = thanhTien;
-    }
-
-    public String getMaTinhTrang() {
-        return maTinhTrang;
-    }
-
-    public void setMaTinhTrang(String maTinhTrang) {
-        this.maTinhTrang = maTinhTrang;
+    public void setIdSanPham(SanPham idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maCTPhieuMuaHang != null ? maCTPhieuMuaHang.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CtPhieumuahang)) {
+        if (!(object instanceof CtPhieuMuaHang)) {
             return false;
         }
-        CtPhieumuahang other = (CtPhieumuahang) object;
-        if ((this.maCTPhieuMuaHang == null && other.maCTPhieuMuaHang != null) || (this.maCTPhieuMuaHang != null && !this.maCTPhieuMuaHang.equals(other.maCTPhieuMuaHang))) {
+        CtPhieuMuaHang other = (CtPhieuMuaHang) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -178,7 +158,7 @@ public class CtPhieumuahang implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.CtPhieumuahang[ maCTPhieuMuaHang=" + maCTPhieuMuaHang + " ]";
+        return "ejb.entities.CtPhieuMuaHang[ id=" + id + " ]";
     }
     
 }

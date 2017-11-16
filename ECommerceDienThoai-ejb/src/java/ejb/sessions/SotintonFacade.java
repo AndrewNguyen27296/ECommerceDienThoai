@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Sotinton;
+import ejb.entities.SoTinTon;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class SotintonFacade extends AbstractFacade<Sotinton> {
+public class SoTinTonFacade extends AbstractFacade<SoTinTon> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class SotintonFacade extends AbstractFacade<Sotinton> {
         return em;
     }
 
-    public SotintonFacade() {
-        super(Sotinton.class);
+    public SoTinTonFacade() {
+        super(SoTinTon.class);
     }
     
 }

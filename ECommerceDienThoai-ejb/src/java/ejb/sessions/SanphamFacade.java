@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.Sanpham;
+import ejb.entities.SanPham;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author XinKaChu
  */
 @Stateless
-public class SanphamFacade extends AbstractFacade<Sanpham> {
+public class SanPhamFacade extends AbstractFacade<SanPham> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class SanphamFacade extends AbstractFacade<Sanpham> {
         return em;
     }
 
-    public SanphamFacade() {
-        super(Sanpham.class);
+    public SanPhamFacade() {
+        super(SanPham.class);
     }
     
 }

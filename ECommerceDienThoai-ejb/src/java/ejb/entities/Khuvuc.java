@@ -24,44 +24,44 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "khuvuc")
+@Table(name = "khu_vuc")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Khuvuc.findAll", query = "SELECT k FROM Khuvuc k"),
-    @NamedQuery(name = "Khuvuc.findByMaKhuVuc", query = "SELECT k FROM Khuvuc k WHERE k.maKhuVuc = :maKhuVuc"),
-    @NamedQuery(name = "Khuvuc.findByTenKhuVuc", query = "SELECT k FROM Khuvuc k WHERE k.tenKhuVuc = :tenKhuVuc")})
-public class Khuvuc implements Serializable {
+    @NamedQuery(name = "KhuVuc.findAll", query = "SELECT k FROM KhuVuc k"),
+    @NamedQuery(name = "KhuVuc.findById", query = "SELECT k FROM KhuVuc k WHERE k.id = :id"),
+    @NamedQuery(name = "KhuVuc.findByTenKhuVuc", query = "SELECT k FROM KhuVuc k WHERE k.tenKhuVuc = :tenKhuVuc")})
+public class KhuVuc implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "MaKhuVuc")
-    private Integer maKhuVuc;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "TenKhuVuc")
+    @Size(min = 1, max = 255)
+    @Column(name = "ten_khu_vuc")
     private String tenKhuVuc;
 
-    public Khuvuc() {
+    public KhuVuc() {
     }
 
-    public Khuvuc(Integer maKhuVuc) {
-        this.maKhuVuc = maKhuVuc;
+    public KhuVuc(Integer id) {
+        this.id = id;
     }
 
-    public Khuvuc(Integer maKhuVuc, String tenKhuVuc) {
-        this.maKhuVuc = maKhuVuc;
+    public KhuVuc(Integer id, String tenKhuVuc) {
+        this.id = id;
         this.tenKhuVuc = tenKhuVuc;
     }
 
-    public Integer getMaKhuVuc() {
-        return maKhuVuc;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMaKhuVuc(Integer maKhuVuc) {
-        this.maKhuVuc = maKhuVuc;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTenKhuVuc() {
@@ -75,18 +75,18 @@ public class Khuvuc implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maKhuVuc != null ? maKhuVuc.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Khuvuc)) {
+        if (!(object instanceof KhuVuc)) {
             return false;
         }
-        Khuvuc other = (Khuvuc) object;
-        if ((this.maKhuVuc == null && other.maKhuVuc != null) || (this.maKhuVuc != null && !this.maKhuVuc.equals(other.maKhuVuc))) {
+        KhuVuc other = (KhuVuc) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -94,7 +94,7 @@ public class Khuvuc implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.Khuvuc[ maKhuVuc=" + maKhuVuc + " ]";
+        return "ejb.entities.KhuVuc[ id=" + id + " ]";
     }
     
 }
