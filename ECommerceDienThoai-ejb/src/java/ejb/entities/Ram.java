@@ -26,17 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "ram")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Ram.findAll", query = "SELECT r FROM Ram r"),
-    @NamedQuery(name = "Ram.findById", query = "SELECT r FROM Ram r WHERE r.id = :id"),
-    @NamedQuery(name = "Ram.findByDungLuong", query = "SELECT r FROM Ram r WHERE r.dungLuong = :dungLuong"),
-    @NamedQuery(name = "Ram.findByDonVi", query = "SELECT r FROM Ram r WHERE r.donVi = :donVi"),
-    @NamedQuery(name = "Ram.findByAnHien", query = "SELECT r FROM Ram r WHERE r.anHien = :anHien")})
+    @NamedQuery(name = "Ram.findAll", query = "SELECT r FROM Ram r")
+    , @NamedQuery(name = "Ram.findById", query = "SELECT r FROM Ram r WHERE r.id = :id")
+    , @NamedQuery(name = "Ram.findByDungLuong", query = "SELECT r FROM Ram r WHERE r.dungLuong = :dungLuong")
+    , @NamedQuery(name = "Ram.findByDonVi", query = "SELECT r FROM Ram r WHERE r.donVi = :donVi")
+    , @NamedQuery(name = "Ram.findByAnHien", query = "SELECT r FROM Ram r WHERE r.anHien = :anHien")})
 public class Ram implements Serializable {
 
     private static final long serialVersionUID = 1L;

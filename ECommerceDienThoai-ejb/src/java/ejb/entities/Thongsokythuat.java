@@ -24,18 +24,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "thong_so_ky_thuat")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ThongSoKyThuat.findAll", query = "SELECT t FROM ThongSoKyThuat t"),
-    @NamedQuery(name = "ThongSoKyThuat.findById", query = "SELECT t FROM ThongSoKyThuat t WHERE t.id = :id"),
-    @NamedQuery(name = "ThongSoKyThuat.findByCameraTruoc", query = "SELECT t FROM ThongSoKyThuat t WHERE t.cameraTruoc = :cameraTruoc"),
-    @NamedQuery(name = "ThongSoKyThuat.findByCameraSau", query = "SELECT t FROM ThongSoKyThuat t WHERE t.cameraSau = :cameraSau"),
-    @NamedQuery(name = "ThongSoKyThuat.findByDungLuongPin", query = "SELECT t FROM ThongSoKyThuat t WHERE t.dungLuongPin = :dungLuongPin"),
-    @NamedQuery(name = "ThongSoKyThuat.findByTheNho", query = "SELECT t FROM ThongSoKyThuat t WHERE t.theNho = :theNho")})
+    @NamedQuery(name = "ThongSoKyThuat.findAll", query = "SELECT t FROM ThongSoKyThuat t")
+    , @NamedQuery(name = "ThongSoKyThuat.findById", query = "SELECT t FROM ThongSoKyThuat t WHERE t.id = :id")
+    , @NamedQuery(name = "ThongSoKyThuat.findByCameraTruoc", query = "SELECT t FROM ThongSoKyThuat t WHERE t.cameraTruoc = :cameraTruoc")
+    , @NamedQuery(name = "ThongSoKyThuat.findByCameraSau", query = "SELECT t FROM ThongSoKyThuat t WHERE t.cameraSau = :cameraSau")
+    , @NamedQuery(name = "ThongSoKyThuat.findByDungLuongPin", query = "SELECT t FROM ThongSoKyThuat t WHERE t.dungLuongPin = :dungLuongPin")
+    , @NamedQuery(name = "ThongSoKyThuat.findByTheNho", query = "SELECT t FROM ThongSoKyThuat t WHERE t.theNho = :theNho")})
 public class ThongSoKyThuat implements Serializable {
 
     private static final long serialVersionUID = 1L;

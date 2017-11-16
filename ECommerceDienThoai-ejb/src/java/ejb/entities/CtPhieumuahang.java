@@ -19,22 +19,20 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "ct_phieu_mua_hang")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CtPhieuMuaHang.findAll", query = "SELECT c FROM CtPhieuMuaHang c"),
-    @NamedQuery(name = "CtPhieuMuaHang.findById", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.id = :id"),
-    @NamedQuery(name = "CtPhieuMuaHang.findByGiaBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.giaBan = :giaBan"),
-    @NamedQuery(name = "CtPhieuMuaHang.findBySoLuongBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.soLuongBan = :soLuongBan"),
-    @NamedQuery(name = "CtPhieuMuaHang.findByIdTinhTrang", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.idTinhTrang = :idTinhTrang")})
+    @NamedQuery(name = "CtPhieuMuaHang.findAll", query = "SELECT c FROM CtPhieuMuaHang c")
+    , @NamedQuery(name = "CtPhieuMuaHang.findById", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.id = :id")
+    , @NamedQuery(name = "CtPhieuMuaHang.findByGiaBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.giaBan = :giaBan")
+    , @NamedQuery(name = "CtPhieuMuaHang.findBySoLuongBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.soLuongBan = :soLuongBan")})
 public class CtPhieuMuaHang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,11 +49,6 @@ public class CtPhieuMuaHang implements Serializable {
     @NotNull
     @Column(name = "so_luong_ban")
     private int soLuongBan;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "id_tinh_trang")
-    private String idTinhTrang;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private NguoiBan idNguoiBan;
@@ -65,6 +58,9 @@ public class CtPhieuMuaHang implements Serializable {
     @JoinColumn(name = "id_san_pham", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private SanPham idSanPham;
+    @JoinColumn(name = "id_tinh_trang", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private TinhTrang idTinhTrang;
 
     public CtPhieuMuaHang() {
     }
@@ -73,11 +69,10 @@ public class CtPhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public CtPhieuMuaHang(Integer id, float giaBan, int soLuongBan, String idTinhTrang) {
+    public CtPhieuMuaHang(Integer id, float giaBan, int soLuongBan) {
         this.id = id;
         this.giaBan = giaBan;
         this.soLuongBan = soLuongBan;
-        this.idTinhTrang = idTinhTrang;
     }
 
     public Integer getId() {
@@ -104,14 +99,6 @@ public class CtPhieuMuaHang implements Serializable {
         this.soLuongBan = soLuongBan;
     }
 
-    public String getIdTinhTrang() {
-        return idTinhTrang;
-    }
-
-    public void setIdTinhTrang(String idTinhTrang) {
-        this.idTinhTrang = idTinhTrang;
-    }
-
     public NguoiBan getIdNguoiBan() {
         return idNguoiBan;
     }
@@ -134,6 +121,14 @@ public class CtPhieuMuaHang implements Serializable {
 
     public void setIdSanPham(SanPham idSanPham) {
         this.idSanPham = idSanPham;
+    }
+
+    public TinhTrang getIdTinhTrang() {
+        return idTinhTrang;
+    }
+
+    public void setIdTinhTrang(TinhTrang idTinhTrang) {
+        this.idTinhTrang = idTinhTrang;
     }
 
     @Override

@@ -31,26 +31,26 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "san_pham")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SanPham.findAll", query = "SELECT s FROM SanPham s"),
-    @NamedQuery(name = "SanPham.findById", query = "SELECT s FROM SanPham s WHERE s.id = :id"),
-    @NamedQuery(name = "SanPham.findByTenMay", query = "SELECT s FROM SanPham s WHERE s.tenMay = :tenMay"),
-    @NamedQuery(name = "SanPham.findByHinhAnh", query = "SELECT s FROM SanPham s WHERE s.hinhAnh = :hinhAnh"),
-    @NamedQuery(name = "SanPham.findByGiaBan", query = "SELECT s FROM SanPham s WHERE s.giaBan = :giaBan"),
-    @NamedQuery(name = "SanPham.findByGhiChu", query = "SELECT s FROM SanPham s WHERE s.ghiChu = :ghiChu"),
-    @NamedQuery(name = "SanPham.findByMoTa", query = "SELECT s FROM SanPham s WHERE s.moTa = :moTa"),
-    @NamedQuery(name = "SanPham.findByTonKho", query = "SELECT s FROM SanPham s WHERE s.tonKho = :tonKho"),
-    @NamedQuery(name = "SanPham.findByNgayDang", query = "SELECT s FROM SanPham s WHERE s.ngayDang = :ngayDang"),
-    @NamedQuery(name = "SanPham.findBySoLanXem", query = "SELECT s FROM SanPham s WHERE s.soLanXem = :soLanXem"),
-    @NamedQuery(name = "SanPham.findBySoLanMua", query = "SELECT s FROM SanPham s WHERE s.soLanMua = :soLanMua"),
-    @NamedQuery(name = "SanPham.findByBiDanh", query = "SELECT s FROM SanPham s WHERE s.biDanh = :biDanh"),
-    @NamedQuery(name = "SanPham.findByTrangThai", query = "SELECT s FROM SanPham s WHERE s.trangThai = :trangThai"),
-    @NamedQuery(name = "SanPham.findByAnHien", query = "SELECT s FROM SanPham s WHERE s.anHien = :anHien")})
+    @NamedQuery(name = "SanPham.findAll", query = "SELECT s FROM SanPham s")
+    , @NamedQuery(name = "SanPham.findById", query = "SELECT s FROM SanPham s WHERE s.id = :id")
+    , @NamedQuery(name = "SanPham.findByTenMay", query = "SELECT s FROM SanPham s WHERE s.tenMay = :tenMay")
+    , @NamedQuery(name = "SanPham.findByHinhAnh", query = "SELECT s FROM SanPham s WHERE s.hinhAnh = :hinhAnh")
+    , @NamedQuery(name = "SanPham.findByGiaBan", query = "SELECT s FROM SanPham s WHERE s.giaBan = :giaBan")
+    , @NamedQuery(name = "SanPham.findByGhiChu", query = "SELECT s FROM SanPham s WHERE s.ghiChu = :ghiChu")
+    , @NamedQuery(name = "SanPham.findByMoTa", query = "SELECT s FROM SanPham s WHERE s.moTa = :moTa")
+    , @NamedQuery(name = "SanPham.findByTonKho", query = "SELECT s FROM SanPham s WHERE s.tonKho = :tonKho")
+    , @NamedQuery(name = "SanPham.findByNgayDang", query = "SELECT s FROM SanPham s WHERE s.ngayDang = :ngayDang")
+    , @NamedQuery(name = "SanPham.findBySoLanXem", query = "SELECT s FROM SanPham s WHERE s.soLanXem = :soLanXem")
+    , @NamedQuery(name = "SanPham.findBySoLanMua", query = "SELECT s FROM SanPham s WHERE s.soLanMua = :soLanMua")
+    , @NamedQuery(name = "SanPham.findByBiDanh", query = "SELECT s FROM SanPham s WHERE s.biDanh = :biDanh")
+    , @NamedQuery(name = "SanPham.findByTrangThai", query = "SELECT s FROM SanPham s WHERE s.trangThai = :trangThai")
+    , @NamedQuery(name = "SanPham.findByAnHien", query = "SELECT s FROM SanPham s WHERE s.anHien = :anHien")})
 public class SanPham implements Serializable {
 
     private static final long serialVersionUID = 1L;

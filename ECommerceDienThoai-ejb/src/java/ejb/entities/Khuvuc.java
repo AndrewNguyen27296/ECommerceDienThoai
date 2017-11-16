@@ -21,15 +21,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "khu_vuc")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "KhuVuc.findAll", query = "SELECT k FROM KhuVuc k"),
-    @NamedQuery(name = "KhuVuc.findById", query = "SELECT k FROM KhuVuc k WHERE k.id = :id"),
-    @NamedQuery(name = "KhuVuc.findByTenKhuVuc", query = "SELECT k FROM KhuVuc k WHERE k.tenKhuVuc = :tenKhuVuc")})
+    @NamedQuery(name = "KhuVuc.findAll", query = "SELECT k FROM KhuVuc k")
+    , @NamedQuery(name = "KhuVuc.findById", query = "SELECT k FROM KhuVuc k WHERE k.id = :id")
+    , @NamedQuery(name = "KhuVuc.findByTenKhuVuc", query = "SELECT k FROM KhuVuc k WHERE k.tenKhuVuc = :tenKhuVuc")})
 public class KhuVuc implements Serializable {
 
     private static final long serialVersionUID = 1L;

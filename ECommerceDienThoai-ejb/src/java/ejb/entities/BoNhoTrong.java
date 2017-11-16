@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "bo_nho_trong")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BoNhoTrong.findAll", query = "SELECT b FROM BoNhoTrong b"),
-    @NamedQuery(name = "BoNhoTrong.findById", query = "SELECT b FROM BoNhoTrong b WHERE b.id = :id"),
-    @NamedQuery(name = "BoNhoTrong.findByDungLuong", query = "SELECT b FROM BoNhoTrong b WHERE b.dungLuong = :dungLuong"),
-    @NamedQuery(name = "BoNhoTrong.findByAnHien", query = "SELECT b FROM BoNhoTrong b WHERE b.anHien = :anHien")})
+    @NamedQuery(name = "BoNhoTrong.findAll", query = "SELECT b FROM BoNhoTrong b")
+    , @NamedQuery(name = "BoNhoTrong.findById", query = "SELECT b FROM BoNhoTrong b WHERE b.id = :id")
+    , @NamedQuery(name = "BoNhoTrong.findByDungLuong", query = "SELECT b FROM BoNhoTrong b WHERE b.dungLuong = :dungLuong")
+    , @NamedQuery(name = "BoNhoTrong.findByAnHien", query = "SELECT b FROM BoNhoTrong b WHERE b.anHien = :anHien")})
 public class BoNhoTrong implements Serializable {
 
     private static final long serialVersionUID = 1L;

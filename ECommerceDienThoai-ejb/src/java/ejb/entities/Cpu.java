@@ -26,18 +26,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "cpu")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cpu.findAll", query = "SELECT c FROM Cpu c"),
-    @NamedQuery(name = "Cpu.findById", query = "SELECT c FROM Cpu c WHERE c.id = :id"),
-    @NamedQuery(name = "Cpu.findByTenCpu", query = "SELECT c FROM Cpu c WHERE c.tenCpu = :tenCpu"),
-    @NamedQuery(name = "Cpu.findBySoNhan", query = "SELECT c FROM Cpu c WHERE c.soNhan = :soNhan"),
-    @NamedQuery(name = "Cpu.findByTocDo", query = "SELECT c FROM Cpu c WHERE c.tocDo = :tocDo"),
-    @NamedQuery(name = "Cpu.findByAnHien", query = "SELECT c FROM Cpu c WHERE c.anHien = :anHien")})
+    @NamedQuery(name = "Cpu.findAll", query = "SELECT c FROM Cpu c")
+    , @NamedQuery(name = "Cpu.findById", query = "SELECT c FROM Cpu c WHERE c.id = :id")
+    , @NamedQuery(name = "Cpu.findByTenCpu", query = "SELECT c FROM Cpu c WHERE c.tenCpu = :tenCpu")
+    , @NamedQuery(name = "Cpu.findBySoNhan", query = "SELECT c FROM Cpu c WHERE c.soNhan = :soNhan")
+    , @NamedQuery(name = "Cpu.findByTocDo", query = "SELECT c FROM Cpu c WHERE c.tocDo = :tocDo")
+    , @NamedQuery(name = "Cpu.findByAnHien", query = "SELECT c FROM Cpu c WHERE c.anHien = :anHien")})
 public class Cpu implements Serializable {
 
     private static final long serialVersionUID = 1L;

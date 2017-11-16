@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "chip_do_hoa")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ChipDoHoa.findAll", query = "SELECT c FROM ChipDoHoa c"),
-    @NamedQuery(name = "ChipDoHoa.findById", query = "SELECT c FROM ChipDoHoa c WHERE c.id = :id"),
-    @NamedQuery(name = "ChipDoHoa.findByTenChip", query = "SELECT c FROM ChipDoHoa c WHERE c.tenChip = :tenChip"),
-    @NamedQuery(name = "ChipDoHoa.findByAnHien", query = "SELECT c FROM ChipDoHoa c WHERE c.anHien = :anHien")})
+    @NamedQuery(name = "ChipDoHoa.findAll", query = "SELECT c FROM ChipDoHoa c")
+    , @NamedQuery(name = "ChipDoHoa.findById", query = "SELECT c FROM ChipDoHoa c WHERE c.id = :id")
+    , @NamedQuery(name = "ChipDoHoa.findByTenChip", query = "SELECT c FROM ChipDoHoa c WHERE c.tenChip = :tenChip")
+    , @NamedQuery(name = "ChipDoHoa.findByAnHien", query = "SELECT c FROM ChipDoHoa c WHERE c.anHien = :anHien")})
 public class ChipDoHoa implements Serializable {
 
     private static final long serialVersionUID = 1L;

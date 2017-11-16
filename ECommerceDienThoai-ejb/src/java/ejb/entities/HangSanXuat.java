@@ -26,17 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "hang_san_xuat")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "HangSanXuat.findAll", query = "SELECT h FROM HangSanXuat h"),
-    @NamedQuery(name = "HangSanXuat.findById", query = "SELECT h FROM HangSanXuat h WHERE h.id = :id"),
-    @NamedQuery(name = "HangSanXuat.findByTenHang", query = "SELECT h FROM HangSanXuat h WHERE h.tenHang = :tenHang"),
-    @NamedQuery(name = "HangSanXuat.findByLogoHang", query = "SELECT h FROM HangSanXuat h WHERE h.logoHang = :logoHang"),
-    @NamedQuery(name = "HangSanXuat.findByAnHien", query = "SELECT h FROM HangSanXuat h WHERE h.anHien = :anHien")})
+    @NamedQuery(name = "HangSanXuat.findAll", query = "SELECT h FROM HangSanXuat h")
+    , @NamedQuery(name = "HangSanXuat.findById", query = "SELECT h FROM HangSanXuat h WHERE h.id = :id")
+    , @NamedQuery(name = "HangSanXuat.findByTenHang", query = "SELECT h FROM HangSanXuat h WHERE h.tenHang = :tenHang")
+    , @NamedQuery(name = "HangSanXuat.findByLogoHang", query = "SELECT h FROM HangSanXuat h WHERE h.logoHang = :logoHang")
+    , @NamedQuery(name = "HangSanXuat.findByAnHien", query = "SELECT h FROM HangSanXuat h WHERE h.anHien = :anHien")})
 public class HangSanXuat implements Serializable {
 
     private static final long serialVersionUID = 1L;

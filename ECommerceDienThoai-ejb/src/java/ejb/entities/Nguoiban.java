@@ -29,23 +29,23 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "nguoi_ban")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "NguoiBan.findAll", query = "SELECT n FROM NguoiBan n"),
-    @NamedQuery(name = "NguoiBan.findById", query = "SELECT n FROM NguoiBan n WHERE n.id = :id"),
-    @NamedQuery(name = "NguoiBan.findByEmail", query = "SELECT n FROM NguoiBan n WHERE n.email = :email"),
-    @NamedQuery(name = "NguoiBan.findByMatKhau", query = "SELECT n FROM NguoiBan n WHERE n.matKhau = :matKhau"),
-    @NamedQuery(name = "NguoiBan.findByHoTen", query = "SELECT n FROM NguoiBan n WHERE n.hoTen = :hoTen"),
-    @NamedQuery(name = "NguoiBan.findByCmnd", query = "SELECT n FROM NguoiBan n WHERE n.cmnd = :cmnd"),
-    @NamedQuery(name = "NguoiBan.findBySoDienThoai", query = "SELECT n FROM NguoiBan n WHERE n.soDienThoai = :soDienThoai"),
-    @NamedQuery(name = "NguoiBan.findByDiaChi", query = "SELECT n FROM NguoiBan n WHERE n.diaChi = :diaChi"),
-    @NamedQuery(name = "NguoiBan.findByNgayDangKy", query = "SELECT n FROM NguoiBan n WHERE n.ngayDangKy = :ngayDangKy"),
-    @NamedQuery(name = "NguoiBan.findByKichHoat", query = "SELECT n FROM NguoiBan n WHERE n.kichHoat = :kichHoat"),
-    @NamedQuery(name = "NguoiBan.findByTrangThai", query = "SELECT n FROM NguoiBan n WHERE n.trangThai = :trangThai")})
+    @NamedQuery(name = "NguoiBan.findAll", query = "SELECT n FROM NguoiBan n")
+    , @NamedQuery(name = "NguoiBan.findById", query = "SELECT n FROM NguoiBan n WHERE n.id = :id")
+    , @NamedQuery(name = "NguoiBan.findByEmail", query = "SELECT n FROM NguoiBan n WHERE n.email = :email")
+    , @NamedQuery(name = "NguoiBan.findByMatKhau", query = "SELECT n FROM NguoiBan n WHERE n.matKhau = :matKhau")
+    , @NamedQuery(name = "NguoiBan.findByHoTen", query = "SELECT n FROM NguoiBan n WHERE n.hoTen = :hoTen")
+    , @NamedQuery(name = "NguoiBan.findByCmnd", query = "SELECT n FROM NguoiBan n WHERE n.cmnd = :cmnd")
+    , @NamedQuery(name = "NguoiBan.findBySoDienThoai", query = "SELECT n FROM NguoiBan n WHERE n.soDienThoai = :soDienThoai")
+    , @NamedQuery(name = "NguoiBan.findByDiaChi", query = "SELECT n FROM NguoiBan n WHERE n.diaChi = :diaChi")
+    , @NamedQuery(name = "NguoiBan.findByNgayDangKy", query = "SELECT n FROM NguoiBan n WHERE n.ngayDangKy = :ngayDangKy")
+    , @NamedQuery(name = "NguoiBan.findByKichHoat", query = "SELECT n FROM NguoiBan n WHERE n.kichHoat = :kichHoat")
+    , @NamedQuery(name = "NguoiBan.findByTrangThai", query = "SELECT n FROM NguoiBan n WHERE n.trangThai = :trangThai")})
 public class NguoiBan implements Serializable {
 
     private static final long serialVersionUID = 1L;

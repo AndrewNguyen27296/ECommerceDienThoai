@@ -26,17 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "goi_tin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GoiTin.findAll", query = "SELECT g FROM GoiTin g"),
-    @NamedQuery(name = "GoiTin.findById", query = "SELECT g FROM GoiTin g WHERE g.id = :id"),
-    @NamedQuery(name = "GoiTin.findByTenGoiTin", query = "SELECT g FROM GoiTin g WHERE g.tenGoiTin = :tenGoiTin"),
-    @NamedQuery(name = "GoiTin.findBySoTin", query = "SELECT g FROM GoiTin g WHERE g.soTin = :soTin"),
-    @NamedQuery(name = "GoiTin.findByGiaBan", query = "SELECT g FROM GoiTin g WHERE g.giaBan = :giaBan")})
+    @NamedQuery(name = "GoiTin.findAll", query = "SELECT g FROM GoiTin g")
+    , @NamedQuery(name = "GoiTin.findById", query = "SELECT g FROM GoiTin g WHERE g.id = :id")
+    , @NamedQuery(name = "GoiTin.findByTenGoiTin", query = "SELECT g FROM GoiTin g WHERE g.tenGoiTin = :tenGoiTin")
+    , @NamedQuery(name = "GoiTin.findBySoTin", query = "SELECT g FROM GoiTin g WHERE g.soTin = :soTin")
+    , @NamedQuery(name = "GoiTin.findByGiaBan", query = "SELECT g FROM GoiTin g WHERE g.giaBan = :giaBan")})
 public class GoiTin implements Serializable {
 
     private static final long serialVersionUID = 1L;

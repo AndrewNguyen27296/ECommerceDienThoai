@@ -23,16 +23,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "danh_gia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DanhGia.findAll", query = "SELECT d FROM DanhGia d"),
-    @NamedQuery(name = "DanhGia.findById", query = "SELECT d FROM DanhGia d WHERE d.id = :id"),
-    @NamedQuery(name = "DanhGia.findBySoDiem", query = "SELECT d FROM DanhGia d WHERE d.soDiem = :soDiem"),
-    @NamedQuery(name = "DanhGia.findBySuDung", query = "SELECT d FROM DanhGia d WHERE d.suDung = :suDung")})
+    @NamedQuery(name = "DanhGia.findAll", query = "SELECT d FROM DanhGia d")
+    , @NamedQuery(name = "DanhGia.findById", query = "SELECT d FROM DanhGia d WHERE d.id = :id")
+    , @NamedQuery(name = "DanhGia.findBySoDiem", query = "SELECT d FROM DanhGia d WHERE d.soDiem = :soDiem")
+    , @NamedQuery(name = "DanhGia.findBySuDung", query = "SELECT d FROM DanhGia d WHERE d.suDung = :suDung")})
 public class DanhGia implements Serializable {
 
     private static final long serialVersionUID = 1L;

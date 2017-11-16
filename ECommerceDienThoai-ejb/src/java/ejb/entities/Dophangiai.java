@@ -26,17 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "do_phan_giai")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DoPhanGiai.findAll", query = "SELECT d FROM DoPhanGiai d"),
-    @NamedQuery(name = "DoPhanGiai.findById", query = "SELECT d FROM DoPhanGiai d WHERE d.id = :id"),
-    @NamedQuery(name = "DoPhanGiai.findByTenDoPhanGiai", query = "SELECT d FROM DoPhanGiai d WHERE d.tenDoPhanGiai = :tenDoPhanGiai"),
-    @NamedQuery(name = "DoPhanGiai.findByChieuRong", query = "SELECT d FROM DoPhanGiai d WHERE d.chieuRong = :chieuRong"),
-    @NamedQuery(name = "DoPhanGiai.findByChieuDai", query = "SELECT d FROM DoPhanGiai d WHERE d.chieuDai = :chieuDai")})
+    @NamedQuery(name = "DoPhanGiai.findAll", query = "SELECT d FROM DoPhanGiai d")
+    , @NamedQuery(name = "DoPhanGiai.findById", query = "SELECT d FROM DoPhanGiai d WHERE d.id = :id")
+    , @NamedQuery(name = "DoPhanGiai.findByTenDoPhanGiai", query = "SELECT d FROM DoPhanGiai d WHERE d.tenDoPhanGiai = :tenDoPhanGiai")
+    , @NamedQuery(name = "DoPhanGiai.findByChieuRong", query = "SELECT d FROM DoPhanGiai d WHERE d.chieuRong = :chieuRong")
+    , @NamedQuery(name = "DoPhanGiai.findByChieuDai", query = "SELECT d FROM DoPhanGiai d WHERE d.chieuDai = :chieuDai")})
 public class DoPhanGiai implements Serializable {
 
     private static final long serialVersionUID = 1L;
