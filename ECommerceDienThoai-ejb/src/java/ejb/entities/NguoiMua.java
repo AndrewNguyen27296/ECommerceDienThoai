@@ -40,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "NguoiMua.findByEmail", query = "SELECT n FROM NguoiMua n WHERE n.email = :email")
     , @NamedQuery(name = "NguoiMua.findByMatKhau", query = "SELECT n FROM NguoiMua n WHERE n.matKhau = :matKhau")
     , @NamedQuery(name = "NguoiMua.findByHoTen", query = "SELECT n FROM NguoiMua n WHERE n.hoTen = :hoTen")
-    , @NamedQuery(name = "NguoiMua.findByNgaySinh", query = "SELECT n FROM NguoiMua n WHERE n.ngaySinh = :ngaySinh")
     , @NamedQuery(name = "NguoiMua.findBySoDienThoai", query = "SELECT n FROM NguoiMua n WHERE n.soDienThoai = :soDienThoai")
     , @NamedQuery(name = "NguoiMua.findByDiaChi", query = "SELECT n FROM NguoiMua n WHERE n.diaChi = :diaChi")
     , @NamedQuery(name = "NguoiMua.findByNgayDangKy", query = "SELECT n FROM NguoiMua n WHERE n.ngayDangKy = :ngayDangKy")
@@ -70,11 +69,6 @@ public class NguoiMua implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "ho_ten")
     private String hoTen;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ngay_sinh")
-    @Temporal(TemporalType.DATE)
-    private Date ngaySinh;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
@@ -108,12 +102,11 @@ public class NguoiMua implements Serializable {
         this.id = id;
     }
 
-    public NguoiMua(Integer id, String email, String matKhau, String hoTen, Date ngaySinh, String soDienThoai, String diaChi, Date ngayDangKy, boolean kichHoat, boolean trangThai) {
+    public NguoiMua(Integer id, String email, String matKhau, String hoTen, String soDienThoai, String diaChi, Date ngayDangKy, boolean kichHoat, boolean trangThai) {
         this.id = id;
         this.email = email;
         this.matKhau = matKhau;
         this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
         this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
         this.ngayDangKy = ngayDangKy;
@@ -151,14 +144,6 @@ public class NguoiMua implements Serializable {
 
     public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
-    }
-
-    public Date getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
     }
 
     public String getSoDienThoai() {

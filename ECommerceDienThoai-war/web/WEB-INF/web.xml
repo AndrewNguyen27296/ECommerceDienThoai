@@ -9,7 +9,7 @@
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
     <!-- Dispatcher Servlet -->
-   <servlet>
+    <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
@@ -22,7 +22,6 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.php</url-pattern>
     </servlet-mapping>
-    
     <!-- UTF-8 -->
     <filter>
         <filter-name>utf8</filter-name>

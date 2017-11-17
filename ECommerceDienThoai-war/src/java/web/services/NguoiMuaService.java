@@ -5,10 +5,133 @@
  */
 package web.services;
 
+import ejb.business.NguoiMuaBusiness;
+import ejb.entities.NguoiMua;
+import ejb.sessions.NguoiMuaFacade;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.jasper.tagplugins.jstl.ForEach;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author DacTien
  */
+@Component
 public class NguoiMuaService {
+    NguoiMuaBusiness business = new NguoiMuaBusiness();
+    
+    NguoiMuaFacade nguoiMuaFacade = lookupNguoiMuaFacadeBean();
+
+    private NguoiMuaFacade lookupNguoiMuaFacadeBean() {
+        try {
+            Context c = new InitialContext();
+            return (NguoiMuaFacade) c.lookup("java:global/ECommerceDienThoai/ECommerceDienThoai-ejb/NguoiMuaFacade!ejb.sessions.NguoiMuaFacade");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+    
+    //insert người mua
+    public void themNguoiMua(HttpServletRequest request) {
+        NguoiMua customer = new NguoiMua();
+        customer.setDiaChi(request.getParameter("diaChi"));
+        customer.setEmail(request.getParameter("email"));
+        customer.setHoTen(request.getParameter("hoTen"));
+        customer.setMatKhau(maHoaMatKhau(request.getParameter("pasword")));
+        customer.setSoDienThoai(request.getParameter("soDienThoai"));
+        customer.setNgayDangKy(new Date());
+        //customer.setNgaySinh(new Date());
+        customer.setKichHoat(false);
+        customer.setTrangThai(true);
+        nguoiMuaFacade.create(customer);
+        //nguoiMuaFacade.equals(this);
+    }
+    
+    public String themNguoiMua(String hoTen, String email, String password, String diaChi, String soDienThoai) {
+//        if (business.kiemTraTonTaiEmail(email) == false) {
+//            return "Email này đã được sử dụng";
+//        }
+//        if (business.kiemTraTonTaiSDT(soDienThoai) == false) {
+//            return "Số điện thoại này đã được sử dụng";
+//        }
+        List<NguoiMua> list = nguoiMuaFacade.findAll();
+        for (NguoiMua n : list) {
+            if (n.getEmail().equals(email)) {
+                return "Email này đã được sử dụng";
+            }
+            if (n.getSoDienThoai().equals(soDienThoai)) {
+                return "Số điện thoại này đã được sử dụng";
+            }
+        }
+        try {
+            NguoiMua customer = new NguoiMua();
+            customer.setDiaChi(diaChi);
+            customer.setEmail(email);
+            customer.setHoTen(hoTen);
+            customer.setMatKhau(maHoaMatKhau(password));
+            customer.setSoDienThoai(soDienThoai);
+            customer.setNgayDangKy(new Date());
+            //customer.setNgaySinh(new Date());
+            customer.setKichHoat(false);
+            customer.setTrangThai(true);
+//            if (nguoiMuaFacade.equals(customer) == true) {
+//                return "Da ton tai";
+//            }
+            nguoiMuaFacade.create(customer);
+            return "Đăng ký thành công, vui lòng kiểm tra email và kích hoạt tài khoản";
+        } catch (Exception e) {
+            return "Đăng ký thất bại";
+        }        
+    }
+    
+    //Mã hóa mật khẩu MD5 (không có cách giải mã - nếu nhập đúng mật khẩu thì sẽ cho ra lại đúng mã đã được mã hóa)
+    public String maHoaMatKhau(String password) {
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(password.getBytes());
+            //Get the hash's bytes
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            //Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            generatedPassword = "";
+            e.printStackTrace();
+        }
+        return generatedPassword;
+    }
+    
+    //Kiểm tra xem sđt, email đăng ký đã tồn tại trong CSDL chưa
+    //TRUE: chưa trùng
+    //FALSE: đã trùng
+//    public boolean kiemTraTonTaiEmailSDT(String email, String SDT) {
+//        NguoiMua customer = business.kiemTraTonTaiEmailSDT(email, SDT);
+//        if (customer == null) {
+//            return true;
+//        }
+//        else
+//            return false;
+//    }
     
 }

@@ -40,13 +40,13 @@
                                 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="account/register.php" method="post">			
-                                                <input placeholder="Họ Tên" name="hoTen" type="text" required="">
-                                                <input placeholder="Email" name="email" type="email" required="">	
-                                                <input placeholder="Mật Khẩu" name="pasword" type="password" required="" id="password">
+                                            <form id="dangKy" method="post">			
+                                                <input placeholder="Họ Tên" name="hoTen" id="hoTen" type="text" required="">
+                                                <input placeholder="Email" name="email" id="email" type="email" required="">	
+                                                <input placeholder="Mật Khẩu" name="pasword" id="password" type="password" required="">
                                                 <input placeholder="Nhập Lại Mật Khẩu" type="password" required="" id="confirm-password">
-                                                <input id="phoneNumber" placeholder="Số Điện Thoại" name="soDienThoai" type="text" minlength="10" maxlength="11" style="margin: 1em 0 0;">	
-                                                <input placeholder="Địa Chỉ" name="diaChi" type="text" required="" style="margin: 1em 0 0;">	
+                                                <input placeholder="Số Điện Thoại" name="soDienThoai" id="soDienThoai" type="text" minlength="10" maxlength="11" style="margin: 1em 0 0;">	
+                                                <input placeholder="Địa Chỉ" name="diaChi" id="diaChi" type="text" required="" style="margin: 1em 0 0;">	
                                                 <span id="error" style="color: red"></span>
                                                 <div class="sign-up">
                                                     <input type="submit" value="Tạo Tài Khoản"/>
@@ -76,32 +76,59 @@
 </div>
 
 <script>
-//		$('#myModal88').modal('show');
+    $(function () {
+        //$('#myModal88').modal('show');
+        //
+        //kiểm tra xác nhận password có trùng nhau hay không
+        function checkPasswordMatch() {
+            var password = $("#password").val();
+            var confirmPassword = $("#confirm-password").val();
 
-//kiểm tra xác nhận password có trùng nhau hay không
-function checkPasswordMatch() {
-    var password = $("#password").val();
-    var confirmPassword = $("#confirm-password").val();
-
-    if (password != confirmPassword)
-        $("#error").html("Mật khẩu không trùng khớp");
-    else
-        $("#error").html("");
-}
-$("#password, #confirm-password").keyup(checkPasswordMatch);
-
-//ô nhập SĐT chỉ được nhập số
-$("#phoneNumber").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [8]) !== -1 ||
-             // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
+            if (password != confirmPassword)
+                $("#error").html("Mật khẩu không trùng khớp");
+            else
+                $("#error").html("");
         }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
+        $("#password, #confirm-password").keyup(checkPasswordMatch);
+
+        //ô nhập SĐT chỉ được nhập số
+        $("#soDienThoai").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [8]) !== -1 ||
+                    // Allow: home, end, left, right
+                            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+        //AJAX thêm Người mua
+        $("#dangKy").submit(function (event) {
+            event.preventDefault();
+            var hoTen = $("#hoTen").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var diaChi = $("#diaChi").val();
+            var soDienThoai = $("#soDienThoai").val();
+
+            //var success = true;
+
+            $.ajax({
+                url: "account/register.php",
+                async: false, //block until we get a response
+                data: {hoTen: hoTen, email: email, password: password, diaChi: diaChi, soDienThoai: soDienThoai},
+                success: function (response) {
+                    $("#error").html(response);
+                    //return false;
+                }
+            });
+            //return false;
+            //return success;
+
+        });
     });
 </script>  
