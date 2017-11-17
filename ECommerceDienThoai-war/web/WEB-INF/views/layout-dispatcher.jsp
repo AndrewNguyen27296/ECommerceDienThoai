@@ -4,7 +4,10 @@
 	if(view.startsWith("demo/")){
 		pageContext.forward("demo-layout.jsp");
 	}
-	else{
+        else if(view.startsWith("customer/")){
+		pageContext.forward("customer-layout.jsp");
+	}
+        else {
 		pageContext.forward("blank-layout.jsp");
 	}
 %>

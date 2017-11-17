@@ -7,5 +7,5 @@ servlet but should be the only JSP outside of WEB-INF.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    pageContext.forward("/");
+    pageContext.forward("home/index.php");
  %>
