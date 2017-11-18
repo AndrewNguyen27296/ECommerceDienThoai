@@ -25,7 +25,7 @@ public class MailerService {
             //Viết thư (tạo mail)
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true, "utf-8");
-            helper.setFrom("dactien020796@gmail.com", "EShop Web Master");
+            helper.setFrom("dactien020796@gmail.com", "DigiWorld Web Master");
             helper.setTo(to);
             helper.setReplyTo("dactien020796@gmail.com");
             helper.setSubject(subject);

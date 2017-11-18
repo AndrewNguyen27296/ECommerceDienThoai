@@ -4,25 +4,39 @@
     Author     : DacTien
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="container" style="    width: 100%;
      background-color: #333333;
      /*    										position: fixed;
                                                                                      z-index: 1000;*/
      background: url(assets/customer/images/banner4.jpg);">
-    <div class="col-sm-12 log-in" style="font-size: 12px; margin-top: 5px">
-        <span style="float: right; color: red;">
-            <a href="#" data-toggle="modal" data-target="#myModal88" >
-                Đăng nhập
-            </a>
-        </span>
-        <span style="float: left; color: red">
-            <a href="#">
-                Kênh người bán
-            </a>
-        </span>
-        <div class="clearfix"></div>
-    </div>
+    <c:choose>
+        <c:when test="${empty sessionScope.nguoiMua}">
+            <div class="col-sm-12 log-in" style="font-size: 12px; margin-top: 5px">
+                <span style="float: right; color: red;">
+                    <a href="#" data-toggle="modal" data-target="#myModal88" >
+                        Đăng nhập
+                    </a>
+                </span>
+                <span style="float: left; color: red">
+                    <a href="#">
+                        Kênh người bán
+                    </a>
+                </span>
+                <div class="clearfix"></div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="col-sm-12 log-in" style="font-size: 12px; margin-top: 5px">
+                <a style="float: right; color: white;font-size: 14px;">
+                    Chào ${sessionScope.nguoiMua.hoTen}
+                </a>
+                <div class="clearfix"></div>
+            </div>
+        </c:otherwise>
+    </c:choose>
+    
 
     <div class="w3l_logo" style="margin-left: 0em; padding-top: 5px;" id="home1">
         <h1>

@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -35,9 +36,13 @@ public class AccountController {
     @Autowired
     NguoiMuaService nguoiMuaService;
     
-    @RequestMapping("login")
-    public String login() {
-        return "redirect:/home/index.php";
+    @ResponseBody
+    @RequestMapping(value = "login", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    public String login(@RequestParam("nguoiMua_email") String email,
+            @RequestParam("nguoiMua_password") String password,
+            HttpSession httpSession) {
+        String temp = nguoiMuaService.dangNhap(email, password, httpSession);
+        return temp;
     }
     
     @ResponseBody

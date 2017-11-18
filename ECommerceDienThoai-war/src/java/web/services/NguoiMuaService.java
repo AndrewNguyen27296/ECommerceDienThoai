@@ -18,6 +18,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.jasper.tagplugins.jstl.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,10 +29,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class NguoiMuaService {
+
     @Autowired
     MailerService mailerService;
-    
-    NguoiMuaBusiness business = new NguoiMuaBusiness();
+
     NguoiMuaFacade nguoiMuaFacade = lookupNguoiMuaFacadeBean();
 
     private NguoiMuaFacade lookupNguoiMuaFacadeBean() {
@@ -44,38 +45,34 @@ public class NguoiMuaService {
         }
     }
     
-    //insert người mua
-    public void themNguoiMua(HttpServletRequest request) {
-        NguoiMua customer = new NguoiMua();
-        customer.setDiaChi(request.getParameter("diaChi"));
-        customer.setEmail(request.getParameter("email"));
-        customer.setHoTen(request.getParameter("hoTen"));
-        customer.setMatKhau(maHoaMatKhau(request.getParameter("pasword")));
-        customer.setSoDienThoai(request.getParameter("soDienThoai"));
-        customer.setNgayDangKy(new Date());
-        //customer.setNgaySinh(new Date());
-        customer.setKichHoat(false);
-        customer.setTrangThai(true);
-        nguoiMuaFacade.create(customer);
-        //nguoiMuaFacade.equals(this);
+    NguoiMuaBusiness nguoiMuaBusiness = lookupNguoiMuaBusinessBean();
+    
+    private NguoiMuaBusiness lookupNguoiMuaBusinessBean() {
+        try {
+            Context c = new InitialContext();
+            return (NguoiMuaBusiness) c.lookup("java:global/ECommerceDienThoai/ECommerceDienThoai-ejb/NguoiMuaBusiness!ejb.business.NguoiMuaBusiness");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
     }
     
     public String themNguoiMua(String hoTen, String email, String password, String diaChi, String soDienThoai,
                 HttpServletRequest request) {
-//        if (business.kiemTraTonTaiEmail(email) == false) {
-//            return "Email này đã được sử dụng";
+//        List<NguoiMua> list = nguoiMuaFacade.findAll();
+//        for (NguoiMua n : list) {
+//            if (n.getId().equals(email)) {
+//                return "Email này đã được sử dụng";
+//            }
+//            if (n.getSoDienThoai().equals(soDienThoai)) {
+//                return "Số điện thoại này đã được sử dụng";
+//            }
 //        }
-//        if (business.kiemTraTonTaiSDT(soDienThoai) == false) {
-//            return "Số điện thoại này đã được sử dụng";
-//        }
-        List<NguoiMua> list = nguoiMuaFacade.findAll();
-        for (NguoiMua n : list) {
-            if (n.getEmail().equals(email)) {
-                return "Email này đã được sử dụng";
-            }
-            if (n.getSoDienThoai().equals(soDienThoai)) {
-                return "Số điện thoại này đã được sử dụng";
-            }
+        if (nguoiMuaBusiness.kiemTraTonTaiEmail(email) == true) {
+            return "Email này đã được sử dụng";
+        }
+        if (nguoiMuaBusiness.kiemTraTonTaiSDT(soDienThoai) == true) {
+            return "Số điện thoại này đã được sử dụng";
         }
         try {
             NguoiMua customer = new NguoiMua();
@@ -138,4 +135,19 @@ public class NguoiMuaService {
         customer.setKichHoat(true);
         nguoiMuaFacade.edit(customer);
     }
+    
+    public String dangNhap(String email, String password,
+                HttpSession httpSession) {
+        if (nguoiMuaBusiness.kiemTraTonTaiEmail(email) == true) {
+            NguoiMua nguoiMua = nguoiMuaBusiness.layNguoiMuaTheoEmail(email);
+            if (nguoiMua.getMatKhau().equals(maHoaMatKhau(password)) == true) {
+                httpSession.setAttribute("nguoiMua", nguoiMua);
+                return "Đăng nhập thành công";
+            }
+            return "Mật khẩu không chính xác";
+        }
+        return "Email không tồn tại";
+    }
+
+    
 }

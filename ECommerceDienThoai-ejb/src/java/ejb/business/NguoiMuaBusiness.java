@@ -26,45 +26,56 @@ public class NguoiMuaBusiness {
     private EntityManager em;
     
     //Kiểm tra xem sđt, email đăng ký đã tồn tại trong CSDL chưa
-    //TRUE: chưa trùng
-    //FALSE: đã trùng
+    //TRUE: đã trùng
+    //FALSE: chưa trùng
     public boolean kiemTraTonTaiEmail(String email) {
-        //String hql = "SELECT FROM NguoiMua WHERE email=:e";
-      
-        Query query = em.createQuery("SELECT n FROM NguoiMua n WHERE n.email = '" +email+"'");
-//        query.setParameter("email", email);
-        if(query.getSingleResult()==null){
+        Query query = em.createQuery("SELECT n FROM NguoiMua n WHERE n.email=:e");
+        query.setParameter("e", email);
+        try {
+            query.getSingleResult();
             return true;
+        } catch (Exception e) {
+            return false;
         }
-        return false;
-//        try {
-//            em.createQuery(hql).setParameter("e", email).getSingleResult();
-//            return false;
-//        } catch (Exception e) {
-//            return true;
-//        }
     }
     
     //Kiểm tra xem sđt, email đăng ký đã tồn tại trong CSDL chưa
-    //TRUE: chưa trùng
-    //FALSE: đã trùng
+    //TRUE: đã trùng
+    //FALSE: chưa trùng
     public boolean kiemTraTonTaiSDT(String sdt) {
-        String hql = "FROM NguoiMua WHERE soDienThoai=:sdt";
-        Query query = em.createQuery(hql);
+        Query query = em.createQuery("SELECT n FROM NguoiMua n WHERE n.soDienThoai=:sdt");
         query.setParameter("sdt", sdt);
-        NguoiMua customer = (NguoiMua) query.getSingleResult();
-        if (customer == null) {
+        try {
+            query.getSingleResult();
             return true;
+        } catch (Exception e) {
+            return false;
         }
-        return false;
-    }
-
-    public void persist(Object object) {
-        em.persist(object);
-    }
-
-    public void persist1(Object object) {
-        em.persist(object);
     }
     
+    //RETURN TRUE : đúng email và mật khẩu
+    //RETURN FALSE : sai
+    public boolean kiemTraPassword(String email, String password) {
+        Query query = em.createQuery("SELECT n FROM NguoiMua n WHERE n.email=:e AND n.matKhau=:password");
+        query.setParameter("e", email);
+        query.setParameter("password", password);
+        try {
+            query.getSingleResult();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public NguoiMua layNguoiMuaTheoEmail(String email) {
+        NguoiMua customer = new NguoiMua();
+        Query query = em.createQuery("SELECT n FROM NguoiMua n WHERE n.email=:e");
+        query.setParameter("e", email);
+        try {
+            customer = (NguoiMua) query.getSingleResult();
+        } catch (Exception e) {
+            
+        }
+        return customer;
+    }
 }
