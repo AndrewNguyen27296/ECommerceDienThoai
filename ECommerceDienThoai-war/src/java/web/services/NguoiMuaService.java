@@ -19,6 +19,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.jasper.tagplugins.jstl.ForEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,8 +28,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class NguoiMuaService {
-    NguoiMuaBusiness business = new NguoiMuaBusiness();
+    @Autowired
+    MailerService mailerService;
     
+    NguoiMuaBusiness business = new NguoiMuaBusiness();
     NguoiMuaFacade nguoiMuaFacade = lookupNguoiMuaFacadeBean();
 
     private NguoiMuaFacade lookupNguoiMuaFacadeBean() {
@@ -57,7 +60,8 @@ public class NguoiMuaService {
         //nguoiMuaFacade.equals(this);
     }
     
-    public String themNguoiMua(String hoTen, String email, String password, String diaChi, String soDienThoai) {
+    public String themNguoiMua(String hoTen, String email, String password, String diaChi, String soDienThoai,
+                HttpServletRequest request) {
 //        if (business.kiemTraTonTaiEmail(email) == false) {
 //            return "Email này đã được sử dụng";
 //        }
@@ -81,14 +85,21 @@ public class NguoiMuaService {
             customer.setMatKhau(maHoaMatKhau(password));
             customer.setSoDienThoai(soDienThoai);
             customer.setNgayDangKy(new Date());
-            //customer.setNgaySinh(new Date());
             customer.setKichHoat(false);
             customer.setTrangThai(true);
-//            if (nguoiMuaFacade.equals(customer) == true) {
-//                return "Da ton tai";
-//            }
             nguoiMuaFacade.create(customer);
-            return "Đăng ký thành công, vui lòng kiểm tra email và kích hoạt tài khoản";
+            try {
+                String url = request.getRequestURL().toString().replace("register", "activate/" + customer.getId());
+                String to = customer.getEmail();
+                String subject = "Chào mừng bạn đã đến với DIGIWOLD";
+                String body = "Cảm ơn bạn đã tham gia cùng chúng tôi. "
+                        + "Click vào đây liên kết sau đây để kích hoạt tài khoản<hr>"
+                        + "<a href='" + url + "'>Kích hoạt tài khoản</a>";
+                mailerService.send(to, subject, body);
+                return "Đăng ký thành công, vui lòng kiểm tra email và kích hoạt tài khoản";
+            } catch (Exception e) {
+                return "Gửi mail thất bại";
+            }
         } catch (Exception e) {
             return "Đăng ký thất bại";
         }        
@@ -122,16 +133,9 @@ public class NguoiMuaService {
         return generatedPassword;
     }
     
-    //Kiểm tra xem sđt, email đăng ký đã tồn tại trong CSDL chưa
-    //TRUE: chưa trùng
-    //FALSE: đã trùng
-//    public boolean kiemTraTonTaiEmailSDT(String email, String SDT) {
-//        NguoiMua customer = business.kiemTraTonTaiEmailSDT(email, SDT);
-//        if (customer == null) {
-//            return true;
-//        }
-//        else
-//            return false;
-//    }
-    
+    public void kichHoatTaiKhoan(String id) {
+        NguoiMua customer = nguoiMuaFacade.find(Integer.parseInt(id));
+        customer.setKichHoat(true);
+        nguoiMuaFacade.edit(customer);
+    }
 }

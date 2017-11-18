@@ -15,6 +15,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,18 +35,10 @@ public class AccountController {
     @Autowired
     NguoiMuaService nguoiMuaService;
     
-//    @RequestMapping(value="register", method = RequestMethod.POST)
-//    public String register(ModelMap model,
-//                            HttpServletRequest request) {
-//        try {
-//            nguoiMuaService.themNguoiMua(request);
-//            model.addAttribute("mess", "Đăng ký tài khoản thành công, vui lòng kiểm tra email "
-//                + "và kích hoạt tài khoản");
-//        } catch (Exception e) {
-//            model.addAttribute("mess", "Đăng ký tài khoản thất bại");
-//        }
-//        return "";
-//    }
+    @RequestMapping("login")
+    public String login() {
+        return "redirect:/home/index.php";
+    }
     
     @ResponseBody
     @RequestMapping(value = "register", produces = "application/x-www-form-urlencoded;charset=UTF-8")
@@ -54,8 +47,17 @@ public class AccountController {
             @RequestParam("password") String password,
             @RequestParam("diaChi") String diaChi,
             @RequestParam("soDienThoai") String soDienThoai,
-            HttpServletResponse response) {
-        String temp = nguoiMuaService.themNguoiMua(hoTen, email, password, diaChi, soDienThoai);
+            HttpServletRequest request) {
+        String temp = nguoiMuaService.themNguoiMua(hoTen, email, password, diaChi, soDienThoai, request);
         return temp;
+    }
+    
+    /**
+     * Kích hoạt tài khoản
+     */
+    @RequestMapping("activate/{id}")
+    public String activate(@PathVariable("id") String id) {
+        nguoiMuaService.kichHoatTaiKhoan(id);
+        return "redirect:/home/index.php";
     }
 }

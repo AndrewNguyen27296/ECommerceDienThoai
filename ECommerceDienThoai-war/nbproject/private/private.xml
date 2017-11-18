@@ -5,8 +5,8 @@
         <group>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/src/java/web/services/NguoiMuaService.java</file>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/src/java/web/controllers/AccountController.java</file>
+            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/web.xml</file>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/layout/header.jsp</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer-layout.jsp</file>
         </group>
     </open-files>
 </project-private>
