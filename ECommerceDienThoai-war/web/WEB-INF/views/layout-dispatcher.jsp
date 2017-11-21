@@ -7,6 +7,9 @@
         else if(view.startsWith("customer/")){
 		pageContext.forward("customer-layout.jsp");
 	}
+        else if(view.startsWith("admin/login")){
+		pageContext.forward("admin-login-layout.jsp");
+	}
         else if(view.startsWith("admin/")){
 		pageContext.forward("admin-layout.jsp");
 	}
