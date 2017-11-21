@@ -23,6 +23,6 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
    	
     <!-- cấu hình controller -->
-    <context:component-scan base-package="web.controllers,web.services"/>
+    <context:component-scan base-package="web.controllers,web.services,admin.controllers"/>
 
 </beans>

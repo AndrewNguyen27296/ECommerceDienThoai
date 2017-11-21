@@ -601,7 +601,7 @@ li.w3pages .dropdown-menu > li > a:hover{
 /*-- banner-bottom --*/
 .banner-bottom,.team,.checkout,.additional_info,.team-bottom,.single,.mail,.special-deals,.about,.faq,.typo,.new-products,.banner-bottom1,.top-brands,.mobiles,.w3l_related_products{
 	padding:5em 0;
-    background-color: whitesmoke;
+    background-color: white;
 }
 .modal-body iframe {
     width: 100%;
@@ -695,7 +695,7 @@ li.w3pages .dropdown-menu > li > a:hover{
 	text-align: center;
 }
 .agile_ecommerce_tabs {
-    padding: 2em 0 0;
+    padding: 24px 0 0;
 }
 .agile_ecommerce_tab_left h5{
 	margin:2em 0 0;

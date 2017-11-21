@@ -3,33 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/TinhTrangFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/CtPhieuMuaHangFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/AbstractFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/CpuFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/KichThuocManHinhFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/PhieuMuaHangFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/NguoiBanFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/ThanhPhoFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/LoaiManHinhFacade.java</file>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/business/NguoiMuaBusiness.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/GoiTinFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/DoPhanGiaiFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/SoTinTonFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/ThongSoKyThuatFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/HangSanXuatFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/BoNhoTrongFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/ChipDoHoaFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/NguoiMuaFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/AdminFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/DanhGiaFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/KhuVucFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/PhieuMuaTinFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/QuanHuyenFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/HeDieuHanhFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/RamFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/SanPhamFacade.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-ejb/src/java/ejb/sessions/PhuongXaFacade.java</file>
         </group>
     </open-files>
 </project-private>
