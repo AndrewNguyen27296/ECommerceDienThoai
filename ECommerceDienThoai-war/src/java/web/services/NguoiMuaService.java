@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.jasper.tagplugins.jstl.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 
 /**
  *
@@ -149,5 +151,14 @@ public class NguoiMuaService {
         return "Email không tồn tại";
     }
 
-    
+    public void capNhatNguoiMua(NguoiMua nguoiMua, ModelMap model, HttpSession httpSession) {
+        try {
+            nguoiMuaFacade.edit(nguoiMua);
+            model.addAttribute("message", "Cập nhật thành công");
+            httpSession.setAttribute("nguoiMua", nguoiMua);
+        } catch (Exception e) {
+            // TODO: handle exception
+            model.addAttribute("message", "Cập nhật thất bại");
+        }
+    }
 }

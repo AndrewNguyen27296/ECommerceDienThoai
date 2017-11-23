@@ -44,7 +44,7 @@
     </head>
     <body>
 
-        <div id="wrapper">
+        <div id="wrapper" style="height: 725px;">
 
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -120,7 +120,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i> ${sessionScope.admin.hoTen} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -175,7 +175,7 @@
                 </div>
             </nav>
 
-            <div id="page-wrapper">
+            <div id="page-wrapper" style="height: 725px;">
                 <jsp:include page="${param.view}"></jsp:include>
             </div>
             <!-- /#page-wrapper -->

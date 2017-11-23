@@ -6,18 +6,13 @@
 package web.controllers;
 
 import ejb.entities.NguoiMua;
-import java.time.Instant;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +31,9 @@ public class AccountController {
     @Autowired
     NguoiMuaService nguoiMuaService;
     
+    /*
+    * Đăng nhập
+    */
     @ResponseBody
     @RequestMapping(value = "login", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String login(@RequestParam("nguoiMua_email") String email,
@@ -45,6 +43,22 @@ public class AccountController {
         return temp;
     }
     
+    /**
+     * Đăng xuất
+     */
+    @RequestMapping("logoff")
+    public String logoff(HttpSession httpSession) {
+        try {
+            httpSession.removeAttribute("nguoiMua");
+        } catch (Exception e) {
+        }
+        //Redirect to action
+        return "redirect:/home/index.php";
+    }
+    
+    /*
+     * Đăng ký tài khoản
+     */
     @ResponseBody
     @RequestMapping(value = "register", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String register(@RequestParam("hoTen") String hoTen,
@@ -64,5 +78,23 @@ public class AccountController {
     public String activate(@PathVariable("id") String id) {
         nguoiMuaService.kichHoatTaiKhoan(id);
         return "redirect:/home/index.php";
+    }
+    
+    /*
+    * Chỉnh sửa thông tin tài khoản
+    */
+    @RequestMapping("edit")
+    public String edit(ModelMap model, HttpSession httpSession) {
+        NguoiMua nguoiMua = (NguoiMua) httpSession.getAttribute("nguoiMua");
+        model.addAttribute("nguoiMua", nguoiMua);
+        return "customer/account/edit";
+    }
+    
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String edit(ModelMap model,
+            HttpSession httpSession,
+            @ModelAttribute("nguoiMua") NguoiMua user) {
+        nguoiMuaService.capNhatNguoiMua(user, model, httpSession);
+        return "user/account/edit";
     }
 }

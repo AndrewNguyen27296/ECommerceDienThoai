@@ -15,11 +15,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
     <head>
         <title>DIGIWORLD WEB MASTER</title>
-        <base href="${pageContext.request.contextPath}/">
+<!--        <link href="../../assets/admin/css/login-style.css" rel="stylesheet" type="text/css"/>-->
         <link href="assets/admin/css/login-style.css" rel="stylesheet" type="text/css" media="all"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Transparent Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+        
+        <base href="${pageContext.request.contextPath}/">
         <!--web-fonts-->
         <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css' />
         <!--web-fonts-->

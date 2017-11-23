@@ -229,7 +229,7 @@
                                 <img src="assets/customer/images/tb3.jpg" alt=" " class="img-responsive">
                             </li><li class="nbs-flexisel-item" style="width: 285px;">
                                 <img src="assets/customer/images/tb4.jpg" alt=" " class="img-responsive">
-                            </li></ul><div class="nbs-flexisel-nav-left" style="top: 22.5px;"></div><div class="nbs-flexisel-nav-right" style="top: 22.5px;"></div></div></div>
+                            </li></ul><div class="nbs-flexisel-nav-left" style="top: 22.5px;left:0"></div><div class="nbs-flexisel-nav-right" style="top: 22.5px;right:0"></div></div></div>
             </div>
             <script type="text/javascript">
                             $(window).load(function() {

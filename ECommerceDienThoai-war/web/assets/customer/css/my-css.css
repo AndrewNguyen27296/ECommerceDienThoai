@@ -445,3 +445,36 @@
     margin: 0 !important;
     -moz-appearance:textfield !important;
 }
+
+/*TRANG QUẢN LÝ TÀI KHOẢN*/
+.my-edit-accout-left {
+    background-color: whitesmoke;
+    width: 20%;
+    float: left;
+}
+
+.my-edit-accout-left > ul > li { 
+    font-size: 16px;
+    line-height: 2.5em;
+    border: 0;
+    background-color: whitesmoke;
+}
+
+.my-edit-accout-left > ul > li > a > span {
+    margin-right: 5px;
+}
+
+.my-edit-accout-left a {
+    color: black;
+}
+
+.my-edit-accout-left a:hover {
+    color: #f44336;
+}
+
+.my-edit-accout-right {
+    width: 80%;
+    padding: 20px 30px 20px;
+    background-color: white;
+    float:right;
+}

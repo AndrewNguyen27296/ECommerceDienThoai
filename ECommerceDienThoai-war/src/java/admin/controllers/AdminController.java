@@ -6,7 +6,6 @@
 package admin.controllers;
 
 import ejb.entities.NguoiBan;
-import ejb.sessions.NguoiBanFacade;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +34,26 @@ public class AdminController {
         return "admin/login/login";
     }
     
-    @ResponseBody
-    @RequestMapping(value = "login", produces = "application/x-www-form-urlencoded;charset=UTF-8")
-    public String login(@RequestParam("email") String email,
-            @RequestParam("password") String password,
+//    @ResponseBody
+//    @RequestMapping(value = "login-check", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+//    public String login(@RequestParam("email") String email,
+//            @RequestParam("password") String password,
+//            HttpSession httpSession) {
+//        String temp = adminService.dangNhap(email, password, httpSession);
+//        return temp;
+//    }
+    
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String login(Model model,
+            @RequestParam("Email") String email,
+            @RequestParam("Password") String password,
             HttpSession httpSession) {
         String temp = adminService.dangNhap(email, password, httpSession);
-        return temp;
+        if (temp.equals("Đăng nhập thành công")) {
+            return "redirect:/admin/index.php";
+        }
+        model.addAttribute("mess", temp);
+        return "admin/login/login";
     }
     
     @RequestMapping("index")

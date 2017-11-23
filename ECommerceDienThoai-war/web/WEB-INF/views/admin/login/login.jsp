@@ -7,23 +7,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="main-content-agile">
     <div class="sub-main-w3">	
-        <form action="#" method="post">
-            <input id="email" placeholder="Email" name="Name" class="user" type="email" required=""><br>
+        <form action="admin/login.php" method="post">
+            <input id="email" placeholder="Email" name="Email" class="user" type="email" required=""><br>
             <input id="password" placeholder="Mật khẩu" name="Password" class="pass" type="password" required=""><br>
-            <span id="error_dangNhap" style="color: red"></span>
-            <input type="submit" value="">
+            <span style="color: red">${mess}</span>
+            <input formaction="admin/login.php" formmethod="post" type="submit" value="">
         </form>
     </div>
 </div>
 
-<script>
+<!--<script>
     $("#dangNhap").submit(function (event) {
                     event.preventDefault();
                     var email = $("#email").val();
                     var password = $("#password").val();
 
                     $.ajax({
-                        url: "admin/login.php",
+                        url: "admin/login-check.php",
                         async: false, //block until we get a response
                         data: {email: email, password: password},
                         success: function (response) {
@@ -34,4 +34,4 @@
                             }
                     });
     });
-</script>
+</script>-->
