@@ -65,13 +65,13 @@ jQuery(document).ready(function ($) {
             <div class="list-inline my-edit-accout-left">
                 <ul class="list-unstyled">
                     <li class="list-group-item">
-                        <a href="#">
+                        <a href="account/edit.php">
                             <span class="glyphicon glyphicon-user"></span>
                             Thông tin tài khoản
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">
+                        <a href="account/change.php">
                             <span class="glyphicon glyphicon-lock"></span>   
                             Đổi mật khẩu
                         </a>

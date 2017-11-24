@@ -95,6 +95,21 @@ public class AccountController {
             HttpSession httpSession,
             @ModelAttribute("nguoiMua") NguoiMua user) {
         nguoiMuaService.capNhatNguoiMua(user, model, httpSession);
-        return "user/account/edit";
+        return "customer/account/edit";
+    }
+    
+    @RequestMapping("change")
+    public String change() {
+        return "customer/account/change";
+    }
+    
+    @RequestMapping(value = "change", method = RequestMethod.POST)
+    public String change(ModelMap model,
+			@RequestParam("matKhau") String matKhau,
+			@RequestParam("matKhau1") String matKhau1,
+			@RequestParam("matKhau2") String matKhau2,
+			HttpSession httpSession) {
+        nguoiMuaService.doiMatKhau(model, matKhau, matKhau1, matKhau2, httpSession);
+        return "customer/account/change";
     }
 }

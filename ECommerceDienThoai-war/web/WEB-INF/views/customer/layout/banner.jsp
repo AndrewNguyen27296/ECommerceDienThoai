@@ -13,7 +13,7 @@
      background: url(assets/customer/images/banner4.jpg);">
     <c:choose>
         <c:when test="${empty sessionScope.nguoiMua}">
-            <div class="col-sm-12 log-in" style="font-size: 12px; margin-top: 5px">
+            <div class="col-sm-12 log-in" style="margin-top: 5px">
                 <span style="float: right; color: red;">
                     <a href="#" data-toggle="modal" data-target="#myModal88" >
                         Đăng nhập
@@ -28,12 +28,34 @@
             </div>
         </c:when>
         <c:otherwise>
-            <div class="col-sm-12 log-in" style="font-size: 12px; margin-top: 5px">
-                <a style="float: right; color: white;font-size: 14px;">
+            <div class="col-sm-12 log-in" style="margin-top: 5px">
+<!--                <a href="#" class="dropdown" style="float: right; color: white;font-size: 16px;">
                     Chào ${sessionScope.nguoiMua.hoTen}
-                </a>
-                <div class="clearfix"></div>
+                </a>-->
+                
+                <div  style="float: right; font-size: 16px">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                        Chào ${sessionScope.nguoiMua.hoTen}
+                    </a>
+                    <ul class="dropdown-menu list-unstyled" style="right: 0; left: 86%">
+                        <li><a href="account/edit.php">Tài khoản của tôi</a></li>
+                        <li><a href="#">Đơn hàng đã mua</a></li>
+                        <li><a href="account/logoff.php">Đăng xuất</a></li>
+                    </ul>
+                </div>
+<!--                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="account/login.php">a</a></li>
+                        <li><a href="account/forgot.php">b</a></li>
+                        <li><a href="account/register.php">c</a></li>
+                    </ul>
+                </li>-->
             </div>
+                        
+            <div class="clearfix"></div>
         </c:otherwise>
     </c:choose>
     

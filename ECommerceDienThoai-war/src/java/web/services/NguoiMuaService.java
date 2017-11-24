@@ -152,13 +152,37 @@ public class NguoiMuaService {
     }
 
     public void capNhatNguoiMua(NguoiMua nguoiMua, ModelMap model, HttpSession httpSession) {
+        NguoiMua nguoiMuaUpdate = nguoiMuaFacade.find(nguoiMua.getId());
+        nguoiMuaUpdate.setEmail(nguoiMua.getEmail());
+        nguoiMuaUpdate.setHoTen(nguoiMua.getHoTen());
+        nguoiMuaUpdate.setSoDienThoai(nguoiMua.getSoDienThoai());
         try {
-            nguoiMuaFacade.edit(nguoiMua);
+            nguoiMuaFacade.edit(nguoiMuaUpdate);
             model.addAttribute("message", "Cập nhật thành công");
             httpSession.setAttribute("nguoiMua", nguoiMua);
         } catch (Exception e) {
             // TODO: handle exception
             model.addAttribute("message", "Cập nhật thất bại");
+        }
+    }
+    
+    public void doiMatKhau(ModelMap model,
+            String matKhau,
+            String matKhau1,
+            String matKhau2,
+            HttpSession httpSession) {
+        if (matKhau1.equals(matKhau2)) {
+            NguoiMua user = (NguoiMua) httpSession.getAttribute("nguoiMua");
+            if (maHoaMatKhau(matKhau).equals(user.getMatKhau())) {
+                user.setMatKhau(maHoaMatKhau(matKhau1));
+                nguoiMuaFacade.edit(user);
+                model.addAttribute("message", "Đổi mật khẩu thành công");
+                httpSession.setAttribute("user", user);
+            } else {
+                model.addAttribute("message", "Sai mật khẩu hiện tại");
+            }
+        } else {
+            model.addAttribute("message", "Xác nhận mật khẩu không đúng");
         }
     }
 }

@@ -39,6 +39,7 @@
                 <td class="text-right">Họ tên</td>
                 <td>
                     <form:input path="hoTen" type="text" cssClass="form-control" />
+                    <form:hidden path="id"/>
                 </td>
             </tr>
             <tr>
