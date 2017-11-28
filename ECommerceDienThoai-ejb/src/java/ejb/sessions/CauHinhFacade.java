@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.BoNhoTrong;
+import ejb.entities.CauHinh;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author DacTien
  */
 @Stateless
-public class BoNhoTrongFacade extends AbstractFacade<BoNhoTrong> {
+public class CauHinhFacade extends AbstractFacade<CauHinh> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class BoNhoTrongFacade extends AbstractFacade<BoNhoTrong> {
         return em;
     }
 
-    public BoNhoTrongFacade() {
-        super(BoNhoTrong.class);
+    public CauHinhFacade() {
+        super(CauHinh.class);
     }
     
 }

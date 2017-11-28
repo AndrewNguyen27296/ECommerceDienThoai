@@ -5,10 +5,28 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 <div class="container" style="width: 100%">
 
     <!-- BỘ LỌC BÊN TRÁI -->
     <div class="col-md-3 w3ls_mobiles_grid_left">
+        <div class="w3ls_mobiles_grid_left_grid">
+            <h3>Khoảng giá</h3>
+            <div class="w3ls_mobiles_grid_left_grid_sub">
+                <div class="ecommerce_color ecommerce_size">
+                    <ul>
+                        <li><a href="#">< 1 triệu</a></li>
+                        <li><a href="#">1 - 3 triệu</a></li>
+                        <li><a href="#">3 - 7 triệu</a></li>
+                        <li><a href="#">7 - 10 triệu</a></li>
+                        <li><a href="#">10 - 15 triệu</a></li>
+                        <li><a href="#">> 15 triệu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
         <div class="w3ls_mobiles_grid_left_grid">
             <h3>Màn hình</h3>
             <div class="w3ls_mobiles_grid_left_grid_sub">
@@ -18,6 +36,21 @@
                         <li><a href="#">4 - 5 inch</a></li>
                         <li><a href="#">5 - 6 inch</a></li>
                         <li><a href="#">&gt; 6 inch</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w3ls_mobiles_grid_left_grid">
+            <h3>Ram</h3>
+            <div class="w3ls_mobiles_grid_left_grid_sub">
+                <div class="ecommerce_color ecommerce_size">
+                    <ul>
+                        <li><a href="#">< 1 GB</a></li>
+                        <li><a href="#">1 - 2 GB</a></li>
+                        <li><a href="#">2 - 3 GB</a></li>
+                        <li><a href="#">> 3 GB</a></li>
 
                     </ul>
                 </div>
@@ -51,23 +84,29 @@
                     
                     <div class="agile_ecommerce_tabs">
 
-                        <!-- SẢN PHẨM -->
-                        <div class="item" style="width: 25%; float: left;">
-                            <div class="item-container" style="background-color: white; border: 1px solid;">
-                                <a href="#">
-                                    <div class="item-img" style="height: 250px; ">
-                                        <img src="assets/customer/images/test.jpg" style="">
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="item-name">Samsung</div>
-                                        <div class="item-price">18.000.000 VND</div>
-                                    </div>
-                                </a>
+                        
+                        <c:forEach var="sp" items="${sanPhamMoi}">
+                            <!-- SẢN PHẨM -->
+                            <div class="item" style="width: 25%; float: left;">
+                                <div class="item-container" style="background-color: white; border: 1px solid;">
+                                    <a href="#">
+                                        <div class="item-img" style="height: 250px; ">
+                                            <img src="assets/images/products/${sp.hinhAnh}" style="">
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="item-name">${sp.tenMay}</div>
+                                            <div class="item-price">
+                                                <fmt:formatNumber type="number" value="${sp.giaBan}" pattern="###,###,###" /> VND
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <!-- /SẢN PHẨM -->
+                            <!-- /SẢN PHẨM -->
+                        </c:forEach>
+                        
 
-                        <div class="item" style="width: 25%; float: left;">
+<!--                        <div class="item" style="width: 25%; float: left;">
                             <div style="background-color: white; border: 1px solid;">
                                 <a href="#">
                                     <div class="item-img" style="height: 250px; ">
@@ -192,7 +231,7 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="clearfix"> </div>
                     </div>

@@ -44,8 +44,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "NguoiBan.findBySoDienThoai", query = "SELECT n FROM NguoiBan n WHERE n.soDienThoai = :soDienThoai")
     , @NamedQuery(name = "NguoiBan.findByDiaChi", query = "SELECT n FROM NguoiBan n WHERE n.diaChi = :diaChi")
     , @NamedQuery(name = "NguoiBan.findByNgayDangKy", query = "SELECT n FROM NguoiBan n WHERE n.ngayDangKy = :ngayDangKy")
+    , @NamedQuery(name = "NguoiBan.findBySoLanCanhCao", query = "SELECT n FROM NguoiBan n WHERE n.soLanCanhCao = :soLanCanhCao")
+    , @NamedQuery(name = "NguoiBan.findBySoLanBiBlock", query = "SELECT n FROM NguoiBan n WHERE n.soLanBiBlock = :soLanBiBlock")
     , @NamedQuery(name = "NguoiBan.findByKichHoat", query = "SELECT n FROM NguoiBan n WHERE n.kichHoat = :kichHoat")
-    , @NamedQuery(name = "NguoiBan.findByTrangThai", query = "SELECT n FROM NguoiBan n WHERE n.trangThai = :trangThai")})
+    , @NamedQuery(name = "NguoiBan.findByBiKhoa", query = "SELECT n FROM NguoiBan n WHERE n.biKhoa = :biKhoa")
+    , @NamedQuery(name = "NguoiBan.findByBiBlock", query = "SELECT n FROM NguoiBan n WHERE n.biBlock = :biBlock")})
 public class NguoiBan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -92,12 +95,24 @@ public class NguoiBan implements Serializable {
     private Date ngayDangKy;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "so_lan_canh_cao")
+    private int soLanCanhCao;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "so_lan_bi_block")
+    private int soLanBiBlock;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "kich_hoat")
     private boolean kichHoat;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "trang_thai")
-    private boolean trangThai;
+    @Column(name = "bi_khoa")
+    private boolean biKhoa;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "bi_block")
+    private boolean biBlock;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan", fetch = FetchType.LAZY)
     private List<SanPham> sanPhamList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan", fetch = FetchType.LAZY)
@@ -116,7 +131,7 @@ public class NguoiBan implements Serializable {
         this.id = id;
     }
 
-    public NguoiBan(Integer id, String email, String matKhau, String hoTen, String cmnd, String soDienThoai, String diaChi, Date ngayDangKy, boolean kichHoat, boolean trangThai) {
+    public NguoiBan(Integer id, String email, String matKhau, String hoTen, String cmnd, String soDienThoai, String diaChi, Date ngayDangKy, int soLanCanhCao, int soLanBiBlock, boolean kichHoat, boolean biKhoa, boolean biBlock) {
         this.id = id;
         this.email = email;
         this.matKhau = matKhau;
@@ -125,8 +140,11 @@ public class NguoiBan implements Serializable {
         this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
         this.ngayDangKy = ngayDangKy;
+        this.soLanCanhCao = soLanCanhCao;
+        this.soLanBiBlock = soLanBiBlock;
         this.kichHoat = kichHoat;
-        this.trangThai = trangThai;
+        this.biKhoa = biKhoa;
+        this.biBlock = biBlock;
     }
 
     public Integer getId() {
@@ -193,6 +211,22 @@ public class NguoiBan implements Serializable {
         this.ngayDangKy = ngayDangKy;
     }
 
+    public int getSoLanCanhCao() {
+        return soLanCanhCao;
+    }
+
+    public void setSoLanCanhCao(int soLanCanhCao) {
+        this.soLanCanhCao = soLanCanhCao;
+    }
+
+    public int getSoLanBiBlock() {
+        return soLanBiBlock;
+    }
+
+    public void setSoLanBiBlock(int soLanBiBlock) {
+        this.soLanBiBlock = soLanBiBlock;
+    }
+
     public boolean getKichHoat() {
         return kichHoat;
     }
@@ -201,12 +235,20 @@ public class NguoiBan implements Serializable {
         this.kichHoat = kichHoat;
     }
 
-    public boolean getTrangThai() {
-        return trangThai;
+    public boolean getBiKhoa() {
+        return biKhoa;
     }
 
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
+    public void setBiKhoa(boolean biKhoa) {
+        this.biKhoa = biKhoa;
+    }
+
+    public boolean getBiBlock() {
+        return biBlock;
+    }
+
+    public void setBiBlock(boolean biBlock) {
+        this.biBlock = biBlock;
     }
 
     @XmlTransient
