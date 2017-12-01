@@ -48,6 +48,9 @@ jQuery(document).ready(function ($) {
 });
         </script>
         <!-- //end-smooth-scrolling --> 
+        
+        <!-- SHopping-cart -->
+        <script src="assets/customer/js/shopping-cart.js" type="text/javascript"></script>
     </head> 
     <body>
         <!-- for bootstrap working -->

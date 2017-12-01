@@ -89,7 +89,7 @@
                             <!-- SẢN PHẨM -->
                             <div class="item" style="width: 25%; float: left;">
                                 <div class="item-container" style="background-color: white; border: 1px solid;">
-                                    <a href="#">
+                                    <a href="product/detail/${sp.id}.php">
                                         <div class="item-img" style="height: 250px; ">
                                             <img src="assets/images/products/${sp.hinhAnh}" style="">
                                         </div>

@@ -5,10 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 <div style="padding-left: 10px; padding-right: 10px">
     <div class="product-detail">
         <div class="product-detail-left">
-            <img src="assets/images/products/1001.png">
+            <img src="assets/images/products/${sanpham.hinhAnh}">
         </div>
 
         <div class="product-detail-right">
@@ -16,10 +17,12 @@
                 <div class="product-detail-info-header">
                     <div class="product-detail-info-header__main">
                         <div class="product-detail-info-header__title">
-                            <h3>Iphone 6 Plus</h3>
+                            <h3>${sanpham.tenMay}</h3>
                         </div>
                         <div class="product-detail-info-header__price">
-                            <div class="product-detail-info-header__price-real-price">14.500.000 VND</div>
+                            <div class="product-detail-info-header__price-real-price">
+                                <fmt:formatNumber type="number" value="${sanpham.giaBan}" pattern="###,###,###" /> VND
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -28,13 +31,19 @@
                         <img class="img-rounded" src="assets/images/store.png">
                     </div>
                     <div class="seller-right">
-                        <span>Sản phẩm được cung cấp bởi: <a>Tuti Shop</a></span>
+                        <span>Sản phẩm được cung cấp bởi: <a>${sanpham.idNguoiBan.hoTen}</a></span>
                         <br>
                         <span>Điểm: 4/5</span>
                     </div>
                 </div>
                 <div class="product-detail-info-footer">
-                    <button class="btn btn">Thêm vào giỏ hàng</button>
+                    <form>
+                        <input type="hidden" name="cmd" value="_cart" />
+                        <input type="hidden" name="add" id="add" value="${sanpham.id}" /> 
+                        <input type="hidden" name="w3ls_item" value="${sanpham.tenMay}" /> 
+                        <input type="hidden" name="amount" value="${sanpham.giaBan}"/>   
+                        <button type="submit" id="btn-add-to-cart" class="w3ls-cart">Thêm vào giỏ hàng</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -47,16 +56,66 @@
         </div>
         <div class="product-detail-content">
             <div class="product-detail-content__description">
-                Nội dung mô tả
+                ${sanpham.moTa}
             </div>
             <div class="product-detail-content__parameters">
                 <table class="table table-bordered table-condensed">
                     <tr>
                         <th>Hãng</th>
-                        <td>Apple</td>
+                        <td>${sanpham.idHangSanXuat.tenHang}</td>
+                    </tr>
+                    <tr>
+                        <th>Kích thước màn hình</th>
+                        <td>${sanpham.kichThuocManHinh}</td>
+                    </tr>
+                    <tr>
+                        <th>CPU</th>
+                        <td>${sanpham.cpu}</td>
+                    </tr>
+                    <tr>
+                        <th>Tốc độ CPU</th>
+                        <td>${sanpham.tocDoCpu}</td>
+                    </tr>
+                    <tr>
+                        <th>Ram</th>
+                        <td>${sanpham.ram}</td>
+                    </tr>
+                    <tr>
+                        <th>Bộ nhớ trong</th>
+                        <td>${sanpham.boNhoTrong}</td>
+                    </tr>
+                    <tr>
+                        <th>Hệ điều hành</th>
+                        <td>${sanpham.heDieuHanh}</td>
+                    </tr>
+                    <tr>
+                        <th>Camera trước</th>
+                        <td>${sanpham.cameraTruoc}</td>
+                    </tr>
+                    <tr>
+                        <th>Camera sau</th>
+                        <td>${sanpham.cameraSau}</td>
+                    </tr>
+                    <tr>
+                        <th>Dung lượng pin</th>
+                        <td>${sanpham.dungLuongPin}</td>
+                    </tr>
+                    <tr>
+                        <th>Hỗ trợ thẻ nhớ</th>
+                        <td>${sanpham.theNhoNgoai}</td>
+                    </tr>
+                    <tr>
+                        <th>Kháng nước</th>
+                        <td>${sanpham.khangNuoc}</td>
+                    </tr>
+                    <tr>
+                        <th>Bảo hành</th>
+                        <td>${sanpham.baoHanh}</td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </div>
+                    
+                    

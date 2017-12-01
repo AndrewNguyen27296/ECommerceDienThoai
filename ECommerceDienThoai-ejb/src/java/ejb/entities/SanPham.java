@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SanPham.findByTenMay", query = "SELECT s FROM SanPham s WHERE s.tenMay = :tenMay")
     , @NamedQuery(name = "SanPham.findByHinhAnh", query = "SELECT s FROM SanPham s WHERE s.hinhAnh = :hinhAnh")
     , @NamedQuery(name = "SanPham.findByGiaBan", query = "SELECT s FROM SanPham s WHERE s.giaBan = :giaBan")
+    , @NamedQuery(name = "SanPham.findBySoLuong", query = "SELECT s FROM SanPham s WHERE s.soLuong = :soLuong")
     , @NamedQuery(name = "SanPham.findByMoTa", query = "SELECT s FROM SanPham s WHERE s.moTa = :moTa")
     , @NamedQuery(name = "SanPham.findByKichThuocManHinh", query = "SELECT s FROM SanPham s WHERE s.kichThuocManHinh = :kichThuocManHinh")
     , @NamedQuery(name = "SanPham.findByCpu", query = "SELECT s FROM SanPham s WHERE s.cpu = :cpu")
@@ -84,6 +85,10 @@ public class SanPham implements Serializable {
     @NotNull
     @Column(name = "gia_ban")
     private long giaBan;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "so_luong")
+    private int soLuong;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
@@ -193,11 +198,12 @@ public class SanPham implements Serializable {
         this.id = id;
     }
 
-    public SanPham(Integer id, String tenMay, String hinhAnh, long giaBan, String moTa, String kichThuocManHinh, String cpu, String tocDoCpu, String ram, String boNhoTrong, String heDieuHanh, String cameraTruoc, String cameraSau, String dungLuongPin, boolean theNhoNgoai, boolean khangNuoc, String baoHanh, int tonKho, Date ngayDang, int soLanXem, int soLanMua, String biDanh, boolean trangThai, boolean anHien) {
+    public SanPham(Integer id, String tenMay, String hinhAnh, long giaBan, int soLuong, String moTa, String kichThuocManHinh, String cpu, String tocDoCpu, String ram, String boNhoTrong, String heDieuHanh, String cameraTruoc, String cameraSau, String dungLuongPin, boolean theNhoNgoai, boolean khangNuoc, String baoHanh, int tonKho, Date ngayDang, int soLanXem, int soLanMua, String biDanh, boolean trangThai, boolean anHien) {
         this.id = id;
         this.tenMay = tenMay;
         this.hinhAnh = hinhAnh;
         this.giaBan = giaBan;
+        this.soLuong = soLuong;
         this.moTa = moTa;
         this.kichThuocManHinh = kichThuocManHinh;
         this.cpu = cpu;
@@ -250,6 +256,14 @@ public class SanPham implements Serializable {
 
     public void setGiaBan(long giaBan) {
         this.giaBan = giaBan;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     public String getMoTa() {

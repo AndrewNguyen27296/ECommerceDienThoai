@@ -29,10 +29,10 @@
         </c:when>
         <c:otherwise>
             <div class="col-sm-12 log-in" style="margin-top: 5px">
-<!--                <a href="#" class="dropdown" style="float: right; color: white;font-size: 16px;">
-                    Chào ${sessionScope.nguoiMua.hoTen}
-                </a>-->
-                
+                <!--                <a href="#" class="dropdown" style="float: right; color: white;font-size: 16px;">
+                                    Chào ${sessionScope.nguoiMua.hoTen}
+                                </a>-->
+
                 <div  style="float: right; font-size: 16px">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
                         Chào ${sessionScope.nguoiMua.hoTen}
@@ -43,29 +43,30 @@
                         <li><a href="account/logoff.php">Đăng xuất</a></li>
                     </ul>
                 </div>
-<!--                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-user"></span><span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="account/login.php">a</a></li>
-                        <li><a href="account/forgot.php">b</a></li>
-                        <li><a href="account/register.php">c</a></li>
-                    </ul>
-                </li>-->
+                <!--                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="account/login.php">a</a></li>
+                                        <li><a href="account/forgot.php">b</a></li>
+                                        <li><a href="account/register.php">c</a></li>
+                                    </ul>
+                                </li>-->
             </div>
-                        
+
             <div class="clearfix"></div>
         </c:otherwise>
     </c:choose>
-    
+
 
     <div class="w3l_logo" style="margin-left: 0em; padding-top: 5px;" id="home1">
-        <h1>
-            <img src="assets/customer/logo/pikachu.png" style="width: 70px ">
-            <span style="font-size: 30px;margin-left: -10px;font-family: fantasy;color: #fcd458">DIGIWORLD</span>
-            </a>
-        </h1>
+        <a href="home/index.php">
+            <h1>
+                <img src="assets/customer/logo/pikachu.png" style="width: 70px ">
+                <span style="font-size: 30px;margin-left: -10px;font-family: fantasy;color: #fcd458">DIGIWORLD</span>
+            </h1>
+        </a>
     </div>
     <form>
         <input type="text" name="search" placeholder="Tìm sản phẩm" style="margin-top: 8px;height: 40px;margin-left: 100px;width: 700px;/*background-image: url('logo/search-32.png');*/padding: 12px 20px 12px 10px;" >
@@ -73,10 +74,10 @@
             <span class="glyphicon glyphicon-search"></span>
         </button>
         <div class="cart cart box_1 row my-cart" style="margin-right: 0"> 
-            <!-- <ul style="float: left;color: red;margin-right: 30px;  font-size: 13px; padding-top: 3px;" class="list-unstyled">
+            <ul style="float: left;color: red;margin-right: 30px;  font-size: 13px; padding-top: 3px;" class="list-unstyled">
                     <li>0 San Pham</li>
                     <li>0 VND</li>
-            </ul> -->
+            </ul>
             <form action="#" method="post" class="last"> 
                 <input type="hidden" name="cmd" value="_cart" />
                 <input type="hidden" name="display" value="1" />

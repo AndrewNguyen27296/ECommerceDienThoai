@@ -7,6 +7,7 @@ package web.services;
 
 import ejb.business.SanPhamBusiness;
 import ejb.entities.SanPham;
+import ejb.sessions.SanPhamFacade;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class SanPhamService {
 
+    SanPhamFacade sanPhamFacade = lookupSanPhamFacadeBean();
+
+    private SanPhamFacade lookupSanPhamFacadeBean() {
+        try {
+            Context c = new InitialContext();
+            return (SanPhamFacade) c.lookup("java:global/ECommerceDienThoai/ECommerceDienThoai-ejb/SanPhamFacade!ejb.sessions.SanPhamFacade");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+    
     SanPhamBusiness sanPhamBusiness = lookupSanPhamBusinessBean();
 
     private SanPhamBusiness lookupSanPhamBusinessBean() {
@@ -39,5 +52,11 @@ public class SanPhamService {
         List<SanPham> list = sanPhamBusiness.laySanPhamMoiNhat();
         return list;
     }
+
+    public SanPham lay1SanPham(Integer id) {
+        return sanPhamFacade.find(id);
+    }
+
+    
 
 }
