@@ -6,6 +6,7 @@
 package ejb.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,8 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CtPhieuMuaHang.findAll", query = "SELECT c FROM CtPhieuMuaHang c"),
     @NamedQuery(name = "CtPhieuMuaHang.findById", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.id = :id"),
     @NamedQuery(name = "CtPhieuMuaHang.findByGiaBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.giaBan = :giaBan"),
-    @NamedQuery(name = "CtPhieuMuaHang.findBySoLuongBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.soLuongBan = :soLuongBan"),
-    @NamedQuery(name = "CtPhieuMuaHang.findByIdTinhTrang", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.idTinhTrang = :idTinhTrang")})
+    @NamedQuery(name = "CtPhieuMuaHang.findBySoLuongMua", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.soLuongMua = :soLuongMua"),
+    @NamedQuery(name = "CtPhieuMuaHang.findByThanhTien", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.thanhTien = :thanhTien"),
+    @NamedQuery(name = "CtPhieuMuaHang.findByNgayGiaoHang", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.ngayGiaoHang = :ngayGiaoHang")})
 public class CtPhieuMuaHang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,13 +52,17 @@ public class CtPhieuMuaHang implements Serializable {
     private float giaBan;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "so_luong_ban")
-    private int soLuongBan;
+    @Column(name = "so_luong_mua")
+    private int soLuongMua;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "id_tinh_trang")
-    private String idTinhTrang;
+    @Column(name = "thanh_tien")
+    private float thanhTien;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ngay_giao_hang")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ngayGiaoHang;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private NguoiBan idNguoiBan;
@@ -65,6 +72,9 @@ public class CtPhieuMuaHang implements Serializable {
     @JoinColumn(name = "id_san_pham", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private SanPham idSanPham;
+    @JoinColumn(name = "id_tinh_trang", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private TinhTrang idTinhTrang;
 
     public CtPhieuMuaHang() {
     }
@@ -73,11 +83,12 @@ public class CtPhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public CtPhieuMuaHang(Integer id, float giaBan, int soLuongBan, String idTinhTrang) {
+    public CtPhieuMuaHang(Integer id, float giaBan, int soLuongMua, float thanhTien, Date ngayGiaoHang) {
         this.id = id;
         this.giaBan = giaBan;
-        this.soLuongBan = soLuongBan;
-        this.idTinhTrang = idTinhTrang;
+        this.soLuongMua = soLuongMua;
+        this.thanhTien = thanhTien;
+        this.ngayGiaoHang = ngayGiaoHang;
     }
 
     public Integer getId() {
@@ -96,20 +107,28 @@ public class CtPhieuMuaHang implements Serializable {
         this.giaBan = giaBan;
     }
 
-    public int getSoLuongBan() {
-        return soLuongBan;
+    public int getSoLuongMua() {
+        return soLuongMua;
     }
 
-    public void setSoLuongBan(int soLuongBan) {
-        this.soLuongBan = soLuongBan;
+    public void setSoLuongMua(int soLuongMua) {
+        this.soLuongMua = soLuongMua;
     }
 
-    public String getIdTinhTrang() {
-        return idTinhTrang;
+    public float getThanhTien() {
+        return thanhTien;
     }
 
-    public void setIdTinhTrang(String idTinhTrang) {
-        this.idTinhTrang = idTinhTrang;
+    public void setThanhTien(float thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
+    public Date getNgayGiaoHang() {
+        return ngayGiaoHang;
+    }
+
+    public void setNgayGiaoHang(Date ngayGiaoHang) {
+        this.ngayGiaoHang = ngayGiaoHang;
     }
 
     public NguoiBan getIdNguoiBan() {
@@ -134,6 +153,14 @@ public class CtPhieuMuaHang implements Serializable {
 
     public void setIdSanPham(SanPham idSanPham) {
         this.idSanPham = idSanPham;
+    }
+
+    public TinhTrang getIdTinhTrang() {
+        return idTinhTrang;
+    }
+
+    public void setIdTinhTrang(TinhTrang idTinhTrang) {
+        this.idTinhTrang = idTinhTrang;
     }
 
     @Override

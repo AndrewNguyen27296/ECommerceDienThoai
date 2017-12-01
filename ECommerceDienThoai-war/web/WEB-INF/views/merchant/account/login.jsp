@@ -35,7 +35,9 @@
 <body class="col-lg-12" style="padding: 0;">
     <div class="header col-lg-12">
         <div class="row col-lg-12">
-            <div class="logo col-lg-2"></div>
+            <div class="logo col-lg-2 pull-right">
+                <img src="assets/merchant/images/2.png" class="pull-right" alt=""/>
+            </div>
             <div class="DIGIWORLD col-lg-4">DIGIWORLD</div>
             <div class="logo2 col-lg-7">Kênh Người Bán</div>
         </div>
@@ -67,12 +69,12 @@
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="tên tài khoản hoặc email">                                        
+                                    <input id="nguoiBan_email" type="text" class="form-control" name="username" value="" placeholder="tên tài khoản hoặc email">                                        
                                 </div>
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input id="login-password" type="password" class="form-control" name="password" placeholder="mật khẩu">
+                                    <input id="nguoiBan_password" type="password" class="form-control" name="password" placeholder="mật khẩu">
                                 </div>
 
 
@@ -86,12 +88,12 @@
                                     </div>
                                 </div>
 
-
+                                <span id="error_dangNhap" style="color:red;"></span>    
                                 <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
 
                                     <div class="col-sm-12 controls">
-                                        <a id="btn-login" href="#" class="btn btn-primary">Đăng nhập  </a>
+                                        <button id="btn-login" class="btn btn-primary" type="submit">Đăng nhập  </button>
 
 
                                     </div>
@@ -118,7 +120,7 @@
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" onclick="$('#signupbox').hide(); $('#loginbox').show()" style="cursor:pointer;">Trở về Đăng nhập</a></div>
                         </div>  
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form" modelAttribute="merchant">
+                            <form id="dangKy" class="form-horizontal" role="form" modelAttribute="merchant">
 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Lỗi:</p>
@@ -130,49 +132,49 @@
                                 <div class="form-group">
                                     <label for="email" class="col-md-4 control-label">Email</label>
                                     <div class="col-md-8">
-                                        <input path="email" type="email" class="form-control" name="email" placeholder="Địa chỉ Email">
+                                        <input id="email" path="email" type="email" class="form-control" name="email" placeholder="Địa chỉ Email">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-4 control-label">Họ Tên</label>
                                     <div class="col-md-8">
-                                        <input path="name" type="text" class="form-control" name="firstname" placeholder="Tên" required="">
+                                        <input id="hoTen" path="name" type="text" class="form-control" name="hoTen" placeholder="Tên" required="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password" class="col-md-4 control-label">Mật khẩu</label>
                                     <div class="col-md-8">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Mật khẩu" required="" id="password">
+                                        <input id="password" type="password" class="form-control" name="password" placeholder="Mật khẩu" required="" id="password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password" class="col-md-4 control-label">Nhập lại Mật khẩu</label>
                                     <div class="col-md-8">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Nhập lại Mật khẩu" required="" id="confirm-password">
+                                        <input type="password" class="form-control" placeholder="Nhập lại Mật khẩu" required="" id="confirm-password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="icode" class="col-md-4 control-label">CMND</label>
                                     <div class="col-md-8">
-                                        <input id="CMND" type="text" minlength="9" maxlength="12" class="form-control" name="icode" placeholder="CMND" required="">
+                                        <input id="cmnd" type="text" minlength="9" maxlength="12" class="form-control" name="cmnd" placeholder="CMND" required="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="icode" class="col-md-4 control-label">SĐT</label>
                                     <div class="col-md-8">
-                                        <input id="soDienThoai" type="text" class="form-control" name="icode" placeholder="SĐT" required="">
+                                        <input id="soDienThoai" type="text" class="form-control" name="soDienThoai" placeholder="SĐT" required="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="icode" class="col-md-4 control-label">Địa chỉ</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" name="icode" placeholder="Địa chỉ" required="">
+                                        <input id="diaChi" type="text" class="form-control" name="diaChi" placeholder="Địa chỉ" required="">
                                     </div>
                                 </div>
 
@@ -180,7 +182,7 @@
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> Đăng ký</button>  
+                                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> Đăng ký</button>  
                                     </div>
                                 </div>
 
@@ -213,7 +215,7 @@
         }
         $("#password, #confirm-password").keyup(checkPasswordMatch);
         //ô nhập SĐT chỉ được nhập số
-        $("#soDienThoai").keydown(function (e) {
+        $("#soDienThoai, #cmnd").keydown(function (e) {
             // Allow: backspace, delete, tab, escape, enter and .
             if ($.inArray(e.keyCode, [8]) !== -1 ||
                     // Allow: home, end, left, right
@@ -227,8 +229,9 @@
             }
         });
         
+        
         //validate email và name
-        $(#merchant).validate({
+        $("#merchant").validate({
             rules:{
                 email:{email:true, required:true},
                 name:{required:true}
@@ -243,5 +246,45 @@
                 }
             }
         });
+        
+        //dang ky email nguoi ban
+        $("#dangKy").submit(function (event) {
+                    event.preventDefault();
+                    var hoTen = $("#hoTen").val();
+                    var email = $("#email").val();
+                    var password = $("#password").val();
+                    var diaChi = $("#diaChi").val();
+                    var cmnd = $("#cmnd").val();
+                    var soDienThoai = $("#soDienThoai").val();
+                    $.ajax({
+                        url: "merchant/account/register.php",
+                        async: false, //block until we get a response
+                        data: {hoTen: hoTen, email: email, password: password, cmnd: cmnd, diaChi: diaChi, soDienThoai: soDienThoai},
+                        success: function (response) {
+                            $("#error").html(response);
+                        }
+                    });
+                });
+        
+        //dang nhap kenh nguoi ban
+        $("#loginform").submit(function (event) {
+                    event.preventDefault();
+                    var nguoiBan_email = $("#nguoiBan_email").val();
+                    var nguoiBan_password = $("#nguoiBan_password").val();
+                    $.ajax({
+                        url: "merchant/account/login.php",
+                        async: false, //block until we get a response
+                        data: {nguoiBan_email: nguoiBan_email, nguoiBan_password: nguoiBan_password},
+                        success: function (response) {
+                            if (response == "Đăng nhập thành công") {
+                                $("#error_dangNhap").html(response);
+                                setTimeout(function () {// wait for 3 secs(2)
+                                    window.location.replace("http://localhost:8080/ECommerceDienThoai-war/merchant/home/index.php"); // then reload the page.(3)
+                                }, 3000);
+                            } else
+                                $("#error_dangNhap").html(response);
+                        }
+                    });
+                });
     });
 </script>  

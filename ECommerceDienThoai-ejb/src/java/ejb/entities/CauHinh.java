@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -23,13 +23,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author XinKaChu
  */
 @Entity
-@Table(name = "khu_vuc")
+@Table(name = "cau_hinh")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "KhuVuc.findAll", query = "SELECT k FROM KhuVuc k"),
-    @NamedQuery(name = "KhuVuc.findById", query = "SELECT k FROM KhuVuc k WHERE k.id = :id"),
-    @NamedQuery(name = "KhuVuc.findByTenKhuVuc", query = "SELECT k FROM KhuVuc k WHERE k.tenKhuVuc = :tenKhuVuc")})
-public class KhuVuc implements Serializable {
+    @NamedQuery(name = "CauHinh.findAll", query = "SELECT c FROM CauHinh c"),
+    @NamedQuery(name = "CauHinh.findById", query = "SELECT c FROM CauHinh c WHERE c.id = :id"),
+    @NamedQuery(name = "CauHinh.findBySoLanBlock", query = "SELECT c FROM CauHinh c WHERE c.soLanBlock = :soLanBlock")})
+public class CauHinh implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,15 +37,21 @@ public class KhuVuc implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 255)
-    @Column(name = "ten_khu_vuc")
-    private String tenKhuVuc;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "so_lan_block")
+    private int soLanBlock;
 
-    public KhuVuc() {
+    public CauHinh() {
     }
 
-    public KhuVuc(Integer id) {
+    public CauHinh(Integer id) {
         this.id = id;
+    }
+
+    public CauHinh(Integer id, int soLanBlock) {
+        this.id = id;
+        this.soLanBlock = soLanBlock;
     }
 
     public Integer getId() {
@@ -56,12 +62,12 @@ public class KhuVuc implements Serializable {
         this.id = id;
     }
 
-    public String getTenKhuVuc() {
-        return tenKhuVuc;
+    public int getSoLanBlock() {
+        return soLanBlock;
     }
 
-    public void setTenKhuVuc(String tenKhuVuc) {
-        this.tenKhuVuc = tenKhuVuc;
+    public void setSoLanBlock(int soLanBlock) {
+        this.soLanBlock = soLanBlock;
     }
 
     @Override
@@ -74,10 +80,10 @@ public class KhuVuc implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof KhuVuc)) {
+        if (!(object instanceof CauHinh)) {
             return false;
         }
-        KhuVuc other = (KhuVuc) object;
+        CauHinh other = (CauHinh) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -86,7 +92,7 @@ public class KhuVuc implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.KhuVuc[ id=" + id + " ]";
+        return "ejb.entities.CauHinh[ id=" + id + " ]";
     }
     
 }

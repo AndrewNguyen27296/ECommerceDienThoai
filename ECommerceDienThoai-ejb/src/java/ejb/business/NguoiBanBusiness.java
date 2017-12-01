@@ -54,6 +54,21 @@ public class NguoiBanBusiness {
         }
     }
     
+    /*Kiểm tra xem cmnd đăng ký đã tồn tại trong CSDL chưa
+    TRUE: đã trùng
+    FALSE: chưa trùng
+    */
+    public boolean kiemTraTonTaiCMND(String cmnd) {
+        Query query = em.createQuery("SELECT n FROM NguoiBan n WHERE n.cmnd=:cmnd");
+        query.setParameter("cmnd", cmnd);
+        try {
+            query.getSingleResult();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     /*
     RETURN TRUE : đúng email và mật khẩu
     RETURN FALSE : sai

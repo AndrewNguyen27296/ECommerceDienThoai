@@ -9,11 +9,13 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author XinKaChu
  */
+@Component
 public class MailerService {
 
     @Autowired 
@@ -26,9 +28,9 @@ public class MailerService {
             */
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true, "utf-8");
-            helper.setFrom("pandarencute96@gmail.com", "DigiWorld Web Master");
+            helper.setFrom("dactien020796@gmail.com", "DigiWorld Web Master");
             helper.setTo(to);
-            helper.setReplyTo("pandarencute96@gmail.com");
+            helper.setReplyTo("dactien020796@gmail.com");
             helper.setSubject(subject);
             helper.setText(body, true);
 

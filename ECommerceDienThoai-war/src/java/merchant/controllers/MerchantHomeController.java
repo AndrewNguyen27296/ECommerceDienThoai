@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @Controller
-@RequestMapping("home")
+@RequestMapping("merchant/home")    
 public class MerchantHomeController {
     @RequestMapping("index")
     public String index() {
@@ -25,5 +25,10 @@ public class MerchantHomeController {
     @RequestMapping(value="register", method = RequestMethod.POST)
     public String register() {
         return "";
+    }
+    
+   @RequestMapping("myaccount")
+   public String myaccount(){
+        return "merchant/home/myaccount";
     }
 }

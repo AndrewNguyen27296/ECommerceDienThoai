@@ -11,15 +11,11 @@ import ejb.sessions.NguoiBanFacade;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
 
 /**
  *
@@ -27,41 +23,17 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class NguoiBanService {
-    
+
     @Autowired
     MailerService mailerService;
-    
-    NguoiBanFacade nguoiBanFacade = lookupNguoiBanFacadeBean();
 
-    private NguoiBanFacade lookupNguoiBanFacadeBean() {
-        try {
-            Context c = new InitialContext();
-            return (NguoiBanFacade) c.lookup("java:global/ECommerceDienThoai/ECommerceDienThoai-ejb/NguoiBanFacade!ejb.sessions.NguoiBanFacade");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-    
-    NguoiBanBusiness nguoiBanBusiness = lookupNguoiBanBusinessBean();
-    
-    private NguoiBanBusiness lookupNguoiBanBusinessBean() {
-        try {
-            Context c = new InitialContext();
-            return (NguoiBanBusiness) c.lookup("java:global/ECommerceDienThoai/ECommerceDienThoai-ejb/NguoiBanBusiness!ejb.business.NguoiBanBusiness");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-    
-    public String themNguoiBan(String email, String password,String hoTen, String cmnd, String soDienThoai, String diaChi,
-                HttpServletRequest request) {
-        if (nguoiBanBusiness.kiemTraTonTaiEmail(email) == true) {
-            return "Email này đã được sử dụng";
-        }
-        if (nguoiBanBusiness.kiemTraTonTaiSDT(soDienThoai) == true) {
-            return "Số điện thoại này đã được sử dụng";
+    NguoiBanFacade nguoiBanFacade = (NguoiBanFacade) LookupFactory.lookupFacadeBean("NguoiBanFacade");
+    NguoiBanBusiness nguoiBanBusiness = (NguoiBanBusiness) LookupFactory.lookupBusinessBean("NguoiBanBusiness");
+
+    public String themNguoiBan(String email, String password, String hoTen, String cmnd, String soDienThoai, String diaChi,
+            HttpServletRequest request) {
+        if (nguoiBanBusiness.kiemTraTonTaiCMND(cmnd) == true) {
+            return "CMND này đã được sử dụng";
         }
         try {
             NguoiBan merchant = new NguoiBan();
@@ -72,24 +44,27 @@ public class NguoiBanService {
             merchant.setMatKhau(maHoaMatKhau(password));
             merchant.setSoDienThoai(soDienThoai);
             merchant.setNgayDangKy(new Date());
+            merchant.setSoLanCanhCao(0);
+            merchant.setSoLanBiBlock(0);
             merchant.setKichHoat(false);
-            merchant.setTrangThai(true);
+            merchant.setBiKhoa(false);
+            merchant.setBiBlock(false);
             nguoiBanFacade.create(merchant);
             try {
-                String url = request.getRequestURL().toString().replace("register", "activate/" + merchant.getId());
+
                 String to = merchant.getEmail();
-                String subject = "Chào mừng bạn đã đến với DIGIWOLD-Kênh Người Bán";
-                String body = "Cảm ơn bạn đã tham gia cùng chúng tôi. "
-                        + "Click vào đây liên kết sau đây để kích hoạt tài khoản<hr>"
-                        + "<a href='" + url + "'>Kích hoạt tài khoản</a>";
+                String subject = "Chào mừng bạn đã đến với DIGIWOLD-Kênh Người Bán \n";
+                String body = "Cảm ơn bạn đã đăng ký kênh người bán - DigiWorld. \n"
+                        + "Tài khoản của bạn vẫn chưa được kích hoạt \n"
+                        + "Vui lòng đến trụ sở công ty chúng tôi để kích hoạt và mua gói tin \n";
                 mailerService.send(to, subject, body);
-                return "Đăng ký thành công, vui lòng kiểm tra email và kích hoạt tài khoản";
+                return "Đăng ký thành công, vui lòng đến trụ sở công ty chúng tôi để kích hoạt và mua gói tin";
             } catch (Exception e) {
                 return "Gửi mail thất bại";
             }
         } catch (Exception e) {
             return "Đăng ký thất bại";
-        } 
+        }
     }
 
     private String maHoaMatKhau(String password) {
@@ -104,37 +79,77 @@ public class NguoiBanService {
             //This bytes[] has bytes in decimal format;
             //Convert it to hexadecimal format
             StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             //Get complete hashed password in hex format
             generatedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
+        } catch (NoSuchAlgorithmException e) {
             generatedPassword = "";
             e.printStackTrace();
         }
         return generatedPassword;
     }
-    
+
     public void kichHoatTaiKhoan(String id) {
         NguoiBan merchant = nguoiBanFacade.find(Integer.parseInt(id));
         merchant.setKichHoat(true);
         nguoiBanFacade.edit(merchant);
     }
-    
+
     public String dangNhap(String email, String password,
-                HttpSession httpSession) {
+            HttpSession httpSession) {
         if (nguoiBanBusiness.kiemTraTonTaiEmail(email) == true) {
             NguoiBan nguoiBan = nguoiBanBusiness.layNguoiBanTheoEmail(email);
             if (nguoiBan.getMatKhau().equals(maHoaMatKhau(password)) == true) {
-                httpSession.setAttribute("nguoiBan", nguoiBan);
-                return "Đăng nhập thành công";
+                if (nguoiBan.getKichHoat() == false) {
+                    return "Tài khoản của bạn vẫn chưa được kích hoạt. Vui lòng đến trụ sở công ty chúng tôi để kích hoạt và mua gói tin";
+                } else if (nguoiBan.getBiBlock() == true) {
+                    return "Tài khoản của bạn đã bị khóa vĩnh viễn vì vi phạm quá nhiều lần";
+                } else {
+                    httpSession.setAttribute("nguoiBan", nguoiBan);
+                    return "Đăng nhập thành công";
+                }
             }
             return "Mật khẩu không chính xác";
         }
         return "Email không tồn tại";
+    }
+
+    public void doiMatKhau(ModelMap model, String password, String password1, String password2, HttpSession httpSession) {
+        if (password1.equals(password2)) {
+            NguoiBan merchant = (NguoiBan) httpSession.getAttribute("nguoiBan");
+            if (maHoaMatKhau(password).equals(merchant.getMatKhau())) {
+                merchant.setMatKhau(maHoaMatKhau(password1));
+                nguoiBanFacade.edit(merchant);
+                model.addAttribute("message", "Chúc mừng bạn đã đổi mật khẩu thành công");
+                httpSession.setAttribute("merchant", merchant);
+            } else {
+                model.addAttribute("message", "Bạn nhập sai mật khẩu hiện tại");
+            }
+
+        } else {
+            model.addAttribute("message", "Mật khẩu mới và cũ không khớp");
+        }
+
+    }
+
+    public void capNhatNguoiBan(NguoiBan nguoiBan, ModelMap model, HttpSession httpSession) {
+        NguoiBan nguoiBanUpdate = nguoiBanFacade.find(nguoiBan.getId());
+        nguoiBanUpdate.setEmail(nguoiBan.getEmail());
+        nguoiBanUpdate.setMatKhau(nguoiBan.getMatKhau());
+        nguoiBanUpdate.setHoTen(nguoiBan.getHoTen());
+        nguoiBanUpdate.setCmnd(nguoiBan.getCmnd());
+        nguoiBanUpdate.setSoDienThoai(nguoiBan.getSoDienThoai());
+        nguoiBanUpdate.setDiaChi(nguoiBan.getDiaChi());
+        try {
+            nguoiBanFacade.edit(nguoiBanUpdate);
+            model.addAttribute("message", "Cập nhật thành công");
+            httpSession.setAttribute("nguoiBan", nguoiBan);
+        } catch (Exception e) {
+            model.addAttribute("message", "Cập nhật thất bại");
+        }
+        
+        
     }
 }

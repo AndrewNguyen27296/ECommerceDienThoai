@@ -23,27 +23,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AdminService {
 
-    AdminFacade adminFacade = lookupAdminFacadeBean();
-    AdminBusiness adminBusiness = lookupAdminBusinessBean();
-
-    private AdminBusiness lookupAdminBusinessBean() {
-        try {
-            Context c = new InitialContext();
-            return (AdminBusiness) c.lookup("java:global/ECommerceDienThoai/ECommerceDienThoai-ejb/AdminBusiness!ejb.business.AdminBusiness");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-    private AdminFacade lookupAdminFacadeBean() {
-        try {
-            Context c = new InitialContext();
-            return (AdminFacade) c.lookup("java:global/ECommerceDienThoai/ECommerceDienThoai-ejb/AdminFacade!ejb.sessions.AdminFacade");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
+    AdminFacade adminFacade = (AdminFacade) LookupFactory.lookupFacadeBean("AdminFacade");
+    AdminBusiness adminBusiness = (AdminBusiness) LookupFactory.lookupBusinessBean("AdminBusiness");
 
 
     public List<Admin> layDanhSachAdmin() {

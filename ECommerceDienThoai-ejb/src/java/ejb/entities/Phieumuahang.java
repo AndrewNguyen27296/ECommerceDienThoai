@@ -45,8 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PhieuMuaHang.findByDiaChiGiao", query = "SELECT p FROM PhieuMuaHang p WHERE p.diaChiGiao = :diaChiGiao"),
     @NamedQuery(name = "PhieuMuaHang.findByGhiChu", query = "SELECT p FROM PhieuMuaHang p WHERE p.ghiChu = :ghiChu"),
     @NamedQuery(name = "PhieuMuaHang.findByNgayDatHang", query = "SELECT p FROM PhieuMuaHang p WHERE p.ngayDatHang = :ngayDatHang"),
-    @NamedQuery(name = "PhieuMuaHang.findByNgayGiaoHang", query = "SELECT p FROM PhieuMuaHang p WHERE p.ngayGiaoHang = :ngayGiaoHang"),
-    @NamedQuery(name = "PhieuMuaHang.findByTrangThai", query = "SELECT p FROM PhieuMuaHang p WHERE p.trangThai = :trangThai")})
+    @NamedQuery(name = "PhieuMuaHang.findByTongTien", query = "SELECT p FROM PhieuMuaHang p WHERE p.tongTien = :tongTien")})
 public class PhieuMuaHang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,13 +87,8 @@ public class PhieuMuaHang implements Serializable {
     private Date ngayDatHang;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ngay_giao_hang")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayGiaoHang;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "trang_thai")
-    private boolean trangThai;
+    @Column(name = "tong_tien")
+    private float tongTien;
     @JoinColumn(name = "id_nguoi_mua", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private NguoiMua idNguoiMua;
@@ -119,7 +113,7 @@ public class PhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public PhieuMuaHang(Integer id, String email, String soDienThoai, String tenNguoiNhan, String diaChiGiao, String ghiChu, Date ngayDatHang, Date ngayGiaoHang, boolean trangThai) {
+    public PhieuMuaHang(Integer id, String email, String soDienThoai, String tenNguoiNhan, String diaChiGiao, String ghiChu, Date ngayDatHang, float tongTien) {
         this.id = id;
         this.email = email;
         this.soDienThoai = soDienThoai;
@@ -127,8 +121,7 @@ public class PhieuMuaHang implements Serializable {
         this.diaChiGiao = diaChiGiao;
         this.ghiChu = ghiChu;
         this.ngayDatHang = ngayDatHang;
-        this.ngayGiaoHang = ngayGiaoHang;
-        this.trangThai = trangThai;
+        this.tongTien = tongTien;
     }
 
     public Integer getId() {
@@ -187,20 +180,12 @@ public class PhieuMuaHang implements Serializable {
         this.ngayDatHang = ngayDatHang;
     }
 
-    public Date getNgayGiaoHang() {
-        return ngayGiaoHang;
+    public float getTongTien() {
+        return tongTien;
     }
 
-    public void setNgayGiaoHang(Date ngayGiaoHang) {
-        this.ngayGiaoHang = ngayGiaoHang;
-    }
-
-    public boolean getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
+    public void setTongTien(float tongTien) {
+        this.tongTien = tongTien;
     }
 
     public NguoiMua getIdNguoiMua() {
