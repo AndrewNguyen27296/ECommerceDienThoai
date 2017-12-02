@@ -33,13 +33,13 @@ public class HomeController {
         return "customer/home/index";
     }
     
-    @RequestMapping("test")
-    public String test(Model model) {
-        return "customer/home/product-detail";
-    }
-    
-    @RequestMapping(value="register", method = RequestMethod.POST)
-    public String register() {
-        return "";
-    }
+//    @RequestMapping("test")
+//    public String test(Model model) {
+//        return "customer/home/product-detail";
+//    }
+//
+//    @RequestMapping(value = "register", method = RequestMethod.POST)
+//    public String register() {
+//        return "";
+//    }
 }

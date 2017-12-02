@@ -4,7 +4,9 @@
     Author     : DacTien
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en" utf-8>
     <head>
@@ -47,10 +49,9 @@ jQuery(document).ready(function ($) {
     });
 });
         </script>
-        <!-- //end-smooth-scrolling --> 
-        
-        <!-- SHopping-cart -->
-        <script src="assets/customer/js/shopping-cart.js" type="text/javascript"></script>
+        <!-- //end-smooth-scrolling -->  
+        <script src="assets/customer/js/easyResponsiveTabs.js" type="text/javascript"></script>
+        <script type="text/javascript" src="assets/customer/js/jquery.flexisel.js"></script>
     </head> 
     <body>
         <!-- for bootstrap working -->
@@ -59,7 +60,7 @@ jQuery(document).ready(function ($) {
         
         <!-- HEADER -->
         <jsp:include page="customer/layout/header.jsp"></jsp:include>
-        
+                
         <!-- BANNER -->
         <jsp:include page="customer/layout/banner.jsp"></jsp:include>
 

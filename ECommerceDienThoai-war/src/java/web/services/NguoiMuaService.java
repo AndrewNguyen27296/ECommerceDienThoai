@@ -185,4 +185,30 @@ public class NguoiMuaService {
             model.addAttribute("message", "Xác nhận mật khẩu không đúng");
         }
     }
+    
+    public void quenMatKhau(Model model, String email, String soDienThoai) {
+        if (nguoiMuaBusiness.kiemTraTonTaiEmail(email)) {
+            NguoiMua nguoiMua = nguoiMuaBusiness.layNguoiMuaTheoEmail(email);
+            if (nguoiMua.getSoDienThoai().equals(soDienThoai)) {
+                try {
+                    String to = email;
+                    String subject = "Quên mật khẩu";
+                    String body = "Mật khẩu mới của bạn là 123456. Vui lòng đăng nhập và cập nhật lại mật khẩu mới";
+                    mailerService.send(to, subject, body);
+                    model.addAttribute("message", "Mật khẩu của bạn đã được reset. Vui lòng kiểm tra email");
+                    
+                    nguoiMua.setMatKhau(maHoaMatKhau("123456"));
+                    nguoiMuaFacade.edit(nguoiMua);
+                } catch (Exception e) {
+                    model.addAttribute("message", "Gửi mail thất bại");
+                }
+            }
+            else {
+                model.addAttribute("message", "Email và SĐT không trùng khớp, xin kiểm tra lại");
+            }
+        }
+        else {
+            model.addAttribute("message", "Email không tồn tại");
+        }
+    }
 }

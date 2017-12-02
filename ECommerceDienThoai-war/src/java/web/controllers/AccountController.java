@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -111,5 +112,18 @@ public class AccountController {
 			HttpSession httpSession) {
         nguoiMuaService.doiMatKhau(model, matKhau, matKhau1, matKhau2, httpSession);
         return "customer/account/change";
+    }
+    
+    @RequestMapping("forgot-password")
+    public String forgot() {
+        return "customer/account/forgot-password";
+    }
+    
+    @RequestMapping(value = "forgot-password", method = RequestMethod.POST)
+    public String forgot(Model model,
+            @RequestParam("email") String email,
+            @RequestParam("soDienThoai") String soDienThoai) {
+        nguoiMuaService.quenMatKhau(model, email, soDienThoai);
+        return "customer/account/forgot-password";
     }
 }

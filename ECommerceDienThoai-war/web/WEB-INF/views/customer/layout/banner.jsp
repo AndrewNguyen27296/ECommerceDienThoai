@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:set var="cart" value="${sessionScope['scopedTarget.cart']}"/>
+
 <div class="container" style="    width: 100%;
      background-color: #333333;
      /*    										position: fixed;
@@ -74,15 +76,12 @@
             <span class="glyphicon glyphicon-search"></span>
         </button>
         <div class="cart cart box_1 row my-cart" style="margin-right: 0"> 
-            <ul style="float: left;color: red;margin-right: 30px;  font-size: 13px; padding-top: 3px;" class="list-unstyled">
-                    <li>0 San Pham</li>
-                    <li>0 VND</li>
+            <ul style="float: left;color: white; font-size: 16px; padding-top: 4px; margin-right: 10px" class="list-unstyled">
+                    <li><span id="count">${cart.count}</span> sản phẩm</li>
+<!--                    <li>0 VND</li>-->
             </ul>
-            <form action="#" method="post" class="last"> 
-                <input type="hidden" name="cmd" value="_cart" />
-                <input type="hidden" name="display" value="1" />
-                <button class="w3view-cart" type="submit" name="submit" value="" style="position: inherit;margin-right: 30px;"><i class="fa fa-cart-arrow-down" aria-hidden="true" ></i></button>
-            </form>   
+            <input type="hidden" name="display" value="1" />
+            <a href="shopping-cart/view.php" class="w3view-cart" style="position: inherit;margin-right: 30px;"><i class="fa fa-cart-arrow-down" aria-hidden="true" ></i></a> 
         </div>
     </form>
 

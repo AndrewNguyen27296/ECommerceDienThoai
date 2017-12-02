@@ -27,6 +27,6 @@ public class SanPhamController {
     public String detail(@PathVariable("id") Integer id, Model model) {
         SanPham sanPham = sanPhamService.lay1SanPham(id);
         model.addAttribute("sanpham", sanPham);
-        return "customer/home/product-detail";
+        return "customer/product/product-detail";
     }
 }

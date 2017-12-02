@@ -76,4 +76,41 @@ public class ShoppingCartService implements Serializable {
         }
         return total;
     }
+
+    /**
+     * lay tong tien trong gio hang
+     *
+     * @return tong tien
+     */
+    public int getAmount() {
+        int total = 0;
+        for (SanPham p : getItems()) {
+            total += p.getSoLuong() * p.getGiaBan();
+        }
+        return total;
+    }
+
+    /**
+     * lay số lượng tồn của sp theo mã sphẩm
+     *
+     * @return số lượng tồn
+     */
+    public int getSoLuongTonTheoMaSanPham(int id) {
+        return sanPhamService.getSoLuongTonTheoMaSanPham(id);
+    }
+
+    /**
+     * cap nhat so luong cua mot san pham bat ki trong gio hang
+     *
+     * @param id : ma sp can cap nhat
+     * @param newQuantity : so luong cap nhat moi
+     */
+    public void update(Integer ma, Integer newSoLuong) {
+        SanPham sanpham = map.get(ma);
+        sanpham.setSoLuong(newSoLuong);
+    }
+
+    public SanPham getItem(Integer ma) {
+        return map.get(ma);
+    }
 }

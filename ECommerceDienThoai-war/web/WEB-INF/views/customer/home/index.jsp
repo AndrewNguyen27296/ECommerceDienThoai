@@ -297,7 +297,6 @@
 						
                             });
             </script>
-            <script type="text/javascript" src="assets/customer/js/jquery.flexisel.js"></script>
         </div>
     </div>
 </div>

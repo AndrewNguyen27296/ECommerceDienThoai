@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SanPhamService {
-
+    
     SanPhamFacade sanPhamFacade = lookupSanPhamFacadeBean();
 
     private SanPhamFacade lookupSanPhamFacadeBean() {
@@ -57,6 +57,9 @@ public class SanPhamService {
         return sanPhamFacade.find(id);
     }
 
-    
+    public int getSoLuongTonTheoMaSanPham(int id){
+        return sanPhamBusiness.getSoLuongTonTheoMaSanPham(id);
+    }
+
 
 }

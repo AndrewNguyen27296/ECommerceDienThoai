@@ -35,6 +35,7 @@
                                                         <span id="error_dangNhap" style="color: red"></span>
                                                         <div class="sign-up">
                                                             <input type="submit" value="Đăng nhập"/>
+                                                            <a href="account/forgot-password.php">Quên mật khẩu</a>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -61,13 +62,11 @@
                                     </div>	
                                 </div>
                                 <script src="assets/customer/js/easyResponsiveTabs.js" type="text/javascript"></script>
-                                <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        $('#horizontalTab').easyResponsiveTabs({
-                                            type: 'default', //Types: default, vertical, accordion           
-                                            width: 'auto', //auto or any width like 600px
-                                            fit: true   // 100% fit in a container
-                                        });
+                                <script >
+                                    $('#horizontalTab').easyResponsiveTabs({
+                                        type: 'default', //Types: default, vertical, accordion           
+                                        width: 'auto', //auto or any width like 600px
+                                        fit: true   // 100% fit in a container
                                     });
                                 </script>
                             </div>
@@ -141,7 +140,7 @@
                             if (response == "Đăng nhập thành công") {
                                 $("#error_dangNhap").html(response);
                                 setTimeout(function () {// wait for 3 secs(2)
-                                    location.reload(); // then reload the page.(3)
+                                    window.location.replace("http://localhost:8080/ECommerceDienThoai-war/home/index.php"); // then reload the page.(3)
                                 }, 3000);
                             } else
                                 $("#error_dangNhap").html(response);
@@ -152,7 +151,7 @@
         </script>  
     </c:when>
     <c:otherwise>
-        
+
     </c:otherwise>
 </c:choose>
 

@@ -5,11 +5,20 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %> 
+<script src="assets/customer/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="assets/customer/js/jquery-ui.js" type="text/javascript"></script>
+<!-- SHopping-cart -->
+<script src="assets/customer/js/shopping-cart.js"></script>
+
+<style id="nn-cart-fly">
+
+</style>
+
 <div style="padding-left: 10px; padding-right: 10px">
     <div class="product-detail">
         <div class="product-detail-left">
-            <img src="assets/images/products/${sanpham.hinhAnh}">
+            <img id="img-product" src="assets/images/products/${sanpham.hinhAnh}">
         </div>
 
         <div class="product-detail-right">
@@ -37,13 +46,8 @@
                     </div>
                 </div>
                 <div class="product-detail-info-footer">
-                    <form>
-                        <input type="hidden" name="cmd" value="_cart" />
-                        <input type="hidden" name="add" id="add" value="${sanpham.id}" /> 
-                        <input type="hidden" name="w3ls_item" value="${sanpham.tenMay}" /> 
-                        <input type="hidden" name="amount" value="${sanpham.giaBan}"/>   
-                        <button type="submit" id="btn-add-to-cart" class="w3ls-cart">Thêm vào giỏ hàng</button>
-                    </form>
+                    <input type="hidden" name="add" id="add" value="${sanpham.id}" />
+                    <button class="btn btn-danger" id="btn-add-to-cart" >Thêm vào giỏ hàng</button>
                 </div>
             </div>
         </div>
@@ -117,5 +121,5 @@
         </div>
     </div>
 </div>
-                    
-                    
+
+

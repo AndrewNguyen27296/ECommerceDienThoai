@@ -481,3 +481,15 @@
     background-color: white;
     float:right;
 }
+
+#my-shopping-cart th,td {
+    text-align: center;
+}
+
+/*#my-shopping-cart td {
+    text-align: right;
+}
+
+#my-shopping-cart td:first-child {
+    text-align: center;
+}*/

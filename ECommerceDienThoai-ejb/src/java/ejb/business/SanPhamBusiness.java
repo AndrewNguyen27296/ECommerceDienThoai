@@ -34,4 +34,10 @@ public class SanPhamBusiness {
         List<SanPham> list = query.getResultList();
         return list;
     }
+    
+    public int getSoLuongTonTheoMaSanPham(int id) {
+        Query query = em.createQuery("SELECT s.soLuong FROM SanPham s WHERE s.id=:id");
+        query.setParameter("id", id);
+        return (int) query.getSingleResult();
+    }
 }
