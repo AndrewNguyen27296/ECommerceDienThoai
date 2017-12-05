@@ -42,6 +42,7 @@ public class ShoppingCartController {
             soLuongs.add(cart.getSoLuongTonTheoMaSanPham(s.getId()));
         }
         model.addAttribute("soLuongs", soLuongs);
+        model.addAttribute("listNguoiBan", cart.getNguoiBans());
         return "customer/shopping-cart/view";
     }
 

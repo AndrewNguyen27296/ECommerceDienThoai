@@ -17,7 +17,7 @@
         <c:when test="${empty sessionScope.nguoiMua}">
             <div class="col-sm-12 log-in" style="margin-top: 5px">
                 <span style="float: right; color: red;">
-                    <a href="#" data-toggle="modal" data-target="#myModal88" >
+                    <a href="#" data-toggle="modal" data-target="#myModal88" id="check-dang-nhap">
                         Đăng nhập
                     </a>
                 </span>
@@ -30,13 +30,13 @@
             </div>
         </c:when>
         <c:otherwise>
-            <div class="col-sm-12 log-in" style="margin-top: 5px">
+            <div class="col-sm-12 log-in" style="margin-top: 5px"  id="check-dang-nhap">
                 <!--                <a href="#" class="dropdown" style="float: right; color: white;font-size: 16px;">
                                     Chào ${sessionScope.nguoiMua.hoTen}
                                 </a>-->
 
                 <div  style="float: right; font-size: 16px">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="check-dang-nhap">
                         Chào ${sessionScope.nguoiMua.hoTen}
                     </a>
                     <ul class="dropdown-menu list-unstyled" style="right: 0; left: 86%">

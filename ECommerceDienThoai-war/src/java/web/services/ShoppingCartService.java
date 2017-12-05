@@ -5,6 +5,7 @@
  */
 package web.services;
 
+import ejb.entities.NguoiBan;
 import ejb.entities.SanPham;
 import java.io.Serializable;
 import java.util.Collection;
@@ -112,5 +113,13 @@ public class ShoppingCartService implements Serializable {
 
     public SanPham getItem(Integer ma) {
         return map.get(ma);
+    }
+    
+    public Collection<NguoiBan> getNguoiBans() {
+        Map<Integer, NguoiBan> listNguoiBan = new HashMap<Integer, NguoiBan>();
+        for (SanPham sp : getItems()) {
+            listNguoiBan.put(sp.getIdNguoiBan().getId(), sp.getIdNguoiBan());
+        }
+        return listNguoiBan.values();
     }
 }

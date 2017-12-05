@@ -24,7 +24,7 @@
                                     <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
                                         <ul>
                                             <li class="resp-tab-item" aria-controls="tab_item-0"><span>Đăng nhập</span></li>
-                                            <li class="resp-tab-item" aria-controls="tab_item-1"><span>Đắng ký</span></li>
+                                            <li class="resp-tab-item" aria-controls="tab_item-1"><span>Đăng ký</span></li>
                                         </ul>		
                                         <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                             <div class="facts">
@@ -50,7 +50,16 @@
                                                         <input placeholder="Mật Khẩu" name="pasword" id="password" type="password" required="">
                                                         <input placeholder="Nhập Lại Mật Khẩu" type="password" required="" id="confirm-password">
                                                         <input placeholder="Số Điện Thoại" name="soDienThoai" id="soDienThoai" type="text" minlength="10" maxlength="11" style="margin: 1em 0 0;">	
-                                                        <input placeholder="Địa Chỉ" name="diaChi" id="diaChi" type="text" required="" style="margin: 1em 0 0;">	
+                                                        <input placeholder="Địa Chỉ" name="diaChi" id="diaChi" type="text" required="" style="margin: 1em 0 0;">
+                                                        <select class="input">
+                                                            <option>--Chọn Tỉnh - Thành phố--</option>
+                                                        </select>
+                                                        <select class="input">
+                                                            <option>--Chọn Quận - Huyện--</option>
+                                                        </select>
+                                                        <select class="input">
+                                                            <option>--Chọn Phường - Xã--</option>
+                                                        </select>
                                                         <span id="error" style="color: red"></span>
                                                         <div class="sign-up">
                                                             <input type="submit" value="Tạo Tài Khoản"/>
@@ -140,7 +149,7 @@
                             if (response == "Đăng nhập thành công") {
                                 $("#error_dangNhap").html(response);
                                 setTimeout(function () {// wait for 3 secs(2)
-                                    window.location.replace("http://localhost:8080/ECommerceDienThoai-war/home/index.php"); // then reload the page.(3)
+                                    window.location.reload(); // then reload the page.(3)
                                 }, 3000);
                             } else
                                 $("#error_dangNhap").html(response);

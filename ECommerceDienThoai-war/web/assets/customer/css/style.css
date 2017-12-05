@@ -1506,7 +1506,7 @@ h2.resp-accordion {
     color: #212121;
     padding-left: 1.5em;
 }
-.register input[type="text"],.register input[type="email"],.register input[type="password"],.register input[type="number"]{
+.register input[type="text"],.register input[type="email"],.register input[type="password"],.register input[type="number"], .register select{
 	outline:none;
 	border:1px solid #DFDFDF;
 	background:#f5f5f5;
@@ -1515,11 +1515,11 @@ h2.resp-accordion {
 	width:100%;
 	font-size:14px;
 }
-.register input[type="password"],.register input[type="email"],.register input[type="number"]{
+.register input[type="text"],.register input[type="email"],.register input[type="password"],.register input[type="number"], .register select {
 	margin:1em 0 0;
 }
 div#horizontalTab ul {
-    padding-bottom: 1.5em;
+/*    padding-bottom: 1.5em;*/
 }
 ::-webkit-input-placeholder{
 	color:#212121 !important;

@@ -126,4 +126,11 @@ public class AccountController {
         nguoiMuaService.quenMatKhau(model, email, soDienThoai);
         return "customer/account/forgot-password";
     }
+    
+    /*@ResponseBody
+    @RequestMapping(value = "check-session", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    public String check(HttpServletRequest request) {
+        String temp = nguoiMuaService.themNguoiMua(request);
+        return temp;
+    }*/
 }
