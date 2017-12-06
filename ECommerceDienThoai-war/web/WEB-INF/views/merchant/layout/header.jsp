@@ -8,22 +8,22 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <style>
     .searchButton {
-  position: absolute;  
-  right: -52px;
-  width: 40px;
-  height: 36px;
-  top: -4px;
-  border: 1px solid #ff9501;
-  background: #ff9501;
-  text-align: center;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  border: 1px solid;
-  margin-right: 51px;
-  margin-top: 3px;
-}
+        position: absolute;  
+        right: -52px;
+        width: 40px;
+        height: 36px;
+        top: -4px;
+        border: 1px solid #ff9501;
+        background: #ff9501;
+        text-align: center;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        border: 1px solid;
+        margin-right: 51px;
+        margin-top: 3px;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -222,10 +222,6 @@
     <div class="clearfix"> </div>	
 </div>
 <!--header end here-->
-
-
-
-
 
 <!-- script-for sticky-nav -->
 <script>

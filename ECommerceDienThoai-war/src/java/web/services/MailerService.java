@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
+<<<<<<< HEAD
  * @author XinKaChu
  */
 @Component

@@ -16,22 +16,20 @@
 
 	<!-- Configures Handler Interceptors --> 
 	<mvc:interceptors>  
-		<bean class="eshop.interceptor.EShopInterceptor" />
-		
 		<!-- Chỉ lọc các URL theo path -->
 		<mvc:interceptor>
 			<mvc:mapping path="/account/logoff.php"/>
 			<mvc:mapping path="/account/change.php"/>
 			<mvc:mapping path="/account/edit.php"/>
 			<mvc:mapping path="/order/**"/>
-			<bean class="eshop.interceptor.AuthenticateInterceptor" />
+                        <bean class="web.interceptor.CustomerInterceptor" />
 		</mvc:interceptor>
 		
-		<mvc:interceptor>
+<!--		<mvc:interceptor>
 			<mvc:mapping path="/admin/**"/>
 			<mvc:exclude-mapping path="/admin/home/**"/>
 			<bean class="eshop.interceptor.AdminInterceptor" />
-		</mvc:interceptor>
+		</mvc:interceptor>-->
 	</mvc:interceptors>
 
 </beans>

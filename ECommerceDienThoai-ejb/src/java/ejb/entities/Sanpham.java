@@ -31,37 +31,38 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author DacTien
  */
 @Entity
 @Table(name = "san_pham")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SanPham.findAll", query = "SELECT s FROM SanPham s"),
-    @NamedQuery(name = "SanPham.findById", query = "SELECT s FROM SanPham s WHERE s.id = :id"),
-    @NamedQuery(name = "SanPham.findByTenMay", query = "SELECT s FROM SanPham s WHERE s.tenMay = :tenMay"),
-    @NamedQuery(name = "SanPham.findByHinhAnh", query = "SELECT s FROM SanPham s WHERE s.hinhAnh = :hinhAnh"),
-    @NamedQuery(name = "SanPham.findByGiaBan", query = "SELECT s FROM SanPham s WHERE s.giaBan = :giaBan"),
-    @NamedQuery(name = "SanPham.findByMoTa", query = "SELECT s FROM SanPham s WHERE s.moTa = :moTa"),
-    @NamedQuery(name = "SanPham.findByKichThuocManHinh", query = "SELECT s FROM SanPham s WHERE s.kichThuocManHinh = :kichThuocManHinh"),
-    @NamedQuery(name = "SanPham.findByCpu", query = "SELECT s FROM SanPham s WHERE s.cpu = :cpu"),
-    @NamedQuery(name = "SanPham.findByTocDoCpu", query = "SELECT s FROM SanPham s WHERE s.tocDoCpu = :tocDoCpu"),
-    @NamedQuery(name = "SanPham.findByRam", query = "SELECT s FROM SanPham s WHERE s.ram = :ram"),
-    @NamedQuery(name = "SanPham.findByBoNhoTrong", query = "SELECT s FROM SanPham s WHERE s.boNhoTrong = :boNhoTrong"),
-    @NamedQuery(name = "SanPham.findByHeDieuHanh", query = "SELECT s FROM SanPham s WHERE s.heDieuHanh = :heDieuHanh"),
-    @NamedQuery(name = "SanPham.findByCameraTruoc", query = "SELECT s FROM SanPham s WHERE s.cameraTruoc = :cameraTruoc"),
-    @NamedQuery(name = "SanPham.findByCameraSau", query = "SELECT s FROM SanPham s WHERE s.cameraSau = :cameraSau"),
-    @NamedQuery(name = "SanPham.findByDungLuongPin", query = "SELECT s FROM SanPham s WHERE s.dungLuongPin = :dungLuongPin"),
-    @NamedQuery(name = "SanPham.findByTheNhoNgoai", query = "SELECT s FROM SanPham s WHERE s.theNhoNgoai = :theNhoNgoai"),
-    @NamedQuery(name = "SanPham.findByKhangNuoc", query = "SELECT s FROM SanPham s WHERE s.khangNuoc = :khangNuoc"),
-    @NamedQuery(name = "SanPham.findByBaoHanh", query = "SELECT s FROM SanPham s WHERE s.baoHanh = :baoHanh"),
-    @NamedQuery(name = "SanPham.findByTonKho", query = "SELECT s FROM SanPham s WHERE s.tonKho = :tonKho"),
-    @NamedQuery(name = "SanPham.findByNgayDang", query = "SELECT s FROM SanPham s WHERE s.ngayDang = :ngayDang"),
-    @NamedQuery(name = "SanPham.findBySoLanXem", query = "SELECT s FROM SanPham s WHERE s.soLanXem = :soLanXem"),
-    @NamedQuery(name = "SanPham.findBySoLanMua", query = "SELECT s FROM SanPham s WHERE s.soLanMua = :soLanMua"),
-    @NamedQuery(name = "SanPham.findByBiDanh", query = "SELECT s FROM SanPham s WHERE s.biDanh = :biDanh"),
-    @NamedQuery(name = "SanPham.findByTrangThai", query = "SELECT s FROM SanPham s WHERE s.trangThai = :trangThai"),
-    @NamedQuery(name = "SanPham.findByAnHien", query = "SELECT s FROM SanPham s WHERE s.anHien = :anHien")})
+    @NamedQuery(name = "SanPham.findAll", query = "SELECT s FROM SanPham s")
+    , @NamedQuery(name = "SanPham.findById", query = "SELECT s FROM SanPham s WHERE s.id = :id")
+    , @NamedQuery(name = "SanPham.findByTenMay", query = "SELECT s FROM SanPham s WHERE s.tenMay = :tenMay")
+    , @NamedQuery(name = "SanPham.findByHinhAnh", query = "SELECT s FROM SanPham s WHERE s.hinhAnh = :hinhAnh")
+    , @NamedQuery(name = "SanPham.findByGiaBan", query = "SELECT s FROM SanPham s WHERE s.giaBan = :giaBan")
+    , @NamedQuery(name = "SanPham.findBySoLuong", query = "SELECT s FROM SanPham s WHERE s.soLuong = :soLuong")
+    , @NamedQuery(name = "SanPham.findByMoTa", query = "SELECT s FROM SanPham s WHERE s.moTa = :moTa")
+    , @NamedQuery(name = "SanPham.findByKichThuocManHinh", query = "SELECT s FROM SanPham s WHERE s.kichThuocManHinh = :kichThuocManHinh")
+    , @NamedQuery(name = "SanPham.findByCpu", query = "SELECT s FROM SanPham s WHERE s.cpu = :cpu")
+    , @NamedQuery(name = "SanPham.findByTocDoCpu", query = "SELECT s FROM SanPham s WHERE s.tocDoCpu = :tocDoCpu")
+    , @NamedQuery(name = "SanPham.findByRam", query = "SELECT s FROM SanPham s WHERE s.ram = :ram")
+    , @NamedQuery(name = "SanPham.findByBoNhoTrong", query = "SELECT s FROM SanPham s WHERE s.boNhoTrong = :boNhoTrong")
+    , @NamedQuery(name = "SanPham.findByHeDieuHanh", query = "SELECT s FROM SanPham s WHERE s.heDieuHanh = :heDieuHanh")
+    , @NamedQuery(name = "SanPham.findByCameraTruoc", query = "SELECT s FROM SanPham s WHERE s.cameraTruoc = :cameraTruoc")
+    , @NamedQuery(name = "SanPham.findByCameraSau", query = "SELECT s FROM SanPham s WHERE s.cameraSau = :cameraSau")
+    , @NamedQuery(name = "SanPham.findByDungLuongPin", query = "SELECT s FROM SanPham s WHERE s.dungLuongPin = :dungLuongPin")
+    , @NamedQuery(name = "SanPham.findByTheNhoNgoai", query = "SELECT s FROM SanPham s WHERE s.theNhoNgoai = :theNhoNgoai")
+    , @NamedQuery(name = "SanPham.findByKhangNuoc", query = "SELECT s FROM SanPham s WHERE s.khangNuoc = :khangNuoc")
+    , @NamedQuery(name = "SanPham.findByBaoHanh", query = "SELECT s FROM SanPham s WHERE s.baoHanh = :baoHanh")
+    , @NamedQuery(name = "SanPham.findByTonKho", query = "SELECT s FROM SanPham s WHERE s.tonKho = :tonKho")
+    , @NamedQuery(name = "SanPham.findByNgayDang", query = "SELECT s FROM SanPham s WHERE s.ngayDang = :ngayDang")
+    , @NamedQuery(name = "SanPham.findBySoLanXem", query = "SELECT s FROM SanPham s WHERE s.soLanXem = :soLanXem")
+    , @NamedQuery(name = "SanPham.findBySoLanMua", query = "SELECT s FROM SanPham s WHERE s.soLanMua = :soLanMua")
+    , @NamedQuery(name = "SanPham.findByBiDanh", query = "SELECT s FROM SanPham s WHERE s.biDanh = :biDanh")
+    , @NamedQuery(name = "SanPham.findByTrangThai", query = "SELECT s FROM SanPham s WHERE s.trangThai = :trangThai")
+    , @NamedQuery(name = "SanPham.findByAnHien", query = "SELECT s FROM SanPham s WHERE s.anHien = :anHien")})
 public class SanPham implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,6 +85,10 @@ public class SanPham implements Serializable {
     @NotNull
     @Column(name = "gia_ban")
     private long giaBan;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "so_luong")
+    private int soLuong;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
@@ -193,11 +198,12 @@ public class SanPham implements Serializable {
         this.id = id;
     }
 
-    public SanPham(Integer id, String tenMay, String hinhAnh, long giaBan, String moTa, String kichThuocManHinh, String cpu, String tocDoCpu, String ram, String boNhoTrong, String heDieuHanh, String cameraTruoc, String cameraSau, String dungLuongPin, boolean theNhoNgoai, boolean khangNuoc, String baoHanh, int tonKho, Date ngayDang, int soLanXem, int soLanMua, String biDanh, boolean trangThai, boolean anHien) {
+    public SanPham(Integer id, String tenMay, String hinhAnh, long giaBan, int soLuong, String moTa, String kichThuocManHinh, String cpu, String tocDoCpu, String ram, String boNhoTrong, String heDieuHanh, String cameraTruoc, String cameraSau, String dungLuongPin, boolean theNhoNgoai, boolean khangNuoc, String baoHanh, int tonKho, Date ngayDang, int soLanXem, int soLanMua, String biDanh, boolean trangThai, boolean anHien) {
         this.id = id;
         this.tenMay = tenMay;
         this.hinhAnh = hinhAnh;
         this.giaBan = giaBan;
+        this.soLuong = soLuong;
         this.moTa = moTa;
         this.kichThuocManHinh = kichThuocManHinh;
         this.cpu = cpu;
@@ -250,6 +256,14 @@ public class SanPham implements Serializable {
 
     public void setGiaBan(long giaBan) {
         this.giaBan = giaBan;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     public String getMoTa() {

@@ -6,8 +6,10 @@
 package ejb.business;
 
 import ejb.entities.NguoiBan;
-import javax.ejb.LocalBean;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -91,6 +93,18 @@ public class NguoiBanBusiness {
         query.setParameter("e", email);
         try {
             merchant = (NguoiBan) query.getSingleResult();
+        } catch (Exception e) {
+            
+        }
+        return merchant;
+    }
+    
+    public List<NguoiBan> timKiemNguoiMua(String cmnd) {
+        List<NguoiBan> merchant = new ArrayList<NguoiBan>();
+        Query query = em.createQuery("SELECT n FROM NguoiBan n WHERE n.cmnd=:cmnd");
+        query.setParameter("cmnd", cmnd);
+        try {
+            merchant = query.getResultList();
         } catch (Exception e) {
             
         }

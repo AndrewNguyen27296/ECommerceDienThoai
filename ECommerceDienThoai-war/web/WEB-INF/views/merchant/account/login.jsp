@@ -9,7 +9,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title></title>
+    <title>Kênh người bán</title>
     <base href="${pageContext.request.contextPath}/">
 
     <!-- Latest compiled and minified CSS -->
@@ -58,7 +58,7 @@
                     <div class="panel panel-info" >
                         <div class="panel-heading">
                             <div class="panel-title">Đăng Nhập</div>
-                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Quên mật khẩu?</a></div>
+                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="merchant/account/forgot.php">Quên mật khẩu?</a></div>
                         </div>     
 
                         <div style="padding-top:30px" class="panel-body" >

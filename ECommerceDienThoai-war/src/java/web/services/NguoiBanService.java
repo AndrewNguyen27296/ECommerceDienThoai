@@ -152,4 +152,29 @@ public class NguoiBanService {
         
         
     }
+
+    public void quenMatKhau(ModelMap model, String email) {
+        if (nguoiBanBusiness.kiemTraTonTaiEmail(email)) {
+            
+            
+            //Gửi mail mật khẩu
+            try {
+                NguoiBan nguoiBan = nguoiBanBusiness.layNguoiBanTheoEmail(email);
+                nguoiBan.setMatKhau(maHoaMatKhau("123456"));
+                nguoiBanFacade.edit(nguoiBan);
+                
+                mailerService.send(email, "Forgot Password", "Password mới của bạn là: 123456. Vui lòng đăng nhập để đổi password");
+                model.addAttribute("message", "Mật khẩu đã được gửi qua email");
+               
+                //Giả sử pass mới là 123456
+                //Mình phải mã hóa 123456 và cập nhật lại trong csdl
+                
+            } catch (Exception e) {
+                // TODO: handle exception
+                model.addAttribute("message", "Mật khẩu đã được gửi qua email. Bạn vui lòng kiểm tra email để lấy mật khẩu mới");
+            }
+        } else {
+            model.addAttribute("message", "Không tồn tại email");
+        }
+    }
 }
