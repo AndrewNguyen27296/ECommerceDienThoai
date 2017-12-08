@@ -3,19 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/src/java/web/controllers/AccountController.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/assets/customer/js/shopping-cart.js</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/src/java/web/interceptor/CustomerInterceptor.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/account/forgot-password.jsp</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/assets/customer/css/style.css</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/src/java/web/services/AdminService.java</file>
+            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/order/history.jsp</file>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/layout/banner.jsp</file>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/shopping-cart/view.jsp</file>
+            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/order/detail.jsp</file>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/order/checkout.jsp</file>
             <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/src/java/web/controllers/OrderController.java</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/account/register.jsp</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/configs/spring-config-interceptor.xml</file>
-            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer/layout/header.jsp</file>
+            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/views/customer-account-layout.jsp</file>
+            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/src/java/web/controllers/ShoppingCartController.java</file>
+            <file>file:/D:/DO_AN/tmdtu/ECommerceDienThoai/ECommerceDienThoai-war/web/WEB-INF/configs/spring-config-gmail.xml</file>
         </group>
     </open-files>
 </project-private>

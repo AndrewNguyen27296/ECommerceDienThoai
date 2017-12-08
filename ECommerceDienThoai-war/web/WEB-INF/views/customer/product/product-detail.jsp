@@ -4,6 +4,7 @@
     Author     : DacTien
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %> 
 <script src="assets/customer/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -46,8 +47,17 @@
                     </div>
                 </div>
                 <div class="product-detail-info-footer">
-                    <input type="hidden" name="add" id="add" value="${sanpham.id}" />
-                    <button class="btn btn-danger" id="btn-add-to-cart" >Thêm vào giỏ hàng</button>
+                    <c:choose>
+                        <c:when test="${sanpham.soLuong > 0}">
+                            <span style="margin-top: 7px; margin-right: 10px;">Còn <strong>${sanpham.soLuong}</strong> sản phẩm</span>
+                            <input type="hidden" name="add" id="add" value="${sanpham.id}" />
+                            <button class="btn btn-lg btn-danger" id="btn-add-to-cart" style="width: auto">Thêm vào giỏ hàng</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="btn btn-lg btn-default" id="btn-add-to-cart" disabled="" style="width: auto">Sản phẩm đã hết hàng</button>
+                        </c:otherwise>
+                    </c:choose>
+                    
                 </div>
             </div>
         </div>

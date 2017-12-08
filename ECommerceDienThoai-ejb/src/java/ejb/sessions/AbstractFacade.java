@@ -29,7 +29,6 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
@@ -45,7 +44,7 @@ public abstract class AbstractFacade<T> {
             getEntityManager().persist(entity);
         }
     }
-    
+
     public void edit(T entity) {
         getEntityManager().merge(entity);
     }

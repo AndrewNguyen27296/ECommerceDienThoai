@@ -452,7 +452,7 @@
 /*TRANG QUẢN LÝ TÀI KHOẢN*/
 .my-edit-accout-left {
     background-color: whitesmoke;
-    width: 20%;
+    width: 15%;
     float: left;
 }
 
@@ -476,7 +476,7 @@
 }
 
 .my-edit-accout-right {
-    width: 80%;
+    width: 85%;
     padding: 20px 30px 20px;
     background-color: white;
     float:right;

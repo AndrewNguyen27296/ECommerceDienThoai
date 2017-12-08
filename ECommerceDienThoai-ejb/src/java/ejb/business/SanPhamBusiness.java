@@ -35,9 +35,22 @@ public class SanPhamBusiness {
         return list;
     }
     
+    public SanPham laySanPham(int id) {
+        Query query = em.createQuery("SELECT s FROM SanPham s WHERE s.id=:id");
+        query.setParameter("id", id);
+        return (SanPham) query.getSingleResult();
+    }
+    
     public int getSoLuongTonTheoMaSanPham(int id) {
         Query query = em.createQuery("SELECT s.soLuong FROM SanPham s WHERE s.id=:id");
         query.setParameter("id", id);
         return (int) query.getSingleResult();
+    }
+    
+    public void capNhatSoLuongSP(int id, int soluong) {
+        Query query = em.createQuery("UPDATE SanPham s SET s.soLuong=s.soLuong - :s WHERE s.id=:id");
+        query.setParameter("id", id);
+        query.setParameter("s", soluong);
+        query.executeUpdate();
     }
 }

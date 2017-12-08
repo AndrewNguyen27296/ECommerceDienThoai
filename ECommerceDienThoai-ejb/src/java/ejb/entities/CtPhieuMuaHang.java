@@ -49,7 +49,7 @@ public class CtPhieuMuaHang implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "gia_ban")
-    private float giaBan;
+    private long giaBan;
     @Basic(optional = false)
     @NotNull
     @Column(name = "so_luong_mua")
@@ -57,9 +57,7 @@ public class CtPhieuMuaHang implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "thanh_tien")
-    private float thanhTien;
-    @Basic(optional = false)
-    @NotNull
+    private long thanhTien;
     @Column(name = "ngay_giao_hang")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayGiaoHang;
@@ -83,12 +81,11 @@ public class CtPhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public CtPhieuMuaHang(Integer id, float giaBan, int soLuongMua, float thanhTien, Date ngayGiaoHang) {
+    public CtPhieuMuaHang(Integer id, long giaBan, int soLuongMua, long thanhTien) {
         this.id = id;
         this.giaBan = giaBan;
         this.soLuongMua = soLuongMua;
         this.thanhTien = thanhTien;
-        this.ngayGiaoHang = ngayGiaoHang;
     }
 
     public Integer getId() {
@@ -99,11 +96,11 @@ public class CtPhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public float getGiaBan() {
+    public long getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(float giaBan) {
+    public void setGiaBan(long giaBan) {
         this.giaBan = giaBan;
     }
 
@@ -115,11 +112,11 @@ public class CtPhieuMuaHang implements Serializable {
         this.soLuongMua = soLuongMua;
     }
 
-    public float getThanhTien() {
+    public long getThanhTien() {
         return thanhTien;
     }
 
-    public void setThanhTien(float thanhTien) {
+    public void setThanhTien(long thanhTien) {
         this.thanhTien = thanhTien;
     }
 

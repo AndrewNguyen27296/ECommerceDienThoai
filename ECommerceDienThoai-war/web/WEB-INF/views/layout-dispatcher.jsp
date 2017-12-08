@@ -13,7 +13,7 @@
         else if(view.startsWith("customer/account/forgot-password")){
 		pageContext.forward("customer-layout.jsp");
 	}
-        else if(view.startsWith("customer/account/")){
+        else if(view.startsWith("customer/account/") || view.startsWith("customer/order/history") || view.startsWith("customer/order/detail")){
 		pageContext.forward("customer-account-layout.jsp");
 	}
         else if(view.startsWith("customer/")){

@@ -41,7 +41,7 @@
                     </a>
                     <ul class="dropdown-menu list-unstyled" style="right: 0; left: 86%">
                         <li><a href="account/edit.php">Tài khoản của tôi</a></li>
-                        <li><a href="#">Đơn hàng đã mua</a></li>
+                        <li><a href="order/history.php">Đơn hàng đã mua</a></li>
                         <li><a href="account/logoff.php">Đăng xuất</a></li>
                     </ul>
                 </div>

@@ -75,9 +75,7 @@ public class PhieuMuaHang implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "dia_chi_giao")
     private String diaChiGiao;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 250)
+    @Size(max = 250)
     @Column(name = "ghi_chu")
     private String ghiChu;
     @Basic(optional = false)
@@ -88,7 +86,7 @@ public class PhieuMuaHang implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "tong_tien")
-    private float tongTien;
+    private long tongTien;
     @JoinColumn(name = "id_nguoi_mua", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private NguoiMua idNguoiMua;
@@ -113,13 +111,12 @@ public class PhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public PhieuMuaHang(Integer id, String email, String soDienThoai, String tenNguoiNhan, String diaChiGiao, String ghiChu, Date ngayDatHang, float tongTien) {
+    public PhieuMuaHang(Integer id, String email, String soDienThoai, String tenNguoiNhan, String diaChiGiao, Date ngayDatHang, long tongTien) {
         this.id = id;
         this.email = email;
         this.soDienThoai = soDienThoai;
         this.tenNguoiNhan = tenNguoiNhan;
         this.diaChiGiao = diaChiGiao;
-        this.ghiChu = ghiChu;
         this.ngayDatHang = ngayDatHang;
         this.tongTien = tongTien;
     }
@@ -180,11 +177,11 @@ public class PhieuMuaHang implements Serializable {
         this.ngayDatHang = ngayDatHang;
     }
 
-    public float getTongTien() {
+    public long getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(float tongTien) {
+    public void setTongTien(long tongTien) {
         this.tongTien = tongTien;
     }
 

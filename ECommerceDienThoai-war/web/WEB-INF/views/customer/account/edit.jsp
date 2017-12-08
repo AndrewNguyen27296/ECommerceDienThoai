@@ -52,6 +52,12 @@
                 <td class="text-right">Số điện thoại</td>
                 <td>
                     <form:input path="soDienThoai" type="text" cssClass="form-control" maxlength="11" minLength="10"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right">Địa chỉ</td>
+                <td>
+                    <form:input path="diaChi" type="text" cssClass="form-control" maxlength="11" minLength="10"/>
                     <span style="color: red">${message}</span>
                 </td>
             </tr>

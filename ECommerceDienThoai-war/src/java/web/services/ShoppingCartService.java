@@ -41,7 +41,7 @@ public class ShoppingCartService implements Serializable {
             sanpham.setSoLuong(sanpham.getSoLuong() + 1);
         } // chua co trong gio hang
         else {
-            sanpham = sanPhamService.sanPhamFacade.find(id);
+            sanpham = sanPhamService.lay1SanPham(id);
             sanpham.setSoLuong(1);
             map.put(id, sanpham);
         }
@@ -54,6 +54,13 @@ public class ShoppingCartService implements Serializable {
      */
     public void remove(Integer id) {
         map.remove(id);
+    }
+
+    /**
+     * xoa tat ca san pham trong gio hang
+     */
+    public void clear() {
+        map.clear();
     }
 
     /**
@@ -114,7 +121,7 @@ public class ShoppingCartService implements Serializable {
     public SanPham getItem(Integer ma) {
         return map.get(ma);
     }
-    
+
     public Collection<NguoiBan> getNguoiBans() {
         Map<Integer, NguoiBan> listNguoiBan = new HashMap<Integer, NguoiBan>();
         for (SanPham sp : getItems()) {

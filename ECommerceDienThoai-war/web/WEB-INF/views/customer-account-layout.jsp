@@ -76,14 +76,14 @@ jQuery(document).ready(function ($) {
                             Đổi mật khẩu
                         </a>
                     </li>
-                    <li class="list-group-item">
+<!--                    <li class="list-group-item">
                         <a href="#">
                             <span class="glyphicon glyphicon-home"></span>
                             Địa chỉ
                         </a>
-                    </li>
+                    </li>-->
                     <li class="list-group-item">
-                        <a href="#">
+                        <a href="order/history.php">
                             <span class="glyphicon glyphicon-file"></span>
                             Đơn hàng của tôi
                         </a>
