@@ -12,11 +12,13 @@
         <title>Quản lý đăng tin</title>
     </head>
     <body>
+        
+        <!-- Hiển thị số tin tồn -->
         <h2>Số gói tin còn lại của bạn: <span style="color:red;">${soTinTon}</span></h2>
         
         
         <a href="merchant/package/purchase.php" class="btn btn-info">Mua tin</a> 
-        <a href="" class="btn btn-danger">Lịch sử mua tin</a>
-        <a href="" class="btn btn-warning">Các tin đã đăng</a>
+        <a href="merchant/package/history.php" class="btn btn-danger">Lịch sử mua tin</a>
+        
     </body>
 </html>

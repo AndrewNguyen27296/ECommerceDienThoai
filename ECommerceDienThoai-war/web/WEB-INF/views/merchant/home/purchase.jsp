@@ -32,21 +32,21 @@
             <div class="form-group" >
                 <div class="radio">
                     <label>
-                        <input type="radio" name="package" id="goi1">
+                        <input type="radio" name="package" class="goiTin" id="goi1" value="0.01">
                         Gói cơ bản - 100k/5 tin
                     </label>
                 </div>
 
                 <div class="radio">
                     <label>
-                        <input type="radio" name="package" checked="true" id="goi2">
+                        <input type="radio" name="package" class="goiTin" checked="true" id="goi2" value="0.02">
                         Gói mặc định - 200k/10 tin
                     </label>
                 </div>
 
                 <div class="radio">
                     <label>
-                        <input type="radio" name="package" id="goi3">
+                        <input type="radio" name="package" class="goiTin" id="goi3" value="0.03">
                         Gói nâng cao - 300k/15 tin
                     </label>
                 </div>
@@ -59,86 +59,56 @@
         <script>
 
             // Render the PayPal button
-            
+
             //TEST BUTTON
-            /*document.getElementById("paypal-button-container").onclick = function (){
-            var checkbox = document.getElementsById("goi1"); {
-            if (checkbox.checked === true){
-            env: 'sandbox',
-                    style: {
-                    label: 'paypal',
-                            size: 'medium', // small | medium | large | responsive
-                            shape: 'rect', // pill | rect
-                            color: 'blue', // gold | blue | silver | black
-                            tagline: false
-                    },
-                    client: {
-                    sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
-                            production: '${sessionScope.nguoiBan.id}'
-                    },
-                            
-                     
-             payment: function (data, actions) {
-                return actions.payment.create({
-                    payment: {
-                        transactions: [
-                            {
-                                amount: {total: '0.01', currency: 'USD'}
-                            }
-                        ]
-                    }
-                });
-             },
-             onAuthorize: function (data, actions) {
-                return actions.payment.execute().then(function () {
-                window.alert('Payment Complete!');
-                });
-             }
-            }
-            };
-            };*/
+            var giaTien = 0.0;
+            $(".goiTin").change(function () {
+                var value = $(this).val();
+//                alert(value);
+                giaTien = value;
+            });
+
             paypal.Button.render({
-             // Set your environment
-             
-             env: 'sandbox', // sandbox | production
-             
-             // Specify the style of the button
-             
-             style: {
-             label: 'paypal',
-             size: 'medium', // small | medium | large | responsive
-             shape: 'rect', // pill | rect
-             color: 'blue', // gold | blue | silver | black
-             tagline: false
-             },
-             // PayPal Client IDs - replace with your own
-             // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-             
-             client: {
-             sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
-             production: '${sessionScope.nguoiBan.id}'
-             },
-             
-             
-             
-             payment: function (data, actions) {
-             return actions.payment.create({
-             payment: {
-             transactions: [
-             {
-             amount: {total: '0.01', currency: 'USD'}
-             }
-             ]
-             }
-             });
-             },
-             onAuthorize: function (data, actions) {
-             return actions.payment.execute().then(function () {
-             window.alert('Payment Complete!');
-             });
-             }
-             
-             }, '#paypal-button-container')
+                // Set your environment
+
+                env: 'sandbox', // sandbox | production
+
+                // Specify the style of the button
+
+                style: {
+                    label: 'paypal',
+                    size: 'medium', // small | medium | large | responsive
+                    shape: 'rect', // pill | rect
+                    color: 'blue', // gold | blue | silver | black
+                    tagline: false
+                },
+                // PayPal Client IDs - replace with your own
+                // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+
+                client: {
+                    sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+                    production: '${sessionScope.nguoiBan.id}'
+                },
+                payment: function (data, actions) {
+                    return actions.payment.create({
+                        payment: {
+                            transactions: [
+                                {                                    
+                                    amount: {total: giaTien, currency: 'USD'}
+                                    
+                                }
+                            ]
+                            
+                        }
+                    });
+                },
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute().then(function () {
+                        window.alert('Payment Complete!');
+                    });
+                }
+
+            }, '#paypal-button-container');
 
         </script>
     </body>

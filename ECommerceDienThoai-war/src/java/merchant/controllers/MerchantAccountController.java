@@ -107,4 +107,19 @@ public class MerchantAccountController {
         nguoiBanService.capNhatNguoiBan(nguoiBan, model, httpSession);
         return "merchant/home/edit";
     }
+    
+    /**
+     * Quên mật khẩu
+     */
+    @RequestMapping("forgot")
+    public String forgot(){
+        return "merchant/account/forgot";
+    }
+    
+    @RequestMapping(value = "forgot", method = RequestMethod.POST)
+    public String forgot(ModelMap model,
+            @RequestParam("email") String email) {
+        nguoiBanService.quenMatKhau(model, email);
+        return "merchant/account/forgot";
+    }
 }

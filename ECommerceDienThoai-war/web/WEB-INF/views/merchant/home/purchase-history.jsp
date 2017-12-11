@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="f" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,12 +32,33 @@
 
 
             <tbody>
-                <c:forEach var="row" items="${orderpackage}">
+                <!-- biến được đặt là row . items dựa theo model.AddAttribute("phieuMuaTin") -->
+                <c:forEach var="row" items="${phieuMuaTin}">
                     <tr>
-                        <td> <c:out value="${orderpackage.package.name}" /> </td>
-                        <td> <c:out value="${orderpackage.package.price}" /> </td>
-                        <td> <c:out value="${orderpackage.date}" /> </td>
-                        <td> <c:out value="${orderpackage.type}" /> </td>
+                        
+                        <!-- idGoiTin và tenGoiTin dựa theo database và entities -->
+                        <td> ${row.idGoiTin.tenGoiTin} </td>
+                        
+                        <td>
+                            <f:formatNumber type="number" value="${row.idGoiTin.giaBan}" pattern="###,###,###"/> VNĐ
+                        </td>
+                        
+                            
+                       
+                        
+                        <td> ${row.ngayMua} </td>
+                        
+                        <!-- Nếu 0 hiển thị : Paypal
+                             Nếu 1 hiển thị : Trực tiếp
+                        -->
+                        <c:choose>
+                            <c:when test="${row.phuongThucThanhToan == 0}">
+                                <td>Paypal</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>Trực tiếp</td>
+                            </c:otherwise>
+                        </c:choose>
                     </tr>
                 </c:forEach>
             </tbody>

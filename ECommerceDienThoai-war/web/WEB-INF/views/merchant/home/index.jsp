@@ -5,4 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<body>
 <h1 style="text-align: center;">Chào mừng <span style="color:red;">${sessionScope.nguoiBan.hoTen}</span> đến kênh người bán</h1>
+</body>

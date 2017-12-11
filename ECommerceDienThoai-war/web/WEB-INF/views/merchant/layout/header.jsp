@@ -8,28 +8,28 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <style>
     .searchButton {
-  position: absolute;  
-  right: -52px;
-  width: 40px;
-  height: 36px;
-  top: -4px;
-  border: 1px solid #ff9501;
-  background: #ff9501;
-  text-align: center;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  border: 1px solid;
-  margin-right: 51px;
-  margin-top: 3px;
-}
+        position: absolute;  
+        right: -52px;
+        width: 40px;
+        height: 36px;
+        top: -4px;
+        border: 1px solid #ff9501;
+        background: #ff9501;
+        text-align: center;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        border: 1px solid;
+        margin-right: 51px;
+        margin-top: 3px;
+    }
 </style>
 
 <!DOCTYPE html>
 <!--header start here-->
 <div class="header-main">
-    
+
     <!-- Banner logo start -->
     <div class="logo-w3-agile" style="height: 70px;">
         <h1 style="margin-top: -11px;">
@@ -39,18 +39,18 @@
         </h1>
     </div>
     <!-- Banner logo end -->
-    
+
     <div class="w3layouts-left">
 
         <!--search-box-->
         <div class="w3-search-box" style="height: 38px;">
             <form action="#" method="post">
                 <div class="search">
-      <input type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" class="searchButton" style="margin-right: 50px;">
-        <i class="fa fa-search"></i>
-     </button>
-   </div>
+                    <input type="text" class="searchTerm" placeholder="Tìm kiếm...">
+                    <button type="submit" class="searchButton" style="margin-right: 50px;">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
             </form>
         </div><!--//end-search-box-->
         <div class="clearfix"> </div>
@@ -195,15 +195,13 @@
 
         <div class="clearfix"> </div>				
     </div>
-    <div class="profile_details w3l">		
+    <div class="profile_details w3l" style="height:70px;">		
         <ul>
             <li class="dropdown profile_details_drop">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <a href="merchant/home/index.php" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="margin-top:8px">
                     <div class="profile_img">	
-                        <span class="prfil-img"><img src="images/in4.jpg" alt=""> </span> 
                         <div class="user-name">
-                            <p>Malorum</p>
-                            <span>Administrator</span>
+                            <span>${sessionScope.nguoiBan.hoTen}</span>
                         </div>
                         <i class="fa fa-angle-down"></i>
                         <i class="fa fa-angle-up"></i>
@@ -211,9 +209,9 @@
                     </div>	
                 </a>
                 <ul class="dropdown-menu drp-mnu">
-                    <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-                    <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
-                    <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                    <li> <a href="#"><i class="fa fa-cog"></i> Sửa thông tin</a> </li> 
+                    <li> <a href="#"><i class="fa fa-user"></i> Đổi mật khẩu</a> </li> 
+                    <li> <a href="#"><i class="fa fa-sign-out"></i> Đăng xuất</a> </li>
                 </ul>
             </li>
         </ul>

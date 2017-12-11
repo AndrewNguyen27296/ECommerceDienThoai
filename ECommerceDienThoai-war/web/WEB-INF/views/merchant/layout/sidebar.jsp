@@ -19,19 +19,27 @@
             <li><a href="merchant/home/myaccount.php"><i class="fa fa-tachometer"></i> <span>Tài khoản của tôi</span><span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
                 <ul id="menu-academico-sub" >
                     <li id="menu-academico-avaliacoes" ><a href="merchant/account/edit.php">Sửa thông tin</a></li>
-                    <li id="menu-academico-avaliacoes" ><a href="merchant/account/change.php">Đổi mật khẩu</a></li>\
+                    <li id="menu-academico-avaliacoes" ><a href="merchant/account/change.php">Đổi mật khẩu</a></li>
+                    <li id="menu-academico-avaliacoes" ><a href="merchant/account/index.php">Đăng xuất</a></li>
                 </ul>
             </li>          
-            <li id="menu-academico" ><a href=""><i class="fa fa-envelope nav_icon"></i><span>Quản lý đăng tin</span><div class="clearfix"></div></a></li>
-            <li><a href="gallery.html"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Quản lý đơn hàng</span><div class="clearfix"></div></a></li>
-            <li id="menu-academico" ><a href="charts.html"><i class="fa fa-bar-chart"></i><span>Thống kê</span><div class="clearfix"></div></a></li>
-            <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span>Quản lý sản phẩm</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+            <li id="menu-academico" ><a href="merchant/package/index.php"><i class="fa fa-envelope nav_icon"></i><span>Quản lý gói tin</span><span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
                 <ul id="menu-academico-sub" >
-                    <li id="menu-academico-avaliacoes" ><a href="icons.html">Icons</a></li>
-                    <li id="menu-academico-avaliacoes" ><a href="typography.html">Typography</a></li>
-                    <li id="menu-academico-avaliacoes" ><a href="faq.html">Faq</a></li>
+                    <li id="menu-academico-avaliacoes" ><a href="merchant/package/purchase.php">Mua tin</a></li>
+                    <li id="menu-academico-avaliacoes" ><a href="merchant/package/history.php">Lịch sử mua tin </a></li>
                 </ul>
             </li>
+            
+            <li id="menu-academico" ><a href="merchant/post/new.php"><i class="fa fa-list-ul" aria-hidden="true"></i><span>Quản lý đăng tin</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+                <ul id="menu-academico-sub" >
+                    <li id="menu-academico-avaliacoes" ><a href="merchant/post/new.php">Đăng tin</a></li>
+                    <li id="menu-academico-avaliacoes" ><a href="typography.html">Các tin đã đăng</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="gallery.html"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Quản lý đơn hàng</span><div class="clearfix"></div></a></li>
+            <li id="menu-academico" ><a href="charts.html"><i class="fa fa-bar-chart"></i><span>Thống kê</span><div class="clearfix"></div></a></li>
+            
             <li id="menu-academico" ><a href="errorpage.html"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><span>Error Page</span><div class="clearfix"></div></a></li>
             <li id="menu-academico" ><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i><span> UI Components</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
                 <ul id="menu-academico-sub" >

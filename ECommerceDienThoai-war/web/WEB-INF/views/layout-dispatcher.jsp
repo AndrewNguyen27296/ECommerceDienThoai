@@ -4,6 +4,9 @@
 	if(view.startsWith("demo/")){
 		pageContext.forward("demo-layout.jsp");
 	}
+        if(view.startsWith("merchant/account/forgot")){
+		pageContext.forward("merchant/account/forgot.jsp");
+	}
         if(view.startsWith("merchant/account")){
 		pageContext.forward("merchant/account/login.jsp");
 	}
