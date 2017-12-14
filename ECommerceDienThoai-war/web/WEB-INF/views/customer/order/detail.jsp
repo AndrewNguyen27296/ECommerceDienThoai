@@ -14,17 +14,17 @@
             <form id="edit" action="account/edit.php" modelAttribute="nguoiMua" >
                 <table class="table">
                     <tr>
-                        <td class="text-right">Họ tên</td>
+                        <td class="text-right">Người nhận</td>
                         <td>
                             <input value="${phieuMuaHang.tenNguoiNhan}" type="text" class="form-control" />
                         </td>
                     </tr>
-                    <tr>
+<!--                    <tr>
                         <td class="text-right">Email</td>
                         <td>
                             <input value="${phieuMuaHang.email}" path="email" type="email" class="form-control"  />
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td class="text-right">Số điện thoại</td>
                         <td>
@@ -32,9 +32,30 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="text-right">Địa chỉ giao</td>
+                        <td>
+                            <input value="${phieuMuaHang.diaChiGiao }" 
+                                   type="text" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">Quận huyện</td>
+                        <td>
+                            <input value="${phieuMuaHang.idQuanHuyen.tenQuanHuyen}" 
+                                   type="text" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">Tỉnh thành phố</td>
+                        <td>
+                            <input value="${phieuMuaHang.idThanhPho.tenThanhPho}" 
+                                   type="text" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="text-right">Tổng tiền</td>
                         <td>
-                            <input value="${phieuMuaHang.tongTien}" path="soDienThoai" type="text" class="form-control" />
+                            <input value="${phieuMuaHang.tongTien}" path="soDienThoai" type="text" class="form-control" pattern="###,###,###" />
                         </td>
                     </tr>
                 </table>

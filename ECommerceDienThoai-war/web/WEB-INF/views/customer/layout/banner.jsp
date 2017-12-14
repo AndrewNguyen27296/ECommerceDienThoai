@@ -70,17 +70,17 @@
             </h1>
         </a>
     </div>
-    <form>
-        <input type="text" name="search" placeholder="Tìm sản phẩm" style="margin-top: 8px;height: 40px;margin-left: 100px;width: 700px;/*background-image: url('logo/search-32.png');*/padding: 12px 20px 12px 10px;" >
+    <form action="product/search.php">
+        <input type="text" name="keywords" placeholder="Tìm sản phẩm" style="margin-top: 8px;height: 40px;margin-left: 100px;width: 700px;/*background-image: url('logo/search-32.png');*/padding: 0px 20px 0px 10px;" >
         <button class="btn btn-primary my-btn-search">
             <span class="glyphicon glyphicon-search"></span>
         </button>
         <div class="cart cart box_1 row my-cart" style="margin-right: 0"> 
             <ul style="float: left;color: white; font-size: 16px; padding-top: 4px; margin-right: 10px" class="list-unstyled">
-                    <li><span id="count">${cart.count}</span> sản phẩm</li>
-<!--                    <li>0 VND</li>-->
+                <li><span id="count">${cart.count}</span> sản phẩm</li>
+                <!--                    <li>0 VND</li>-->
             </ul>
-            <input type="hidden" name="display" value="1" />
+<!--            <input type="hidden" name="display" value="1" />-->
             <a href="shopping-cart/view.php" class="w3view-cart" style="position: inherit;margin-right: 30px;"><i class="fa fa-cart-arrow-down" aria-hidden="true" ></i></a> 
         </div>
     </form>

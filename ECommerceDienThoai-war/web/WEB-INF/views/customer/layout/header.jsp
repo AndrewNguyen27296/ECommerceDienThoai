@@ -49,17 +49,17 @@
                                                         <input placeholder="Email" name="email" id="email" type="email" required="">	
                                                         <input placeholder="Mật Khẩu" name="pasword" id="password" type="password" required="">
                                                         <input placeholder="Nhập Lại Mật Khẩu" type="password" required="" id="confirm-password">
-                                                        <input placeholder="Số Điện Thoại" name="soDienThoai" id="soDienThoai" type="text" minlength="10" maxlength="11" style="margin: 1em 0 0;">	
-                                                        <input placeholder="Địa Chỉ" name="diaChi" id="diaChi" type="text" required="" style="margin: 1em 0 0;">
-                                                        <select class="input">
-                                                            <option>--Chọn Tỉnh - Thành phố--</option>
+                                                        <input placeholder="Số Điện Thoại" name="soDienThoai" id="soDienThoai" type="text" minlength="10" maxlength="11" style="margin: 1em 0 0;">
+                                                        <select id="thanhPho" name="thanhPho" class="input">
+                                                            <option selected value="-1">Chọn thành phố</option>
+                                                            <option value="1">Hồ Chí Minh</option>
                                                         </select>
-                                                        <select class="input">
-                                                            <option>--Chọn Quận - Huyện--</option>
+                                                        <select id="quanHuyen" name="quanHuyen" class="input">
                                                         </select>
-                                                        <select class="input">
-                                                            <option>--Chọn Phường - Xã--</option>
-                                                        </select>
+                                                        <input placeholder="Số nhà, tên đường, phường - xã" name="diaChi" id="diaChi" type="text" required="" style="margin: 1em 0 0;">
+                                                        <!--                                                        <select class="input">
+                                                                                                                    <option>--Chọn Phường - Xã--</option>
+                                                                                                                </select>-->
                                                         <span id="error" style="color: red"></span>
                                                         <div class="sign-up">
                                                             <input type="submit" value="Tạo Tài Khoản"/>
@@ -125,11 +125,13 @@
                     var password = $("#password").val();
                     var diaChi = $("#diaChi").val();
                     var soDienThoai = $("#soDienThoai").val();
-
+                    var thanhPho = $("#thanhPho").val();
+                    var quanHuyen = $("#quanHuyen").val()
                     $.ajax({
                         url: "account/register.php",
                         async: false, //block until we get a response
-                        data: {hoTen: hoTen, email: email, password: password, diaChi: diaChi, soDienThoai: soDienThoai},
+                        data: {hoTen: hoTen, email: email, password: password, diaChi: diaChi, soDienThoai: soDienThoai,
+                            thanhPho: thanhPho, quanHuyen:quanHuyen},
                         success: function (response) {
                             $("#error").html(response);
                         }
@@ -154,6 +156,28 @@
                             } else
                                 $("#error_dangNhap").html(response);
                         }
+                    });
+                });
+                
+                //load Quận tương ứng với thành phố được chọn
+                $('#thanhPho').on('change', function (e) {
+                    var valueSelected = this.value;
+                    $.ajax({
+                        url: "account/get-quan-huyen.php",
+                        async: false, //block until we get a response
+                        data: {idThanhPho: valueSelected},
+                        success: function (response) {
+                            var select = document.getElementById('quanHuyen');
+                            $(select).empty();
+
+                            // Add options
+                            for (var i = 0; i < response.length; i++) {
+                                var obj = response[i];
+                                $(select).append('<option value=' + obj.id + '>' + obj.tenQuanHuyen + '</option>');
+                            }
+
+                        },
+                        dataType: 'json'
                     });
                 });
             });

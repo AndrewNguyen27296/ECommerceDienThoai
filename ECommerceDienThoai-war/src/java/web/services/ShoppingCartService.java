@@ -38,7 +38,11 @@ public class ShoppingCartService implements Serializable {
         SanPham sanpham = map.get(id);
         // da co trong gio hang
         if (sanpham != null) {
-            sanpham.setSoLuong(sanpham.getSoLuong() + 1);
+            //kiểm tra số lượng sản phẩm người mua click
+            if (sanpham.getSoLuong() >= getSoLuongTonTheoMaSanPham(id)) {
+                
+            }
+            else sanpham.setSoLuong(sanpham.getSoLuong() + 1);
         } // chua co trong gio hang
         else {
             sanpham = sanPhamService.lay1SanPham(id);

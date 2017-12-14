@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "PhieuMuaHang.findBySoDienThoai", query = "SELECT p FROM PhieuMuaHang p WHERE p.soDienThoai = :soDienThoai")
     , @NamedQuery(name = "PhieuMuaHang.findByTenNguoiNhan", query = "SELECT p FROM PhieuMuaHang p WHERE p.tenNguoiNhan = :tenNguoiNhan")
     , @NamedQuery(name = "PhieuMuaHang.findByDiaChiGiao", query = "SELECT p FROM PhieuMuaHang p WHERE p.diaChiGiao = :diaChiGiao")
+    , @NamedQuery(name = "PhieuMuaHang.findByIdPhuongXa", query = "SELECT p FROM PhieuMuaHang p WHERE p.idPhuongXa = :idPhuongXa")
     , @NamedQuery(name = "PhieuMuaHang.findByGhiChu", query = "SELECT p FROM PhieuMuaHang p WHERE p.ghiChu = :ghiChu")
     , @NamedQuery(name = "PhieuMuaHang.findByNgayDatHang", query = "SELECT p FROM PhieuMuaHang p WHERE p.ngayDatHang = :ngayDatHang")
     , @NamedQuery(name = "PhieuMuaHang.findByTongTien", query = "SELECT p FROM PhieuMuaHang p WHERE p.tongTien = :tongTien")})
@@ -75,6 +76,10 @@ public class PhieuMuaHang implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "dia_chi_giao")
     private String diaChiGiao;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_phuong_xa")
+    private int idPhuongXa;
     @Size(max = 250)
     @Column(name = "ghi_chu")
     private String ghiChu;
@@ -90,9 +95,6 @@ public class PhieuMuaHang implements Serializable {
     @JoinColumn(name = "id_nguoi_mua", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private NguoiMua idNguoiMua;
-    @JoinColumn(name = "id_phuong_xa", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private PhuongXa idPhuongXa;
     @JoinColumn(name = "id_quan_huyen", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private QuanHuyen idQuanHuyen;
@@ -111,12 +113,13 @@ public class PhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public PhieuMuaHang(Integer id, String email, String soDienThoai, String tenNguoiNhan, String diaChiGiao, Date ngayDatHang, long tongTien) {
+    public PhieuMuaHang(Integer id, String email, String soDienThoai, String tenNguoiNhan, String diaChiGiao, int idPhuongXa, Date ngayDatHang, long tongTien) {
         this.id = id;
         this.email = email;
         this.soDienThoai = soDienThoai;
         this.tenNguoiNhan = tenNguoiNhan;
         this.diaChiGiao = diaChiGiao;
+        this.idPhuongXa = idPhuongXa;
         this.ngayDatHang = ngayDatHang;
         this.tongTien = tongTien;
     }
@@ -161,6 +164,14 @@ public class PhieuMuaHang implements Serializable {
         this.diaChiGiao = diaChiGiao;
     }
 
+    public int getIdPhuongXa() {
+        return idPhuongXa;
+    }
+
+    public void setIdPhuongXa(int idPhuongXa) {
+        this.idPhuongXa = idPhuongXa;
+    }
+
     public String getGhiChu() {
         return ghiChu;
     }
@@ -191,14 +202,6 @@ public class PhieuMuaHang implements Serializable {
 
     public void setIdNguoiMua(NguoiMua idNguoiMua) {
         this.idNguoiMua = idNguoiMua;
-    }
-
-    public PhuongXa getIdPhuongXa() {
-        return idPhuongXa;
-    }
-
-    public void setIdPhuongXa(PhuongXa idPhuongXa) {
-        this.idPhuongXa = idPhuongXa;
     }
 
     public QuanHuyen getIdQuanHuyen() {

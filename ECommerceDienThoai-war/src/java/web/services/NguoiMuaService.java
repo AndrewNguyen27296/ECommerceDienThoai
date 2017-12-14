@@ -8,6 +8,8 @@ package web.services;
 import ejb.business.NguoiMuaBusiness;
 import ejb.entities.NguoiMua;
 import ejb.sessions.NguoiMuaFacade;
+import ejb.sessions.QuanHuyenFacade;
+import ejb.sessions.ThanhPhoFacade;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -36,6 +38,8 @@ public class NguoiMuaService {
     MailerService mailerService;
 
     NguoiMuaFacade nguoiMuaFacade = lookupNguoiMuaFacadeBean();
+    QuanHuyenFacade quanHuyenFacade = (QuanHuyenFacade) LookupFactory.lookupFacadeBean("QuanHuyenFacade");
+    ThanhPhoFacade thanhPhoFacade = (ThanhPhoFacade) LookupFactory.lookupFacadeBean("ThanhPhoFacade");
 
     private NguoiMuaFacade lookupNguoiMuaFacadeBean() {
         try {
@@ -46,9 +50,9 @@ public class NguoiMuaService {
             throw new RuntimeException(ne);
         }
     }
-    
+
     NguoiMuaBusiness nguoiMuaBusiness = lookupNguoiMuaBusinessBean();
-    
+
     private NguoiMuaBusiness lookupNguoiMuaBusinessBean() {
         try {
             Context c = new InitialContext();
@@ -58,9 +62,9 @@ public class NguoiMuaService {
             throw new RuntimeException(ne);
         }
     }
-    
+
     public String themNguoiMua(String hoTen, String email, String password, String diaChi, String soDienThoai,
-                HttpServletRequest request) {
+            int thanhPho, int quanHuyen, HttpServletRequest request) {
 //        List<NguoiMua> list = nguoiMuaFacade.findAll();
 //        for (NguoiMua n : list) {
 //            if (n.getId().equals(email)) {
@@ -86,6 +90,8 @@ public class NguoiMuaService {
             customer.setNgayDangKy(new Date());
             customer.setKichHoat(false);
             customer.setTrangThai(true);
+            customer.setIdQuanHuyen(quanHuyenFacade.find(quanHuyen));
+            customer.setIdThanhPho(thanhPhoFacade.find(thanhPho));
             nguoiMuaFacade.create(customer);
             try {
                 String url = request.getRequestURL().toString().replace("register", "activate/" + customer.getId());
@@ -101,9 +107,9 @@ public class NguoiMuaService {
             }
         } catch (Exception e) {
             return "Đăng ký thất bại";
-        }        
+        }
     }
-    
+
     //Mã hóa mật khẩu MD5 (không có cách giải mã - nếu nhập đúng mật khẩu thì sẽ cho ra lại đúng mã đã được mã hóa)
     public String maHoaMatKhau(String password) {
         String generatedPassword = null;
@@ -117,29 +123,26 @@ public class NguoiMuaService {
             //This bytes[] has bytes in decimal format;
             //Convert it to hexadecimal format
             StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             //Get complete hashed password in hex format
             generatedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
+        } catch (NoSuchAlgorithmException e) {
             generatedPassword = "";
             e.printStackTrace();
         }
         return generatedPassword;
     }
-    
+
     public void kichHoatTaiKhoan(String id) {
         NguoiMua customer = nguoiMuaFacade.find(Integer.parseInt(id));
         customer.setKichHoat(true);
         nguoiMuaFacade.edit(customer);
     }
-    
+
     public String dangNhap(String email, String password,
-                HttpSession httpSession) {
+            HttpSession httpSession) {
         if (nguoiMuaBusiness.kiemTraTonTaiEmail(email) == true) {
             NguoiMua nguoiMua = nguoiMuaBusiness.layNguoiMuaTheoEmail(email);
             if (nguoiMua.getMatKhau().equals(maHoaMatKhau(password)) == true) {
@@ -165,7 +168,7 @@ public class NguoiMuaService {
             model.addAttribute("message", "Cập nhật thất bại");
         }
     }
-    
+
     public void doiMatKhau(ModelMap model,
             String matKhau,
             String matKhau1,
@@ -185,7 +188,7 @@ public class NguoiMuaService {
             model.addAttribute("message", "Xác nhận mật khẩu không đúng");
         }
     }
-    
+
     public void quenMatKhau(Model model, String email, String soDienThoai) {
         if (nguoiMuaBusiness.kiemTraTonTaiEmail(email)) {
             NguoiMua nguoiMua = nguoiMuaBusiness.layNguoiMuaTheoEmail(email);
@@ -196,18 +199,16 @@ public class NguoiMuaService {
                     String body = "Mật khẩu mới của bạn là 123456. Vui lòng đăng nhập và cập nhật lại mật khẩu mới";
                     mailerService.send(to, subject, body);
                     model.addAttribute("message", "Mật khẩu của bạn đã được reset. Vui lòng kiểm tra email");
-                    
+
                     nguoiMua.setMatKhau(maHoaMatKhau("123456"));
                     nguoiMuaFacade.edit(nguoiMua);
                 } catch (Exception e) {
                     model.addAttribute("message", "Gửi mail thất bại");
                 }
-            }
-            else {
+            } else {
                 model.addAttribute("message", "Email và SĐT không trùng khớp, xin kiểm tra lại");
             }
-        }
-        else {
+        } else {
             model.addAttribute("message", "Email không tồn tại");
         }
     }

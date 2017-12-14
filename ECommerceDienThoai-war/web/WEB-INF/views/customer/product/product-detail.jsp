@@ -57,7 +57,7 @@
                             <button class="btn btn-lg btn-default" id="btn-add-to-cart" disabled="" style="width: auto">Sản phẩm đã hết hàng</button>
                         </c:otherwise>
                     </c:choose>
-                    
+
                 </div>
             </div>
         </div>
@@ -131,5 +131,14 @@
         </div>
     </div>
 </div>
+
+<style>
+    th {
+        color: black;
+    }
+    td {
+        color: black;
+    }
+</style>
 
 

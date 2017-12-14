@@ -55,9 +55,23 @@
                 </td>
             </tr>
             <tr>
+                <td class="text-right">Thành phố</td>
+                <td>
+                    <form:select path="idThanhPho.id" cssClass="form-control" id="thanhPho"
+                                 items="${thanhPhos}" itemValue="id" itemLabel="tenThanhPho" />
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right">Quận huyện</td>
+                <td>
+                    <form:select path="idQuanHuyen.id" cssClass="form-control" id="quanHuyen"
+                                 items="${quanHuyens}" itemValue="id" itemLabel="tenQuanHuyen" />
+                </td>
+            </tr>
+            <tr>
                 <td class="text-right">Địa chỉ</td>
                 <td>
-                    <form:input path="diaChi" type="text" cssClass="form-control" maxlength="11" minLength="10"/>
+                    <form:input path="diaChi" type="text" cssClass="form-control" />
                     <span style="color: red">${message}</span>
                 </td>
             </tr>
@@ -73,16 +87,37 @@
 
 <script>
     $("#soDienThoai").keydown(function (e) {
-                    // Allow: backspace, delete, tab, escape, enter and .
-                    if ($.inArray(e.keyCode, [8]) !== -1 ||
-                            // Allow: home, end, left, right
-                                    (e.keyCode >= 35 && e.keyCode <= 39)) {
-                        // let it happen, don't do anything
-                        return;
-                    }
-                    // Ensure that it is a number and stop the keypress
-                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                        e.preventDefault();
-                    }
-                });
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [8]) !== -1 ||
+                // Allow: home, end, left, right
+                        (e.keyCode >= 35 && e.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    //load Quận tương ứng với thành phố được chọn
+    $('#thanhPho').on('change', function (e) {
+        var valueSelected = this.value;
+        $.ajax({
+            url: "account/get-quan-huyen.php",
+            async: false, //block until we get a response
+            data: {idThanhPho: valueSelected},
+            success: function (response) {
+                var select = document.getElementById('quanHuyen');
+                $(select).empty();
+
+                // Add options
+                for (var i = 0; i < response.length; i++) {
+                    var obj = response[i];
+                    $(select).append('<option value=' + obj.id + '>' + obj.tenQuanHuyen + '</option>');
+                }
+
+            },
+            dataType: 'json'
+        });
+    });
 </script>

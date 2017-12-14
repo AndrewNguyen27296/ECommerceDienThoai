@@ -57,9 +57,9 @@ public class QuanHuyen implements Serializable {
     @Column(name = "loai")
     private String loai;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen", fetch = FetchType.LAZY)
-    private List<PhieuMuaHang> phieuMuaHangList;
+    private List<NguoiMua> nguoiMuaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen", fetch = FetchType.LAZY)
-    private List<PhuongXa> phuongXaList;
+    private List<PhieuMuaHang> phieuMuaHangList;
     @JoinColumn(name = "id_thanh_pho", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ThanhPho idThanhPho;
@@ -102,21 +102,21 @@ public class QuanHuyen implements Serializable {
     }
 
     @XmlTransient
+    public List<NguoiMua> getNguoiMuaList() {
+        return nguoiMuaList;
+    }
+
+    public void setNguoiMuaList(List<NguoiMua> nguoiMuaList) {
+        this.nguoiMuaList = nguoiMuaList;
+    }
+
+    @XmlTransient
     public List<PhieuMuaHang> getPhieuMuaHangList() {
         return phieuMuaHangList;
     }
 
     public void setPhieuMuaHangList(List<PhieuMuaHang> phieuMuaHangList) {
         this.phieuMuaHangList = phieuMuaHangList;
-    }
-
-    @XmlTransient
-    public List<PhuongXa> getPhuongXaList() {
-        return phuongXaList;
-    }
-
-    public void setPhuongXaList(List<PhuongXa> phuongXaList) {
-        this.phuongXaList = phuongXaList;
     }
 
     public ThanhPho getIdThanhPho() {

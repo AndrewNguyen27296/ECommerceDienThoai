@@ -55,6 +55,8 @@ public class ThanhPho implements Serializable {
     @Column(name = "loai")
     private String loai;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho", fetch = FetchType.LAZY)
+    private List<NguoiMua> nguoiMuaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho", fetch = FetchType.LAZY)
     private List<PhieuMuaHang> phieuMuaHangList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho", fetch = FetchType.LAZY)
     private List<QuanHuyen> quanHuyenList;
@@ -94,6 +96,15 @@ public class ThanhPho implements Serializable {
 
     public void setLoai(String loai) {
         this.loai = loai;
+    }
+
+    @XmlTransient
+    public List<NguoiMua> getNguoiMuaList() {
+        return nguoiMuaList;
+    }
+
+    public void setNguoiMuaList(List<NguoiMua> nguoiMuaList) {
+        this.nguoiMuaList = nguoiMuaList;
     }
 
     @XmlTransient
