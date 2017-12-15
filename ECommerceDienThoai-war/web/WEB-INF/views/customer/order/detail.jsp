@@ -96,14 +96,20 @@
                                         <fmt:formatNumber type="number" value="${p.giaBan * p.soLuongMua}" pattern="###,###,###"/>
                                         VND
                                     </td>
-                                    <td>${p.idTinhTrang.tenMoTa}</td> 
-                                    <c:if test="${p.idTinhTrang.id == 'TC' || p.idTinhTrang.id == 'DH'}">
-                                        <td>
-                                            <a href="#">
-                                                Đánh giá
-                                            </a>
-                                        </td> 
-                                    </c:if>
+                                    <c:choose>
+                                        <c:when test="${p.idTinhTrang.id == 'XL'}" >
+                                            <td>Đang xử lý</td>
+                                        </c:when>
+                                        <c:when test="${p.idTinhTrang.id == 'DG'}" >
+                                            <td>Đang giao</td>
+                                        </c:when>
+                                        <c:when test="${p.idTinhTrang.id == 'TC'}" >
+                                            <td>Thành công</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>Đã hủy</td>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </tr>
                             </c:if>
                         </c:forEach>

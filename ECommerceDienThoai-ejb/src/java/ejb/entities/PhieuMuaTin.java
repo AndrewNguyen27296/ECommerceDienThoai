@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,10 +63,10 @@ public class PhieuMuaTin implements Serializable {
     @Column(name = "trang_thai")
     private boolean trangThai;
     @JoinColumn(name = "id_goi_tin", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private GoiTin idGoiTin;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
 
     public PhieuMuaTin() {

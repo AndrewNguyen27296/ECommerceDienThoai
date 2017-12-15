@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,7 +58,7 @@ public class SoTinTon implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayCapNhat;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
 
     public SoTinTon() {

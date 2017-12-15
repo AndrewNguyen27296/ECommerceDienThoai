@@ -6,6 +6,7 @@
 package web.controllers;
 
 import com.google.gson.Gson;
+import ejb.business.CtPhieuMuaHangBusiness;
 import ejb.business.SanPhamBusiness;
 import ejb.entities.CtPhieuMuaHang;
 import ejb.entities.DanhGia;
@@ -17,6 +18,7 @@ import ejb.entities.SanPham;
 import ejb.entities.ThanhPho;
 import ejb.entities.TinhTrang;
 import ejb.sessions.CtPhieuMuaHangFacade;
+import ejb.sessions.NguoiBanFacade;
 import ejb.sessions.PhieuMuaHangFacade;
 import ejb.sessions.QuanHuyenFacade;
 import ejb.sessions.SanPhamFacade;
@@ -34,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import web.services.CtPhieuMuaHangService;
+import web.services.DanhGiaService;
 import web.services.LookupFactory;
 import web.services.QuanHuyenService;
 import web.services.SanPhamService;
@@ -55,9 +58,12 @@ public class OrderController {
 
     @Autowired
     SanPhamService sanPhamService;
-    
+
     @Autowired
     CtPhieuMuaHangService ctPhieuMuaHangService;
+    
+    @Autowired
+    DanhGiaService danhGiaService;
 
     PhieuMuaHangFacade phieuMuaHangFacade = (PhieuMuaHangFacade) LookupFactory.lookupFacadeBean("PhieuMuaHangFacade");
     CtPhieuMuaHangFacade ctPhieuMuaHangFacade = (CtPhieuMuaHangFacade) LookupFactory.lookupFacadeBean("CtPhieuMuaHangFacade");
@@ -66,7 +72,9 @@ public class OrderController {
     //PhuongXaFacade phuongXaFacade = (PhuongXaFacade) LookupFactory.lookupFacadeBean("PhuongXaFacade");
     SanPhamFacade sanPhamFacade = (SanPhamFacade) LookupFactory.lookupFacadeBean("SanPhamFacade");
     SanPhamBusiness sanPhamBusiness = (SanPhamBusiness) LookupFactory.lookupBusinessBean("SanPhamBusiness");
-
+    CtPhieuMuaHangBusiness ctPhieuMuaHangBusiness = (CtPhieuMuaHangBusiness) LookupFactory.lookupBusinessBean("CtPhieuMuaHangBusiness");
+    NguoiBanFacade nguoiBanFacade = (NguoiBanFacade) LookupFactory.lookupFacadeBean("NguoiBanFacade");
+    
     @RequestMapping("check-out")
     public String checkout(Model model) {
         model.addAttribute("cart", cart);
@@ -98,8 +106,7 @@ public class OrderController {
             phieuMuaHang.setIdThanhPho(nguoiMua.getIdThanhPho());
             phieuMuaHang.setIdQuanHuyen(nguoiMua.getIdQuanHuyen());
             phieuMuaHang.setGhiChu("");
-        }
-        //Nếu người dùng chọn địa chỉ khác
+        } //Nếu người dùng chọn địa chỉ khác
         //thì lưu địa chỉ người dùng nhập vào đơn hàng
         else {
             System.out.println("Dia chi khac");
@@ -114,7 +121,7 @@ public class OrderController {
             phieuMuaHang.setIdQuanHuyen(quanHuyenFacade.find(quanHuyen));
             phieuMuaHang.setGhiChu("");
         }
-        
+
         try {
             phieuMuaHangFacade.create(phieuMuaHang);
         } catch (Exception e) {
@@ -154,11 +161,12 @@ public class OrderController {
     public String detail(@PathVariable("id") Integer id, Model model) {
         PhieuMuaHang phieuMuaHang = phieuMuaHangFacade.find(id);
         model.addAttribute("phieuMuaHang", phieuMuaHang);
-        model.addAttribute("ctPhieuMuaHang", ctPhieuMuaHangService.layChiTietTheoMaPhieuMuaHang(id));
+        List<CtPhieuMuaHang> list_ct = ctPhieuMuaHangBusiness.layChiTietTheoMaPhieuMuaHang(id);
+        model.addAttribute("ctPhieuMuaHang", list_ct);
 
         //Group Các chi tiết PMH theo người bán
         List<NguoiBan> listNguoiBan = new ArrayList<>();
-        for (CtPhieuMuaHang ctPhieuMuaHang : phieuMuaHang.getCtPhieuMuaHangList()) {
+        for (CtPhieuMuaHang ctPhieuMuaHang : list_ct) {
             listNguoiBan.add(ctPhieuMuaHang.getIdNguoiBan());
         }
         model.addAttribute("listNguoiBan", listNguoiBan);
@@ -174,6 +182,31 @@ public class OrderController {
         ThanhPho thanhPho = thanhPhoFacade.find(id);
         List<QuanHuyen> list = quanHuyenService.getQuanHuyen(thanhPho);
         String temp = new Gson().toJson(list);
+        return temp;
+    }
+    
+    @RequestMapping("rating")
+    public String rating(Model model, HttpSession session) {
+
+        NguoiMua nguoiMua = (NguoiMua) session.getAttribute("nguoiMua");
+
+        //List<SanPham> list = hoaDonBusiness.getRatingItems(user);
+        //model.addAttribute("rating", list);
+        List<CtPhieuMuaHang> listThanhCong = ctPhieuMuaHangBusiness.layChiTietDaHoanThanh(nguoiMua.getId());
+        model.addAttribute("rating", listThanhCong);
+        return "customer/order/rating";
+    }
+    
+    @ResponseBody
+    @RequestMapping("rated")
+    public String rated(Model model, HttpSession httpSession,
+            @RequestParam("idNguoiBan") Integer idNguoiBan,
+            @RequestParam("rating") Integer rating,
+            @RequestParam("idCT_PhieuMuaHang") Integer idCT_PhieuMuaHang) {
+        NguoiMua user = (NguoiMua) httpSession.getAttribute("nguoiMua");
+        NguoiBan nguoiBan = nguoiBanFacade.find(idNguoiBan);
+        String temp = danhGiaService.danhGia(user, nguoiBan, rating);
+        ctPhieuMuaHangBusiness.capNhatDaDanhGiaCT_PhieuMuaHang(idCT_PhieuMuaHang);
         return temp;
     }
 }

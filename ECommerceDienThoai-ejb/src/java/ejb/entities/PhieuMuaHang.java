@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -93,18 +92,16 @@ public class PhieuMuaHang implements Serializable {
     @Column(name = "tong_tien")
     private long tongTien;
     @JoinColumn(name = "id_nguoi_mua", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private NguoiMua idNguoiMua;
     @JoinColumn(name = "id_quan_huyen", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private QuanHuyen idQuanHuyen;
     @JoinColumn(name = "id_thanh_pho", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private ThanhPho idThanhPho;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPhieuMuaHang", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPhieuMuaHang")
     private List<CtPhieuMuaHang> ctPhieuMuaHangList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDonHang", fetch = FetchType.LAZY)
-    private List<DanhGia> danhGiaList;
 
     public PhieuMuaHang() {
     }
@@ -227,15 +224,6 @@ public class PhieuMuaHang implements Serializable {
 
     public void setCtPhieuMuaHangList(List<CtPhieuMuaHang> ctPhieuMuaHangList) {
         this.ctPhieuMuaHangList = ctPhieuMuaHangList;
-    }
-
-    @XmlTransient
-    public List<DanhGia> getDanhGiaList() {
-        return danhGiaList;
-    }
-
-    public void setDanhGiaList(List<DanhGia> danhGiaList) {
-        this.danhGiaList = danhGiaList;
     }
 
     @Override

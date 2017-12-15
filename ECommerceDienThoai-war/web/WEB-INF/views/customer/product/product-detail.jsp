@@ -43,7 +43,14 @@
                     <div class="seller-right">
                         <span>Sản phẩm được cung cấp bởi: <a>${sanpham.idNguoiBan.hoTen}</a></span>
                         <br>
-                        <span>Điểm: 4/5</span>
+                        <c:choose>
+                            <c:when test="${rating == -1}">
+                                <span>Điểm: -- / 5</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span>Điểm: <fmt:formatNumber value="${rating}" minFractionDigits="1" maxFractionDigits="1"/> / 5</span>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="product-detail-info-footer">

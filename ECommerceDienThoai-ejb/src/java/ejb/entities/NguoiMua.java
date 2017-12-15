@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -95,13 +94,15 @@ public class NguoiMua implements Serializable {
     @Column(name = "trang_thai")
     private boolean trangThai;
     @JoinColumn(name = "id_quan_huyen", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private QuanHuyen idQuanHuyen;
     @JoinColumn(name = "id_thanh_pho", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private ThanhPho idThanhPho;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiMua", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiMua")
     private List<PhieuMuaHang> phieuMuaHangList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiMua")
+    private List<DanhGia> danhGiaList;
 
     public NguoiMua() {
     }
@@ -217,6 +218,15 @@ public class NguoiMua implements Serializable {
 
     public void setPhieuMuaHangList(List<PhieuMuaHang> phieuMuaHangList) {
         this.phieuMuaHangList = phieuMuaHangList;
+    }
+
+    @XmlTransient
+    public List<DanhGia> getDanhGiaList() {
+        return danhGiaList;
+    }
+
+    public void setDanhGiaList(List<DanhGia> danhGiaList) {
+        this.danhGiaList = danhGiaList;
     }
 
     @Override

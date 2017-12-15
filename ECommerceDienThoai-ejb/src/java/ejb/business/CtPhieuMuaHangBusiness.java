@@ -5,6 +5,7 @@
  */
 package ejb.business;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import ejb.entities.CtPhieuMuaHang;
 import ejb.entities.PhieuMuaHang;
 import java.util.List;
@@ -30,9 +31,37 @@ public class CtPhieuMuaHangBusiness {
     }
     
     public List<CtPhieuMuaHang> layChiTietTheoMaPhieuMuaHang(Integer id) {
+        //List<CtPhieuMuaHang> list = new VirtualFlow.ArrayLinkedList<>();
         Query query = em.createQuery("SELECT n FROM CtPhieuMuaHang n WHERE n.idPhieuMuaHang.id=:e");
         query.setParameter("e", id);
+        //n.id, n.giaBan, n.idNguoiBan, n.idPhieuMuaHang, n.idSanPham, n.idTinhTrang, n.ngayGiaoHang, n.soLuongMua, n.thanhTien
+        //list = (List<CtPhieuMuaHang>) query.getResultList();
         return query.getResultList();
+    }
+    
+    /*
+    * Lấy các CT_PMH đã hoàn thành nhưng chưa được đánh giá
+    */
+    public List<CtPhieuMuaHang> layChiTietDaHoanThanh(Integer id) {
+        //List<CtPhieuMuaHang> list = new VirtualFlow.ArrayLinkedList<>();
+        Query query = em.createQuery("SELECT DISTINCT ct FROM PhieuMuaHang pmh, CtPhieuMuaHang ct, NguoiMua n WHERE pmh.idNguoiMua.id=:e AND pmh.idNguoiMua.id=n.id AND pmh.id = ct.idPhieuMuaHang.id AND ct.idTinhTrang.id = 'TC' AND ct.danhGia = false OR pmh.idNguoiMua.id=:e AND pmh.idNguoiMua.id=n.id AND pmh.id = ct.idPhieuMuaHang.id AND ct.idTinhTrang.id = 'DH' AND ct.danhGia = false");
+        query.setParameter("e", id);
+        //n.id, n.giaBan, n.idNguoiBan, n.idPhieuMuaHang, n.idSanPham, n.idTinhTrang, n.ngayGiaoHang, n.soLuongMua, n.thanhTien
+        //list = (List<CtPhieuMuaHang>) query.getResultList();
+        return query.getResultList();
+    }
+    
+    /*
+    * Cập nhật CT_PMH đã được đánh giá và ko hiển thị lên cho ng dùng nữa
+    */
+    public void capNhatDaDanhGiaCT_PhieuMuaHang(Integer id) {
+        Query query = em.createQuery("UPDATE CtPhieuMuaHang c SET c.danhGia=true WHERE c.id=:id");
+        query.setParameter("id", id);
+        try {
+            query.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 
 }

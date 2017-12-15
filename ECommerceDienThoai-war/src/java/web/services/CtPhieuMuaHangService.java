@@ -22,6 +22,7 @@ public class CtPhieuMuaHangService {
     CtPhieuMuaHangBusiness ctPhieuMuaHangBusiness = (CtPhieuMuaHangBusiness) LookupFactory.lookupBusinessBean("CtPhieuMuaHangBusiness");
     
     public List<CtPhieuMuaHang> layChiTietTheoMaPhieuMuaHang(Integer id) {
+        //List<CtPhieuMuaHang> list = ctPhieuMuaHangBusiness.layChiTietTheoMaPhieuMuaHang(id);
         return ctPhieuMuaHangBusiness.layChiTietTheoMaPhieuMuaHang(id);
     }
 }

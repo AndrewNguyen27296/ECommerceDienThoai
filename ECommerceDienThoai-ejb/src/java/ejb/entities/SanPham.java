@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -183,12 +182,12 @@ public class SanPham implements Serializable {
     @Column(name = "an_hien")
     private boolean anHien;
     @JoinColumn(name = "id_hang_san_xuat", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private HangSanXuat idHangSanXuat;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSanPham", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSanPham")
     private List<CtPhieuMuaHang> ctPhieuMuaHangList;
 
     public SanPham() {

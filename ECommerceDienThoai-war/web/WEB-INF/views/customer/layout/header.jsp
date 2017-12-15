@@ -173,7 +173,7 @@
                             // Add options
                             for (var i = 0; i < response.length; i++) {
                                 var obj = response[i];
-                                $(select).append('<option value=' + obj.id + '>' + obj.tenQuanHuyen + '</option>');
+                                $(select).append('<option value=' + obj[0] + '>' + obj[1] + '</option>');
                             }
 
                         },

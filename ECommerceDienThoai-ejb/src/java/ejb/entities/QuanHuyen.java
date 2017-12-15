@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,12 +55,12 @@ public class QuanHuyen implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "loai")
     private String loai;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen")
     private List<NguoiMua> nguoiMuaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen")
     private List<PhieuMuaHang> phieuMuaHangList;
     @JoinColumn(name = "id_thanh_pho", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private ThanhPho idThanhPho;
 
     public QuanHuyen() {

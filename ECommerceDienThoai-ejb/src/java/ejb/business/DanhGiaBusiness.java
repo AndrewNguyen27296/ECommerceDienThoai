@@ -5,9 +5,6 @@
  */
 package ejb.business;
 
-import ejb.entities.QuanHuyen;
-import ejb.entities.ThanhPho;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -20,18 +17,24 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class QuanHuyenBusiness {
+public class DanhGiaBusiness {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
-    
+
     public void persist(Object object) {
         em.persist(object);
     }
-        
-    public List<QuanHuyen> getQuanHuyen(ThanhPho thanhPho) {
-        Query query = em.createQuery("SELECT q.id, q.tenQuanHuyen FROM QuanHuyen q WHERE q.idThanhPho=:id");
-        query.setParameter("id", thanhPho);
-        return query.getResultList();
+    
+    public double layRatingTrungBinhCuaNguoiMua(int id) {
+        double rating = -1;
+        Query query = em.createQuery("SELECT AVG(d.soDiem) FROM DanhGia d WHERE d.idNguoiBan.id=:e");
+        query.setParameter("e", id);
+        try {
+            rating = (double) query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return rating;
     }
 }

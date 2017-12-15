@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CtPhieuMuaHang.findByGiaBan", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.giaBan = :giaBan")
     , @NamedQuery(name = "CtPhieuMuaHang.findBySoLuongMua", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.soLuongMua = :soLuongMua")
     , @NamedQuery(name = "CtPhieuMuaHang.findByThanhTien", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.thanhTien = :thanhTien")
-    , @NamedQuery(name = "CtPhieuMuaHang.findByNgayGiaoHang", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.ngayGiaoHang = :ngayGiaoHang")})
+    , @NamedQuery(name = "CtPhieuMuaHang.findByNgayGiaoHang", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.ngayGiaoHang = :ngayGiaoHang")
+    , @NamedQuery(name = "CtPhieuMuaHang.findByDanhGia", query = "SELECT c FROM CtPhieuMuaHang c WHERE c.danhGia = :danhGia")})
 public class CtPhieuMuaHang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,17 +61,21 @@ public class CtPhieuMuaHang implements Serializable {
     @Column(name = "ngay_giao_hang")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayGiaoHang;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "danh_gia")
+    private boolean danhGia;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
     @JoinColumn(name = "id_phieu_mua_hang", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private PhieuMuaHang idPhieuMuaHang;
     @JoinColumn(name = "id_san_pham", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private SanPham idSanPham;
     @JoinColumn(name = "id_tinh_trang", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private TinhTrang idTinhTrang;
 
     public CtPhieuMuaHang() {
@@ -81,11 +85,12 @@ public class CtPhieuMuaHang implements Serializable {
         this.id = id;
     }
 
-    public CtPhieuMuaHang(Integer id, long giaBan, int soLuongMua, long thanhTien) {
+    public CtPhieuMuaHang(Integer id, long giaBan, int soLuongMua, long thanhTien, boolean danhGia) {
         this.id = id;
         this.giaBan = giaBan;
         this.soLuongMua = soLuongMua;
         this.thanhTien = thanhTien;
+        this.danhGia = danhGia;
     }
 
     public Integer getId() {
@@ -126,6 +131,14 @@ public class CtPhieuMuaHang implements Serializable {
 
     public void setNgayGiaoHang(Date ngayGiaoHang) {
         this.ngayGiaoHang = ngayGiaoHang;
+    }
+
+    public boolean getDanhGia() {
+        return danhGia;
+    }
+
+    public void setDanhGia(boolean danhGia) {
+        this.danhGia = danhGia;
     }
 
     public NguoiBan getIdNguoiBan() {

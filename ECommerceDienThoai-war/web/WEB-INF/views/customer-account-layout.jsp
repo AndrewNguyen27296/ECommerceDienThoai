@@ -88,6 +88,12 @@ jQuery(document).ready(function ($) {
                             Đơn hàng của tôi
                         </a>
                     </li>
+                    <li class="list-group-item">
+                        <a href="order/rating.php">
+                            <span class="glyphicon glyphicon-star"></span>
+                            Đánh giá sản phẩm
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="my-edit-accout-right">

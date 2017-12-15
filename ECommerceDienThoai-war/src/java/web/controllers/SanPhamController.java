@@ -5,6 +5,7 @@
  */
 package web.controllers;
 
+import ejb.business.DanhGiaBusiness;
 import ejb.business.SanPhamBusiness;
 import ejb.entities.SanPham;
 import java.util.List;
@@ -28,11 +29,13 @@ public class SanPhamController {
     SanPhamService sanPhamService;
     
     SanPhamBusiness sanPhamBusiness = (SanPhamBusiness) LookupFactory.lookupBusinessBean("SanPhamBusiness");
+    DanhGiaBusiness danhGiaBusiness = (DanhGiaBusiness) LookupFactory.lookupBusinessBean("DanhGiaBusiness");
     
     @RequestMapping("detail/{id}")
     public String detail(@PathVariable("id") Integer id, Model model) {
         SanPham sanPham = sanPhamService.lay1SanPham(id);
         model.addAttribute("sanpham", sanPham);
+        model.addAttribute("rating", danhGiaBusiness.layRatingTrungBinhCuaNguoiMua(sanPham.getIdNguoiBan().getId()));
         return "customer/product/product-detail";
     }
     
