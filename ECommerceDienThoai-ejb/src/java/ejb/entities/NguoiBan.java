@@ -113,7 +113,11 @@ public class NguoiBan implements Serializable {
     @Column(name = "bi_block")
     private boolean biBlock;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<BienBanKhoaVinhVien> bienBanKhoaVinhVienList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<SanPham> sanPhamList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<BienBanKhoa> bienBanKhoaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<CtPhieuMuaHang> ctPhieuMuaHangList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
@@ -251,12 +255,30 @@ public class NguoiBan implements Serializable {
     }
 
     @XmlTransient
+    public List<BienBanKhoaVinhVien> getBienBanKhoaVinhVienList() {
+        return bienBanKhoaVinhVienList;
+    }
+
+    public void setBienBanKhoaVinhVienList(List<BienBanKhoaVinhVien> bienBanKhoaVinhVienList) {
+        this.bienBanKhoaVinhVienList = bienBanKhoaVinhVienList;
+    }
+
+    @XmlTransient
     public List<SanPham> getSanPhamList() {
         return sanPhamList;
     }
 
     public void setSanPhamList(List<SanPham> sanPhamList) {
         this.sanPhamList = sanPhamList;
+    }
+
+    @XmlTransient
+    public List<BienBanKhoa> getBienBanKhoaList() {
+        return bienBanKhoaList;
+    }
+
+    public void setBienBanKhoaList(List<BienBanKhoa> bienBanKhoaList) {
+        this.bienBanKhoaList = bienBanKhoaList;
     }
 
     @XmlTransient

@@ -35,6 +35,8 @@
         <!-- Custom Fonts -->
         <link href="assets/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+        <!-- js -->
+        <script src="assets/customer/js/jquery.min.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -80,15 +82,19 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="admin/active-account.php"><i class="fa fa-dashboard fa-fw"></i> Quản lý Merchant</a>
+                                <a href="admin/active-account.php"><i class="glyphicon glyphicon-home" style="margin-right: 5px"></i>Quản lý Merchant</a>
                             </li>
                             <li class="">
-                                <a href="admin/manage-customer.php"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý Customer</a>
+                                <a href="admin/manage-customer.php"><i class="glyphicon glyphicon-user" style="margin-right: 5px"></i>Quản lý Customer</a>
                             </li>
                             <li>
-                                <a href="admin/block.php"><i class="fa fa-table fa-fw"></i> Cấu hình số lần block</a>
+                                <a href="admin/order.php"><i class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></i>Quản lý phiếu mua hàng</a>
                             </li>
                             <li>
+                                <a href="admin/block.php"><i class="glyphicon glyphicon-lock" style="margin-right: 5px"></i>Cấu hình số lần block</a>
+                            </li>
+                            
+<!--                            <li>
                                 <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                             </li>
                             <li>
@@ -99,7 +105,7 @@
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                 </div>
