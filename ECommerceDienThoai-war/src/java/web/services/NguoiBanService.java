@@ -6,8 +6,11 @@
 package web.services;
 
 import ejb.business.NguoiBanBusiness;
+import ejb.entities.Admin;
 import ejb.entities.NguoiBan;
+import ejb.entities.PhieuNopPhat;
 import ejb.sessions.NguoiBanFacade;
+import ejb.sessions.PhieuNopPhatFacade;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -29,7 +32,8 @@ public class NguoiBanService {
 
     NguoiBanFacade nguoiBanFacade = (NguoiBanFacade) LookupFactory.lookupFacadeBean("NguoiBanFacade");
     NguoiBanBusiness nguoiBanBusiness = (NguoiBanBusiness) LookupFactory.lookupBusinessBean("NguoiBanBusiness");
-
+    PhieuNopPhatFacade phieuNopPhatFacade = (PhieuNopPhatFacade) LookupFactory.lookupFacadeBean("PhieuNopPhatFacade");
+    
     public String themNguoiBan(String email, String password, String hoTen, String cmnd, String soDienThoai, String diaChi,
             HttpServletRequest request) {
         if (nguoiBanBusiness.kiemTraTonTaiCMND(cmnd) == true) {
@@ -175,6 +179,22 @@ public class NguoiBanService {
             }
         } else {
             model.addAttribute("message", "Không tồn tại email");
+        }
+    }
+    
+    public void themPhieuNopPhat(Integer id, HttpSession httpSession) {
+        PhieuNopPhat phieuNopPhat = new PhieuNopPhat();
+        NguoiBan nguoiBan = nguoiBanFacade.find(id);
+        phieuNopPhat.setIdAdmin((Admin) httpSession.getAttribute("admin"));
+        phieuNopPhat.setIdNguoiBan(nguoiBan);
+        phieuNopPhat.setNgayNopPhat(new Date());
+        phieuNopPhat.setSoTien(200000);
+        nguoiBan.setBiKhoa(false);
+        try {
+            phieuNopPhatFacade.create(phieuNopPhat);
+            nguoiBanFacade.edit(nguoiBan);
+        } catch (Exception e) {
+            throw e;
         }
     }
 }

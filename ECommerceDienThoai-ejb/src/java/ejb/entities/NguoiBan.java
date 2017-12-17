@@ -117,6 +117,8 @@ public class NguoiBan implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<SanPham> sanPhamList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<PhieuNopPhat> phieuNopPhatList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<BienBanKhoa> bienBanKhoaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<CtPhieuMuaHang> ctPhieuMuaHangList;
@@ -124,6 +126,8 @@ public class NguoiBan implements Serializable {
     private List<PhieuMuaTin> phieuMuaTinList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<DanhGia> danhGiaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<PhieuMuaTinOffline> phieuMuaTinOfflineList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<SoTinTon> soTinTonList;
 
@@ -273,6 +277,15 @@ public class NguoiBan implements Serializable {
     }
 
     @XmlTransient
+    public List<PhieuNopPhat> getPhieuNopPhatList() {
+        return phieuNopPhatList;
+    }
+
+    public void setPhieuNopPhatList(List<PhieuNopPhat> phieuNopPhatList) {
+        this.phieuNopPhatList = phieuNopPhatList;
+    }
+
+    @XmlTransient
     public List<BienBanKhoa> getBienBanKhoaList() {
         return bienBanKhoaList;
     }
@@ -306,6 +319,15 @@ public class NguoiBan implements Serializable {
 
     public void setDanhGiaList(List<DanhGia> danhGiaList) {
         this.danhGiaList = danhGiaList;
+    }
+
+    @XmlTransient
+    public List<PhieuMuaTinOffline> getPhieuMuaTinOfflineList() {
+        return phieuMuaTinOfflineList;
+    }
+
+    public void setPhieuMuaTinOfflineList(List<PhieuMuaTinOffline> phieuMuaTinOfflineList) {
+        this.phieuMuaTinOfflineList = phieuMuaTinOfflineList;
     }
 
     @XmlTransient

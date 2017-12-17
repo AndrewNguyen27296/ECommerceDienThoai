@@ -6,14 +6,25 @@
 package admin.controllers;
 
 import ejb.business.CtPhieuMuaHangBusiness;
+import ejb.entities.Admin;
 import ejb.entities.CauHinh;
 import ejb.entities.CtPhieuMuaHang;
+import ejb.entities.DanhGia;
+import ejb.entities.GoiTin;
 import ejb.entities.NguoiBan;
 import ejb.entities.NguoiMua;
 import ejb.entities.PhieuMuaHang;
+import ejb.entities.PhieuMuaTinOffline;
+import ejb.entities.PhieuNopPhat;
 import ejb.sessions.CauHinhFacade;
+import ejb.sessions.DanhGiaFacade;
+import ejb.sessions.GoiTinFacade;
+import ejb.sessions.NguoiBanFacade;
 import ejb.sessions.PhieuMuaHangFacade;
+import ejb.sessions.PhieuMuaTinOfflineFacade;
+import ejb.sessions.PhieuNopPhatFacade;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +34,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import web.services.AdminService;
 import web.services.LookupFactory;
+import web.services.NguoiBanService;
 
 /**
  *
@@ -35,9 +48,17 @@ import web.services.LookupFactory;
 public class AdminController {
     @Autowired
     AdminService adminService;
+    @Autowired 
+    NguoiBanService nguoiBanService;
+    
     PhieuMuaHangFacade phieuMuaHangFacade = (PhieuMuaHangFacade) LookupFactory.lookupFacadeBean("PhieuMuaHangFacade");
     CtPhieuMuaHangBusiness ctPhieuMuaHangBusiness = (CtPhieuMuaHangBusiness) LookupFactory.lookupBusinessBean("CtPhieuMuaHangBusiness");
     CauHinhFacade cauHinhFacade = (CauHinhFacade) LookupFactory.lookupFacadeBean("CauHinhFacade");
+    NguoiBanFacade nguoiBanFacade = (NguoiBanFacade) LookupFactory.lookupFacadeBean("NguoiBanFacade");
+    GoiTinFacade goiTinFacade = (GoiTinFacade) LookupFactory.lookupFacadeBean("GoiTinFacade");
+    PhieuMuaTinOfflineFacade phieuMuaTinOfflineFacade = (PhieuMuaTinOfflineFacade) LookupFactory.lookupFacadeBean("PhieuMuaTinOfflineFacade");
+    PhieuNopPhatFacade phieuNopPhatFacade = (PhieuNopPhatFacade) LookupFactory.lookupFacadeBean("PhieuNopPhatFacade");
+    DanhGiaFacade danhGiaFacade = (DanhGiaFacade) LookupFactory.lookupFacadeBean("DanhGiaFacade");
     
     @RequestMapping("login")
     public String login() {
@@ -144,5 +165,84 @@ public class AdminController {
         }
         model.addAttribute("listNguoiBan", listNguoiBan);
         return "admin/order/detail";
+    }
+    
+    @RequestMapping("locked-account")
+    public String lockedAccount(Model model) {
+        List<NguoiBan> temp = nguoiBanFacade.findAll();
+        List<NguoiBan> list = new ArrayList<>();
+        for (NguoiBan nguoiBan : temp) {
+            if (nguoiBan.getBiKhoa() == true) {
+                list.add(nguoiBan);
+            }
+        }
+        model.addAttribute("list", list);
+        return "admin/account/locked-account";
+    }
+    
+    @RequestMapping("phieu-nop-phat/them-phieu-phat/{id}")
+    public String themPhieuNopPhat(@PathVariable("id") Integer id, HttpSession httpSession) {
+        nguoiBanService.themPhieuNopPhat(id, httpSession);
+        return "redirect:/admin/locked-account.php";
+    }
+    
+    @RequestMapping("phieu-mua-tin-offline/them-phieu-mua-tin-offline/{id}")
+    public String themPhieuMuaTinOffline(Model model, @PathVariable("id") Integer id) {
+        List<GoiTin> goiTins = goiTinFacade.findAll();
+        model.addAttribute("listGoiTin", goiTins);
+        NguoiBan nguoiBan = nguoiBanFacade.find(id);
+        model.addAttribute("nguoiBan", nguoiBan);     
+        return "admin/goi-tin/them-goi-tin-offline";
+    }
+    
+    @ResponseBody
+    @RequestMapping("getInfoGoiTin")
+    public GoiTin getGoiTin(@RequestParam("id") Integer id)
+    {
+        return goiTinFacade.find(id);
+    }
+    
+    @RequestMapping(value="phieu-mua-tin-offline/them-phieu-mua-tin-offline/{id}", method = RequestMethod.POST)
+    public String themPhieuMuaTinOffline(@PathVariable("id") Integer id,
+            @RequestParam("goiTin") Integer idGoiTin,
+            HttpSession httpSession) {
+        //Lưu thông tin phiếu mua tin tại trụ sở
+        NguoiBan nguoiBan = nguoiBanFacade.find(id);   
+        GoiTin goiTin = goiTinFacade.find(idGoiTin);
+        PhieuMuaTinOffline phieuMuaTinOffline = new PhieuMuaTinOffline();
+        phieuMuaTinOffline.setGiaBan(goiTin.getGiaBan());
+        phieuMuaTinOffline.setIdAdmin((Admin) httpSession.getAttribute("admin"));
+        phieuMuaTinOffline.setIdGoiTin(goiTin);
+        phieuMuaTinOffline.setIdNguoiBan(nguoiBan);
+        phieuMuaTinOffline.setNgayMua(new Date());
+        try {
+            phieuMuaTinOfflineFacade.create(phieuMuaTinOffline);
+            //Cập nhật số lượng tin tồn của Merchant
+            //nguoiBan.gS
+        } catch (Exception e) {
+            throw e;
+        }
+        return "redirect:/admin/active-account.php";
+    }
+    
+    @RequestMapping("phieu-mua-tin-offline")
+    public String quanLyPhieuMuaTinOffline(Model model) {
+        List<PhieuMuaTinOffline> list = phieuMuaTinOfflineFacade.findAll();
+        model.addAttribute("list", list);
+        return "admin/goi-tin/quan-ly-phieu-mua-tin-offline";
+    }
+    
+    @RequestMapping("phieu-nop-phat")
+    public String quanLyPhieuNopPhat(Model model) {
+        List<PhieuNopPhat> list = phieuNopPhatFacade.findAll();
+        model.addAttribute("list", list);
+        return "admin/phieu-nop-phat/quan-ly-phieu-nop-phat";
+    }
+    
+    @RequestMapping("danh-gia")
+    public String quanLyDanhGia(Model model) {
+        List<DanhGia> list = danhGiaFacade.findAll();
+        model.addAttribute("list", list);
+        return "admin/danh-gia/quan-ly-danh-gia";
     }
 }

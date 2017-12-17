@@ -41,6 +41,7 @@
                 <th>Địa chỉ</th>
                 <th>Trạng Thái</th>
                 <th></th>
+                <th></th>
             </tr>
             <c:forEach var="i" items="${list}" >
                 <tr>
@@ -61,6 +62,9 @@
                             <td></td>
                         </c:otherwise>
                     </c:choose> 
+                    <td>
+                        <a href="admin/phieu-mua-tin-offline/them-phieu-mua-tin-offline/${i.id}.php">Mua tin</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

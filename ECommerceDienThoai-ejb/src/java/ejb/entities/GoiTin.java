@@ -56,9 +56,11 @@ public class GoiTin implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "gia_ban")
-    private float giaBan;
+    private long giaBan;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGoiTin")
     private List<PhieuMuaTin> phieuMuaTinList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGoiTin")
+    private List<PhieuMuaTinOffline> phieuMuaTinOfflineList;
 
     public GoiTin() {
     }
@@ -67,7 +69,7 @@ public class GoiTin implements Serializable {
         this.id = id;
     }
 
-    public GoiTin(Integer id, String tenGoiTin, int soTin, float giaBan) {
+    public GoiTin(Integer id, String tenGoiTin, int soTin, long giaBan) {
         this.id = id;
         this.tenGoiTin = tenGoiTin;
         this.soTin = soTin;
@@ -98,11 +100,11 @@ public class GoiTin implements Serializable {
         this.soTin = soTin;
     }
 
-    public float getGiaBan() {
+    public long getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(float giaBan) {
+    public void setGiaBan(long giaBan) {
         this.giaBan = giaBan;
     }
 
@@ -113,6 +115,15 @@ public class GoiTin implements Serializable {
 
     public void setPhieuMuaTinList(List<PhieuMuaTin> phieuMuaTinList) {
         this.phieuMuaTinList = phieuMuaTinList;
+    }
+
+    @XmlTransient
+    public List<PhieuMuaTinOffline> getPhieuMuaTinOfflineList() {
+        return phieuMuaTinOfflineList;
+    }
+
+    public void setPhieuMuaTinOfflineList(List<PhieuMuaTinOffline> phieuMuaTinOfflineList) {
+        this.phieuMuaTinOfflineList = phieuMuaTinOfflineList;
     }
 
     @Override

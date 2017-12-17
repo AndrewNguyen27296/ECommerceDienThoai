@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,18 +28,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author DacTien
  */
 @Entity
-@Table(name = "phieu_mua_tin")
+@Table(name = "phieu_mua_tin_offline")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PhieuMuaTin.findAll", query = "SELECT p FROM PhieuMuaTin p")
-    , @NamedQuery(name = "PhieuMuaTin.findById", query = "SELECT p FROM PhieuMuaTin p WHERE p.id = :id")
-    , @NamedQuery(name = "PhieuMuaTin.findByGiaBan", query = "SELECT p FROM PhieuMuaTin p WHERE p.giaBan = :giaBan")
-    , @NamedQuery(name = "PhieuMuaTin.findByNgayMua", query = "SELECT p FROM PhieuMuaTin p WHERE p.ngayMua = :ngayMua")
-    , @NamedQuery(name = "PhieuMuaTin.findByPhuongThucThanhToan", query = "SELECT p FROM PhieuMuaTin p WHERE p.phuongThucThanhToan = :phuongThucThanhToan")
-    , @NamedQuery(name = "PhieuMuaTin.findByTrangThai", query = "SELECT p FROM PhieuMuaTin p WHERE p.trangThai = :trangThai")
-    , @NamedQuery(name = "PhieuMuaTin.findByPaymentId", query = "SELECT p FROM PhieuMuaTin p WHERE p.paymentId = :paymentId")
-    , @NamedQuery(name = "PhieuMuaTin.findByPayerId", query = "SELECT p FROM PhieuMuaTin p WHERE p.payerId = :payerId")})
-public class PhieuMuaTin implements Serializable {
+    @NamedQuery(name = "PhieuMuaTinOffline.findAll", query = "SELECT p FROM PhieuMuaTinOffline p")
+    , @NamedQuery(name = "PhieuMuaTinOffline.findById", query = "SELECT p FROM PhieuMuaTinOffline p WHERE p.id = :id")
+    , @NamedQuery(name = "PhieuMuaTinOffline.findByGiaBan", query = "SELECT p FROM PhieuMuaTinOffline p WHERE p.giaBan = :giaBan")
+    , @NamedQuery(name = "PhieuMuaTinOffline.findByNgayMua", query = "SELECT p FROM PhieuMuaTinOffline p WHERE p.ngayMua = :ngayMua")})
+public class PhieuMuaTinOffline implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,24 +52,9 @@ public class PhieuMuaTin implements Serializable {
     @Column(name = "ngay_mua")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayMua;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "phuong_thuc_thanh_toan")
-    private int phuongThucThanhToan;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "trang_thai")
-    private boolean trangThai;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "payment_id")
-    private String paymentId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "payer_id")
-    private String payerId;
+    @JoinColumn(name = "id_admin", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Admin idAdmin;
     @JoinColumn(name = "id_goi_tin", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private GoiTin idGoiTin;
@@ -82,21 +62,17 @@ public class PhieuMuaTin implements Serializable {
     @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
 
-    public PhieuMuaTin() {
+    public PhieuMuaTinOffline() {
     }
 
-    public PhieuMuaTin(Integer id) {
+    public PhieuMuaTinOffline(Integer id) {
         this.id = id;
     }
 
-    public PhieuMuaTin(Integer id, long giaBan, Date ngayMua, int phuongThucThanhToan, boolean trangThai, String paymentId, String payerId) {
+    public PhieuMuaTinOffline(Integer id, long giaBan, Date ngayMua) {
         this.id = id;
         this.giaBan = giaBan;
         this.ngayMua = ngayMua;
-        this.phuongThucThanhToan = phuongThucThanhToan;
-        this.trangThai = trangThai;
-        this.paymentId = paymentId;
-        this.payerId = payerId;
     }
 
     public Integer getId() {
@@ -123,36 +99,12 @@ public class PhieuMuaTin implements Serializable {
         this.ngayMua = ngayMua;
     }
 
-    public int getPhuongThucThanhToan() {
-        return phuongThucThanhToan;
+    public Admin getIdAdmin() {
+        return idAdmin;
     }
 
-    public void setPhuongThucThanhToan(int phuongThucThanhToan) {
-        this.phuongThucThanhToan = phuongThucThanhToan;
-    }
-
-    public boolean getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public String getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public String getPayerId() {
-        return payerId;
-    }
-
-    public void setPayerId(String payerId) {
-        this.payerId = payerId;
+    public void setIdAdmin(Admin idAdmin) {
+        this.idAdmin = idAdmin;
     }
 
     public GoiTin getIdGoiTin() {
@@ -181,10 +133,10 @@ public class PhieuMuaTin implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PhieuMuaTin)) {
+        if (!(object instanceof PhieuMuaTinOffline)) {
             return false;
         }
-        PhieuMuaTin other = (PhieuMuaTin) object;
+        PhieuMuaTinOffline other = (PhieuMuaTinOffline) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -193,7 +145,7 @@ public class PhieuMuaTin implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.PhieuMuaTin[ id=" + id + " ]";
+        return "ejb.entities.PhieuMuaTinOffline[ id=" + id + " ]";
     }
     
 }

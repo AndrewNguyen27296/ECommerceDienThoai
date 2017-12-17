@@ -84,6 +84,9 @@
                             <li>
                                 <a href="admin/active-account.php"><i class="glyphicon glyphicon-home" style="margin-right: 5px"></i>Quản lý Merchant</a>
                             </li>
+                            <li>
+                                <a href="admin/locked-account.php"><i class="glyphicon glyphicon-lock" style="margin-right: 5px"></i>Quản lý Merchant bị tạm khóa</a>
+                            </li>
                             <li class="">
                                 <a href="admin/manage-customer.php"><i class="glyphicon glyphicon-user" style="margin-right: 5px"></i>Quản lý Customer</a>
                             </li>
@@ -91,7 +94,19 @@
                                 <a href="admin/order.php"><i class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></i>Quản lý phiếu mua hàng</a>
                             </li>
                             <li>
-                                <a href="admin/block.php"><i class="glyphicon glyphicon-lock" style="margin-right: 5px"></i>Cấu hình số lần block</a>
+                                <a href="admin/phieu-mua-tin-offline.php"><i class="glyphicon glyphicon-file" style="margin-right: 5px"></i>Quản lý phiếu mua tin onine</a>
+                            </li>
+                            <li>
+                                <a href="admin/phieu-mua-tin-offline.php"><i class="glyphicon glyphicon-file" style="margin-right: 5px"></i>Quản lý phiếu mua tin tại trụ sở</a>
+                            </li>
+                            <li>
+                                <a href="admin/phieu-nop-phat.php"><i class="glyphicon glyphicon-file" style="margin-right: 5px"></i>Quản lý phiếu nộp phạt</a>
+                            </li>
+                            <li>
+                                <a href="admin/danh-gia.php"><i class="glyphicon glyphicon-file" style="margin-right: 5px"></i>Quản lý đánh giá</a>
+                            </li>
+                            <li>
+                                <a href="admin/block.php"><i class="glyphicon glyphicon-cog" style="margin-right: 5px"></i>Cấu hình số lần block</a>
                             </li>
                             
 <!--                            <li>
