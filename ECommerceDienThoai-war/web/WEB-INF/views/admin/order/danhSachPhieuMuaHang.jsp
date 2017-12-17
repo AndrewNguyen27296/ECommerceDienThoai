@@ -22,9 +22,9 @@
                 <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Lọc</button>
             </div>
         </div>
-        <table id="example" class="table">
+        <table class="table">
             <thead>
-                <tr >
+                <tr class="filters">
                     <th>Mã PMH</th>
                     <th><input type="text" class="form-control" placeholder="Người mua" disabled></th>
                     <th>Ngày lập</th>
@@ -50,7 +50,6 @@
             </tbody>
         </table>
     </div>
-  
 </div>
 
 <style>
@@ -90,10 +89,6 @@
 
 <script>
     $(document).ready(function () {
-        //$('table').excelTableFilter();
-        
-        //$('#example').DataTable();
-        
         $('.filterable .btn-filter').click(function () {
             var $panel = $(this).parents('.filterable'),
                     $filters = $panel.find('.filters input'),
@@ -107,7 +102,6 @@
                 $tbody.find('tr').show();
             }
         });
-
         $('.filterable .filters input').keyup(function (e) {
             /* Ignore tab key */
             var code = e.keyCode || e.which;
