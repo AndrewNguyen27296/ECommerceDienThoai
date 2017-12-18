@@ -7,6 +7,7 @@ package ejb.business;
 
 import ejb.entities.NguoiBan;
 import ejb.entities.SoTinTon;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -38,5 +39,19 @@ public class SoTinTonBusiness {
             
         }
         return soTinTon;
+    }
+    
+    public int laySoTinTheoNguoiBanVaThoiGian(Integer id, Date thoiGian) {
+        try {
+            Query q = em.createQuery("FROM SoTinTon s "
+                    + "WHERE s.idNguoiBan.id = :id AND s.ngayCapNhat <= :date "
+                    + "ORDER BY s.ngayCapNhat DESC");
+            q.setParameter("id", id);
+            q.setParameter("date", thoiGian);
+            SoTinTon soTin = (SoTinTon) q.getResultList().get(0);
+            return soTin.getSoTinTon();
+        } catch (Exception ex) {
+            return 0;
+        }
     }
 }

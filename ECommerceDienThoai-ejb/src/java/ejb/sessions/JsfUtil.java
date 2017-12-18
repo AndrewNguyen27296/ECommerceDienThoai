@@ -7,12 +7,10 @@ package ejb.sessions;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 class JsfUtil {
-
     static void addErrorMessage(String string) {
         System.out.println(string);
     }
-    
 }
