@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DacTien
+ * @author myly
  */
 @Entity
 @Table(name = "nguoi_ban")

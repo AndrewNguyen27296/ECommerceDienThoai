@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -58,9 +59,8 @@ public class MerchantPostController {
 
     @RequestMapping(value = "new", method=RequestMethod.POST)
     public String dangTin(Model model,
-            @ModelAttribute("sanPham")  SanPhamViewModel sanPhamVM,
+            @ModelAttribute("sanPham") @Valid SanPhamViewModel sanPhamVM,
             @RequestParam("hinhAnh") MultipartFile hinhAnh,
-            
             HttpSession httpSession) {
         String temp = postService.dangTin(model, sanPhamVM, hinhAnh, httpSession);
         return "redirect:/merchant/home/post-list";

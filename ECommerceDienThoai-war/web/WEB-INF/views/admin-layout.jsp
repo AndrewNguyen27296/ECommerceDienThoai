@@ -115,6 +115,9 @@
                                 <a href="admin/thong-ke-doanh-thu.php"><i class="glyphicon glyphicon-stats" style="margin-right: 5px"></i>Thống kê doanh thu</a>
                             </li>
                             <li>
+                                <a href="admin/thong-ke-doanh-thu-theo-thang.php"><i class="glyphicon glyphicon-stats" style="margin-right: 5px"></i>Thống kê doanh thu theo tháng</a>
+                            </li>
+                            <li>
                                 <a href="admin/block.php"><i class="glyphicon glyphicon-cog" style="margin-right: 5px"></i>Cấu hình số lần khóa vĩnh viễn</a>
                             </li>
                             

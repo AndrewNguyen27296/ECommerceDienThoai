@@ -7,6 +7,7 @@ package admin.controllers;
 
 import ejb.business.CtPhieuMuaHangBusiness;
 import ejb.business.DanhGiaBusiness;
+import ejb.business.GoiTinBusiness;
 import ejb.business.ThongKeBusiness;
 import ejb.entities.Admin;
 import ejb.entities.CauHinh;
@@ -63,6 +64,7 @@ public class AdminController {
     DanhGiaFacade danhGiaFacade = (DanhGiaFacade) LookupFactory.lookupFacadeBean("DanhGiaFacade");
     DanhGiaBusiness danhGiaBusiness = (DanhGiaBusiness) LookupFactory.lookupBusinessBean("DanhGiaBusiness");
     ThongKeBusiness thongKeBusiness = (ThongKeBusiness) LookupFactory.lookupBusinessBean("ThongKeBusiness");
+    GoiTinBusiness goiTinBusiness = (GoiTinBusiness) LookupFactory.lookupBusinessBean("GoiTinBusiness");
     
     @RequestMapping("login")
     public String login() {
@@ -208,9 +210,9 @@ public class AdminController {
     
     @ResponseBody
     @RequestMapping("getInfoGoiTin")
-    public GoiTin getGoiTin(@RequestParam("id") Integer id)
+    public Object getGoiTin(@RequestParam("id") Integer id)
     {
-        return goiTinFacade.find(id);
+        return goiTinBusiness.getGoiTinInfo(id);
     }
     
     @RequestMapping(value="phieu-mua-tin-offline/them-phieu-mua-tin-offline/{id}", method = RequestMethod.POST)
@@ -272,5 +274,34 @@ public class AdminController {
         List<Long> list = thongKeBusiness.thongKeDoanhThu();
         model.addAttribute("items", list);
         return "admin/thong-ke/thong-ke-doanh-thu";
+    }
+    
+    @RequestMapping("thong-ke-doanh-thu-theo-thang")
+    public String thongKeDoanhThuTheoThang(Model model) {
+        List<Long> list1 = thongKeBusiness.thongKeDoanhThuTheoThang(1);
+        List<Long> list2 = thongKeBusiness.thongKeDoanhThuTheoThang(2);
+        List<Long> list3 = thongKeBusiness.thongKeDoanhThuTheoThang(3);
+        List<Long> list4 = thongKeBusiness.thongKeDoanhThuTheoThang(4);
+        List<Long> list5 = thongKeBusiness.thongKeDoanhThuTheoThang(5);
+        List<Long> list6 = thongKeBusiness.thongKeDoanhThuTheoThang(6);
+        List<Long> list7 = thongKeBusiness.thongKeDoanhThuTheoThang(7);
+        List<Long> list8 = thongKeBusiness.thongKeDoanhThuTheoThang(8);
+        List<Long> list9 = thongKeBusiness.thongKeDoanhThuTheoThang(9);
+        List<Long> list10 = thongKeBusiness.thongKeDoanhThuTheoThang(10);
+        List<Long> list11 = thongKeBusiness.thongKeDoanhThuTheoThang(11);
+        List<Long> list12 = thongKeBusiness.thongKeDoanhThuTheoThang(12);
+        model.addAttribute("list1", list1);
+        model.addAttribute("list2", list2);
+        model.addAttribute("list3", list3);
+        model.addAttribute("list4", list4);
+        model.addAttribute("list5", list5);
+        model.addAttribute("list6", list6);
+        model.addAttribute("list7", list7);
+        model.addAttribute("list8", list8);
+        model.addAttribute("list9", list9);
+        model.addAttribute("list10", list10);
+        model.addAttribute("list11", list11);
+        model.addAttribute("list12", list12);
+        return "admin/thong-ke/thong-ke-doanh-thu-theo-thang";
     }
 }

@@ -31,9 +31,9 @@ public class SanPhamViewModel {
     String baoHanh;
     Integer tonKho;
     //Integer idNguoiBan;
-    Date ngayDang;
-    Boolean trangThai;
-    Boolean anHien;
+//    Date ngayDang;
+//    Boolean trangThai;
+//    Boolean anHien;
 
     public String getTenMay() {
         return tenMay;
@@ -179,29 +179,29 @@ public class SanPhamViewModel {
 //        this.idNguoiBan = idNguoiBan;
 //    }
 
-    public Date getNgayDang() {
-        return ngayDang;
-    }
-
-    public void setNgayDang(Date ngayDang) {
-        this.ngayDang = ngayDang;
-    }
-
-    public Boolean getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(Boolean trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public Boolean getAnHien() {
-        return anHien;
-    }
-
-    public void setAnHien(Boolean anHien) {
-        this.anHien = anHien;
-    }
+//    public Date getNgayDang() {
+//        return ngayDang;
+//    }
+//
+//    public void setNgayDang(Date ngayDang) {
+//        this.ngayDang = ngayDang;
+//    }
+//
+//    public Boolean getTrangThai() {
+//        return trangThai;
+//    }
+//
+//    public void setTrangThai(Boolean trangThai) {
+//        this.trangThai = trangThai;
+//    }
+//
+//    public Boolean getAnHien() {
+//        return anHien;
+//    }
+//
+//    public void setAnHien(Boolean anHien) {
+//        this.anHien = anHien;
+//    }
     
     
 }

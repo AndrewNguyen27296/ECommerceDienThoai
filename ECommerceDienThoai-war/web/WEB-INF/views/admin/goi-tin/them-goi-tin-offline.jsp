@@ -59,8 +59,8 @@
             async: false, //block until we get a response
             data: {id: valueSelected},
             success: function (response) {
-                $('#soTin').html(response.soTin);
-                var value = response.giaBan;
+                $('#soTin').html(response[0]);
+                var value = response[1];
                 var num = value.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                 $('#giaBan').html(num + ' VND');
                 $('#thanhTien').html(num + ' VND');

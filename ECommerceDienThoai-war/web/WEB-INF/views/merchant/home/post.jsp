@@ -46,7 +46,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Hình ảnh: </label>
                     <div class="col-sm-6">
-                        <input type="file" class="form-control" required="" name="hinhAnh"/>
+                        <input type="file" class="form-control" required="" name="hinhAnh" />
                     </div>
 		</div>
             </div>
@@ -64,7 +64,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Hãng sản xuất: </label>
                     <div class="col-sm-6">
-                        <form:select cssClass="form-control" required="" path="hangSanXuat">
+                        <form:select cssClass="form-control" required="" path="idHangSanXuat">
                             <c:forEach var="row" items="${hangSanXuat}">
                                 <option value="${row.id}">${row.tenHang}</option>
                             </c:forEach>
@@ -115,7 +115,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">RAM: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="RAM"  placeholder="Nhập dung lượng RAM..."/>
+                        <form:input type="text" cssClass="form-control" required="" path="ram"  placeholder="Nhập dung lượng RAM..."/>
                     </div>
 		</div>
             </div>
@@ -181,7 +181,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Chống nước: </label>
                     <div class="col-sm-6">
-                        <form:select cssClass="form-control" required="" path="chongNuoc">
+                        <form:select cssClass="form-control" required="" path="khangNuoc">
                             <option>Có</option>
                             <option>Không</option>
                         </form:select>

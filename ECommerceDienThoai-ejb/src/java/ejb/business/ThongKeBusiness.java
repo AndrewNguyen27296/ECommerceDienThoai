@@ -82,4 +82,37 @@ public class ThongKeBusiness {
         list.add(phat);
         return list;
     }
+    
+     public List<Long> thongKeDoanhThuTheoThang(Integer thang) {
+        long onl = 0;
+        long off = 0;
+        long phat = 0;
+        
+        Query query = em.createQuery("SELECT SUM(p.giaBan) FROM PhieuMuaTin p WHERE extract(month from p.ngayMua)=:e");
+        query.setParameter("e", thang);
+        try {
+            onl = (long) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        
+        Query query2 = em.createQuery("SELECT SUM(p.giaBan) FROM PhieuMuaTinOffline p WHERE extract(month from p.ngayMua)=:e");
+        query2.setParameter("e", thang);
+        try {
+            off = (long) query2.getSingleResult();
+        } catch (Exception e) {
+        }
+        
+        Query query3 = em.createQuery("SELECT SUM(p.soTien) FROM PhieuNopPhat p WHERE extract(month from p.ngayNopPhat)=:e");
+        query3.setParameter("e", thang);
+        try {
+            phat = (long) query3.getSingleResult();
+        } catch (Exception e) {
+        }
+        
+        List<Long> list = new ArrayList<>();
+        list.add(onl);
+        list.add(off);
+        list.add(phat);
+        return list;
+     }
 }
