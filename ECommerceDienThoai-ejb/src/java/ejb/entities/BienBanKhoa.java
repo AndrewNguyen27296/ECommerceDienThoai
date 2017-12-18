@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,15 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author HOME
  */
 @Entity
-@Table(name = "so_tin_ton")
+@Table(name = "bien_ban_khoa")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SoTinTon.findAll", query = "SELECT s FROM SoTinTon s")
-    , @NamedQuery(name = "SoTinTon.findById", query = "SELECT s FROM SoTinTon s WHERE s.id = :id")
-    , @NamedQuery(name = "SoTinTon.findBySoTinTon", query = "SELECT s FROM SoTinTon s WHERE s.soTinTon = :soTinTon")
-    , @NamedQuery(name = "SoTinTon.findBySoTinDaDung", query = "SELECT s FROM SoTinTon s WHERE s.soTinDaDung = :soTinDaDung")
-    , @NamedQuery(name = "SoTinTon.findByNgayCapNhat", query = "SELECT s FROM SoTinTon s WHERE s.ngayCapNhat = :ngayCapNhat")})
-public class SoTinTon implements Serializable {
+    @NamedQuery(name = "BienBanKhoa.findAll", query = "SELECT b FROM BienBanKhoa b")
+    , @NamedQuery(name = "BienBanKhoa.findById", query = "SELECT b FROM BienBanKhoa b WHERE b.id = :id")
+    , @NamedQuery(name = "BienBanKhoa.findByNgayKhoa", query = "SELECT b FROM BienBanKhoa b WHERE b.ngayKhoa = :ngayKhoa")
+    , @NamedQuery(name = "BienBanKhoa.findByLyDo", query = "SELECT b FROM BienBanKhoa b WHERE b.lyDo = :lyDo")})
+public class BienBanKhoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,33 +46,29 @@ public class SoTinTon implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "so_tin_ton")
-    private int soTinTon;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "so_tin_da_dung")
-    private int soTinDaDung;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ngay_cap_nhat")
+    @Column(name = "ngay_khoa")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayCapNhat;
+    private Date ngayKhoa;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 250)
+    @Column(name = "ly_do")
+    private String lyDo;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
 
-    public SoTinTon() {
+    public BienBanKhoa() {
     }
 
-    public SoTinTon(Integer id) {
+    public BienBanKhoa(Integer id) {
         this.id = id;
     }
 
-    public SoTinTon(Integer id, int soTinTon, int soTinDaDung, Date ngayCapNhat) {
+    public BienBanKhoa(Integer id, Date ngayKhoa, String lyDo) {
         this.id = id;
-        this.soTinTon = soTinTon;
-        this.soTinDaDung = soTinDaDung;
-        this.ngayCapNhat = ngayCapNhat;
+        this.ngayKhoa = ngayKhoa;
+        this.lyDo = lyDo;
     }
 
     public Integer getId() {
@@ -83,28 +79,20 @@ public class SoTinTon implements Serializable {
         this.id = id;
     }
 
-    public int getSoTinTon() {
-        return soTinTon;
+    public Date getNgayKhoa() {
+        return ngayKhoa;
     }
 
-    public void setSoTinTon(int soTinTon) {
-        this.soTinTon = soTinTon;
+    public void setNgayKhoa(Date ngayKhoa) {
+        this.ngayKhoa = ngayKhoa;
     }
 
-    public int getSoTinDaDung() {
-        return soTinDaDung;
+    public String getLyDo() {
+        return lyDo;
     }
 
-    public void setSoTinDaDung(int soTinDaDung) {
-        this.soTinDaDung = soTinDaDung;
-    }
-
-    public Date getNgayCapNhat() {
-        return ngayCapNhat;
-    }
-
-    public void setNgayCapNhat(Date ngayCapNhat) {
-        this.ngayCapNhat = ngayCapNhat;
+    public void setLyDo(String lyDo) {
+        this.lyDo = lyDo;
     }
 
     public NguoiBan getIdNguoiBan() {
@@ -125,10 +113,10 @@ public class SoTinTon implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SoTinTon)) {
+        if (!(object instanceof BienBanKhoa)) {
             return false;
         }
-        SoTinTon other = (SoTinTon) object;
+        BienBanKhoa other = (BienBanKhoa) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -137,7 +125,7 @@ public class SoTinTon implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.SoTinTon[ id=" + id + " ]";
+        return "ejb.entities.BienBanKhoa[ id=" + id + " ]";
     }
     
 }

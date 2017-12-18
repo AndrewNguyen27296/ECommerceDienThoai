@@ -5,7 +5,7 @@
  */
 package ejb.sessions;
 
-import ejb.entities.PhieuMuaTin;
+import ejb.entities.BienBanKhoa;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author HOME
  */
 @Stateless
-public class PhieuMuaTinFacade extends AbstractFacade<PhieuMuaTin> {
+public class BienBanKhoaFacade extends AbstractFacade<BienBanKhoa> {
 
     @PersistenceContext(unitName = "ECommerceDienThoai-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class PhieuMuaTinFacade extends AbstractFacade<PhieuMuaTin> {
         return em;
     }
 
-    public PhieuMuaTinFacade() {
-        super(PhieuMuaTin.class);
+    public BienBanKhoaFacade() {
+        super(BienBanKhoa.class);
     }
     
 }

@@ -24,6 +24,11 @@
         margin-right: 51px;
         margin-top: 3px;
     }
+    
+    html, body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 96%;
+    }
 </style>
 
 <!DOCTYPE html>

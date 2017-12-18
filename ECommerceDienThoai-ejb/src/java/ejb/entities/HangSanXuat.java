@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,17 +25,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "hang_san_xuat")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "HangSanXuat.findAll", query = "SELECT h FROM HangSanXuat h"),
-    @NamedQuery(name = "HangSanXuat.findById", query = "SELECT h FROM HangSanXuat h WHERE h.id = :id"),
-    @NamedQuery(name = "HangSanXuat.findByTenHang", query = "SELECT h FROM HangSanXuat h WHERE h.tenHang = :tenHang"),
-    @NamedQuery(name = "HangSanXuat.findByLogoHang", query = "SELECT h FROM HangSanXuat h WHERE h.logoHang = :logoHang"),
-    @NamedQuery(name = "HangSanXuat.findByAnHien", query = "SELECT h FROM HangSanXuat h WHERE h.anHien = :anHien")})
+    @NamedQuery(name = "HangSanXuat.findAll", query = "SELECT h FROM HangSanXuat h")
+    , @NamedQuery(name = "HangSanXuat.findById", query = "SELECT h FROM HangSanXuat h WHERE h.id = :id")
+    , @NamedQuery(name = "HangSanXuat.findByTenHang", query = "SELECT h FROM HangSanXuat h WHERE h.tenHang = :tenHang")
+    , @NamedQuery(name = "HangSanXuat.findByLogoHang", query = "SELECT h FROM HangSanXuat h WHERE h.logoHang = :logoHang")
+    , @NamedQuery(name = "HangSanXuat.findByAnHien", query = "SELECT h FROM HangSanXuat h WHERE h.anHien = :anHien")})
 public class HangSanXuat implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +58,7 @@ public class HangSanXuat implements Serializable {
     @NotNull
     @Column(name = "an_hien")
     private boolean anHien;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHangSanXuat", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHangSanXuat")
     private List<SanPham> sanPhamList;
 
     public HangSanXuat() {

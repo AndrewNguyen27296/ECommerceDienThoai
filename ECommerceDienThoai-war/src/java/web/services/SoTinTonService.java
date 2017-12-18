@@ -13,11 +13,13 @@ import ejb.sessions.NguoiBanFacade;
 import ejb.sessions.SoTinTonFacade;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author XinKaChu
  */
+@Component
 public class SoTinTonService {
     NguoiBanFacade nguoiBanFacade = (NguoiBanFacade) LookupFactory.lookupFacadeBean("NguoiBanFacade");
     SoTinTonBusiness soTinTonBusiness = (SoTinTonBusiness) LookupFactory.lookupBusinessBean("SoTinTonBusiness");

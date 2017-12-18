@@ -70,7 +70,7 @@ public class PostService {
     }
 
     public String dangTin(Model model,SanPhamViewModel spVM, MultipartFile hinhAnh, 
-            HttpServletRequest request, HttpSession httpSession) {
+             HttpSession httpSession) {
         SanPham sp = new SanPham();
 
             sp.setAnHien(true);
@@ -109,7 +109,7 @@ public class PostService {
 			}
 			sanPhamFacade.create(sp);
                         System.out.println("thanh cong");
-			model.addAttribute("message", "Insert thanh cong");
+			model.addAttribute("message", "Đăng tin thành công");
 			
                         return "redirect:/merchant/post/new.php";
                         

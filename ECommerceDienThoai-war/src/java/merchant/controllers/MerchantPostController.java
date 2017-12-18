@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,7 @@ public class MerchantPostController {
     @RequestMapping("new")
     public String post(Model model) {
         model.addAttribute("hangSanXuat", postService.layDanhSachHangSanXuat());
+        model.addAttribute("sanPham", new SanPhamViewModel());
         return "merchant/home/post";
     }
 
@@ -56,12 +58,11 @@ public class MerchantPostController {
 
     @RequestMapping(value = "new", method=RequestMethod.POST)
     public String dangTin(Model model,
-            SanPhamViewModel sanPhamVM,
-            @RequestParam
-            MultipartFile hinhAnh,
-            HttpServletRequest request,
+            @ModelAttribute("sanPham")  SanPhamViewModel sanPhamVM,
+            @RequestParam("hinhAnh") MultipartFile hinhAnh,
+            
             HttpSession httpSession) {
-        String temp = postService.dangTin(model, sanPhamVM, hinhAnh, request, httpSession);
-        return temp;
+        String temp = postService.dangTin(model, sanPhamVM, hinhAnh, httpSession);
+        return "redirect:/merchant/home/post-list";
     }
 }

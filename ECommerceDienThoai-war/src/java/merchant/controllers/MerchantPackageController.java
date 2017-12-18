@@ -5,7 +5,7 @@
  */
 package merchant.controllers;
 
-import com.paypal.api.payments.Payment;
+//import com.paypal.api.payments.Payment;
 import ejb.entities.NguoiBan;
 import ejb.entities.PhieuMuaTin;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.services.GoiTinService;
-import web.services.PaypalService;
+//import web.services.PaypalService;
 import web.services.SoTinTonService;
 
 /**
@@ -32,8 +32,8 @@ public class MerchantPackageController {
     @Autowired
     GoiTinService goiTinService;
     
-    @Autowired
-    PaypalService paypalService;
+//    @Autowired
+//    PaypalService paypalService;
     
     @Autowired
     SoTinTonService soTinTonService;
@@ -65,12 +65,12 @@ public class MerchantPackageController {
     public String thanhToanGoiTin(ModelMap model,
             @PathVariable("id") String id) {
         try {
-            String redirectURL = paypalService.paymentWithPaypal(goiTinService.timGoiTinTheoId(id));
-            if (redirectURL != null) {
-                return "redirect:" + redirectURL;
-            } else {
-                model.addAttribute("error", "Hệ thống bảo trì, xin vui lòng thử lại.");
-            }
+//            String redirectURL = paypalService.paymentWithPaypal(goiTinService.timGoiTinTheoId(id));
+//            if (redirectURL != null) {
+//                return "redirect:" + redirectURL;
+//            } else {
+//                model.addAttribute("error", "Hệ thống bảo trì, xin vui lòng thử lại.");
+//            }
         } catch (Exception ex) {
             model.addAttribute("error", "Lỗi hệ thống, xin vui lòng thử lại.");
         }
@@ -90,13 +90,13 @@ public class MerchantPackageController {
         if (paymentId.isEmpty() || payerId.isEmpty()) {
             return "redirect:/merchant/purchase/";
         } else {
-            Payment hoaDonPaypal = paypalService.completePaymentProcess(paymentId, payerId);
-            String idGoiTin = hoaDonPaypal.getTransactions().get(0).getItemList().getItems().get(0).getSku();
-            /// Cập nhật số tin            
-            soTinTonService.capNhatSoTinDang(goiTinService.timGoiTinTheoId(idGoiTin), httpSession);
-            /// Tạo phiếu mua tin
-            phieuMuaTinService.taoPhieuMuaTinQuaPayPal((NguoiBan) httpSession.getAttribute("merchant"),
-                    goiTinService.timGoiTinTheoId(idGoiTin), paymentId, payerId);
+//            Payment hoaDonPaypal = paypalService.completePaymentProcess(paymentId, payerId);
+//            String idGoiTin = hoaDonPaypal.getTransactions().get(0).getItemList().getItems().get(0).getSku();
+//            /// Cập nhật số tin            
+//            soTinTonService.capNhatSoTinDang(goiTinService.timGoiTinTheoId(idGoiTin), httpSession);
+//            /// Tạo phiếu mua tin
+//            phieuMuaTinService.taoPhieuMuaTinQuaPayPal((NguoiBan) httpSession.getAttribute("merchant"),
+//                    goiTinService.timGoiTinTheoId(idGoiTin), paymentId, payerId);
             return "redirect:/merchant/xu-ly-du-lieu/";
         }
     }

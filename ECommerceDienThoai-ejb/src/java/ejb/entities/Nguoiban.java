@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,26 +28,26 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "nguoi_ban")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "NguoiBan.findAll", query = "SELECT n FROM NguoiBan n"),
-    @NamedQuery(name = "NguoiBan.findById", query = "SELECT n FROM NguoiBan n WHERE n.id = :id"),
-    @NamedQuery(name = "NguoiBan.findByEmail", query = "SELECT n FROM NguoiBan n WHERE n.email = :email"),
-    @NamedQuery(name = "NguoiBan.findByMatKhau", query = "SELECT n FROM NguoiBan n WHERE n.matKhau = :matKhau"),
-    @NamedQuery(name = "NguoiBan.findByHoTen", query = "SELECT n FROM NguoiBan n WHERE n.hoTen = :hoTen"),
-    @NamedQuery(name = "NguoiBan.findByCmnd", query = "SELECT n FROM NguoiBan n WHERE n.cmnd = :cmnd"),
-    @NamedQuery(name = "NguoiBan.findBySoDienThoai", query = "SELECT n FROM NguoiBan n WHERE n.soDienThoai = :soDienThoai"),
-    @NamedQuery(name = "NguoiBan.findByDiaChi", query = "SELECT n FROM NguoiBan n WHERE n.diaChi = :diaChi"),
-    @NamedQuery(name = "NguoiBan.findByNgayDangKy", query = "SELECT n FROM NguoiBan n WHERE n.ngayDangKy = :ngayDangKy"),
-    @NamedQuery(name = "NguoiBan.findBySoLanCanhCao", query = "SELECT n FROM NguoiBan n WHERE n.soLanCanhCao = :soLanCanhCao"),
-    @NamedQuery(name = "NguoiBan.findBySoLanBiBlock", query = "SELECT n FROM NguoiBan n WHERE n.soLanBiBlock = :soLanBiBlock"),
-    @NamedQuery(name = "NguoiBan.findByKichHoat", query = "SELECT n FROM NguoiBan n WHERE n.kichHoat = :kichHoat"),
-    @NamedQuery(name = "NguoiBan.findByBiKhoa", query = "SELECT n FROM NguoiBan n WHERE n.biKhoa = :biKhoa"),
-    @NamedQuery(name = "NguoiBan.findByBiBlock", query = "SELECT n FROM NguoiBan n WHERE n.biBlock = :biBlock")})
+    @NamedQuery(name = "NguoiBan.findAll", query = "SELECT n FROM NguoiBan n")
+    , @NamedQuery(name = "NguoiBan.findById", query = "SELECT n FROM NguoiBan n WHERE n.id = :id")
+    , @NamedQuery(name = "NguoiBan.findByEmail", query = "SELECT n FROM NguoiBan n WHERE n.email = :email")
+    , @NamedQuery(name = "NguoiBan.findByMatKhau", query = "SELECT n FROM NguoiBan n WHERE n.matKhau = :matKhau")
+    , @NamedQuery(name = "NguoiBan.findByHoTen", query = "SELECT n FROM NguoiBan n WHERE n.hoTen = :hoTen")
+    , @NamedQuery(name = "NguoiBan.findByCmnd", query = "SELECT n FROM NguoiBan n WHERE n.cmnd = :cmnd")
+    , @NamedQuery(name = "NguoiBan.findBySoDienThoai", query = "SELECT n FROM NguoiBan n WHERE n.soDienThoai = :soDienThoai")
+    , @NamedQuery(name = "NguoiBan.findByDiaChi", query = "SELECT n FROM NguoiBan n WHERE n.diaChi = :diaChi")
+    , @NamedQuery(name = "NguoiBan.findByNgayDangKy", query = "SELECT n FROM NguoiBan n WHERE n.ngayDangKy = :ngayDangKy")
+    , @NamedQuery(name = "NguoiBan.findBySoLanCanhCao", query = "SELECT n FROM NguoiBan n WHERE n.soLanCanhCao = :soLanCanhCao")
+    , @NamedQuery(name = "NguoiBan.findBySoLanBiBlock", query = "SELECT n FROM NguoiBan n WHERE n.soLanBiBlock = :soLanBiBlock")
+    , @NamedQuery(name = "NguoiBan.findByKichHoat", query = "SELECT n FROM NguoiBan n WHERE n.kichHoat = :kichHoat")
+    , @NamedQuery(name = "NguoiBan.findByBiKhoa", query = "SELECT n FROM NguoiBan n WHERE n.biKhoa = :biKhoa")
+    , @NamedQuery(name = "NguoiBan.findByBiBlock", query = "SELECT n FROM NguoiBan n WHERE n.biBlock = :biBlock")})
 public class NguoiBan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -113,15 +112,23 @@ public class NguoiBan implements Serializable {
     @NotNull
     @Column(name = "bi_block")
     private boolean biBlock;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<BienBanKhoaVinhVien> bienBanKhoaVinhVienList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<SanPham> sanPhamList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<PhieuNopPhat> phieuNopPhatList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<BienBanKhoa> bienBanKhoaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<CtPhieuMuaHang> ctPhieuMuaHangList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<PhieuMuaTin> phieuMuaTinList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<DanhGia> danhGiaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
+    private List<PhieuMuaTinOffline> phieuMuaTinOfflineList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiBan")
     private List<SoTinTon> soTinTonList;
 
     public NguoiBan() {
@@ -252,12 +259,39 @@ public class NguoiBan implements Serializable {
     }
 
     @XmlTransient
+    public List<BienBanKhoaVinhVien> getBienBanKhoaVinhVienList() {
+        return bienBanKhoaVinhVienList;
+    }
+
+    public void setBienBanKhoaVinhVienList(List<BienBanKhoaVinhVien> bienBanKhoaVinhVienList) {
+        this.bienBanKhoaVinhVienList = bienBanKhoaVinhVienList;
+    }
+
+    @XmlTransient
     public List<SanPham> getSanPhamList() {
         return sanPhamList;
     }
 
     public void setSanPhamList(List<SanPham> sanPhamList) {
         this.sanPhamList = sanPhamList;
+    }
+
+    @XmlTransient
+    public List<PhieuNopPhat> getPhieuNopPhatList() {
+        return phieuNopPhatList;
+    }
+
+    public void setPhieuNopPhatList(List<PhieuNopPhat> phieuNopPhatList) {
+        this.phieuNopPhatList = phieuNopPhatList;
+    }
+
+    @XmlTransient
+    public List<BienBanKhoa> getBienBanKhoaList() {
+        return bienBanKhoaList;
+    }
+
+    public void setBienBanKhoaList(List<BienBanKhoa> bienBanKhoaList) {
+        this.bienBanKhoaList = bienBanKhoaList;
     }
 
     @XmlTransient
@@ -285,6 +319,15 @@ public class NguoiBan implements Serializable {
 
     public void setDanhGiaList(List<DanhGia> danhGiaList) {
         this.danhGiaList = danhGiaList;
+    }
+
+    @XmlTransient
+    public List<PhieuMuaTinOffline> getPhieuMuaTinOfflineList() {
+        return phieuMuaTinOfflineList;
+    }
+
+    public void setPhieuMuaTinOfflineList(List<PhieuMuaTinOffline> phieuMuaTinOfflineList) {
+        this.phieuMuaTinOfflineList = phieuMuaTinOfflineList;
     }
 
     @XmlTransient

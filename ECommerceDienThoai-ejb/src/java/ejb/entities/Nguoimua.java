@@ -12,10 +12,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,22 +30,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "nguoi_mua")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "NguoiMua.findAll", query = "SELECT n FROM NguoiMua n"),
-    @NamedQuery(name = "NguoiMua.findById", query = "SELECT n FROM NguoiMua n WHERE n.id = :id"),
-    @NamedQuery(name = "NguoiMua.findByEmail", query = "SELECT n FROM NguoiMua n WHERE n.email = :email"),
-    @NamedQuery(name = "NguoiMua.findByMatKhau", query = "SELECT n FROM NguoiMua n WHERE n.matKhau = :matKhau"),
-    @NamedQuery(name = "NguoiMua.findByHoTen", query = "SELECT n FROM NguoiMua n WHERE n.hoTen = :hoTen"),
-    @NamedQuery(name = "NguoiMua.findBySoDienThoai", query = "SELECT n FROM NguoiMua n WHERE n.soDienThoai = :soDienThoai"),
-    @NamedQuery(name = "NguoiMua.findByDiaChi", query = "SELECT n FROM NguoiMua n WHERE n.diaChi = :diaChi"),
-    @NamedQuery(name = "NguoiMua.findByNgayDangKy", query = "SELECT n FROM NguoiMua n WHERE n.ngayDangKy = :ngayDangKy"),
-    @NamedQuery(name = "NguoiMua.findByKichHoat", query = "SELECT n FROM NguoiMua n WHERE n.kichHoat = :kichHoat"),
-    @NamedQuery(name = "NguoiMua.findByTrangThai", query = "SELECT n FROM NguoiMua n WHERE n.trangThai = :trangThai")})
+    @NamedQuery(name = "NguoiMua.findAll", query = "SELECT n FROM NguoiMua n")
+    , @NamedQuery(name = "NguoiMua.findById", query = "SELECT n FROM NguoiMua n WHERE n.id = :id")
+    , @NamedQuery(name = "NguoiMua.findByEmail", query = "SELECT n FROM NguoiMua n WHERE n.email = :email")
+    , @NamedQuery(name = "NguoiMua.findByMatKhau", query = "SELECT n FROM NguoiMua n WHERE n.matKhau = :matKhau")
+    , @NamedQuery(name = "NguoiMua.findByHoTen", query = "SELECT n FROM NguoiMua n WHERE n.hoTen = :hoTen")
+    , @NamedQuery(name = "NguoiMua.findBySoDienThoai", query = "SELECT n FROM NguoiMua n WHERE n.soDienThoai = :soDienThoai")
+    , @NamedQuery(name = "NguoiMua.findByDiaChi", query = "SELECT n FROM NguoiMua n WHERE n.diaChi = :diaChi")
+    , @NamedQuery(name = "NguoiMua.findByNgayDangKy", query = "SELECT n FROM NguoiMua n WHERE n.ngayDangKy = :ngayDangKy")
+    , @NamedQuery(name = "NguoiMua.findByKichHoat", query = "SELECT n FROM NguoiMua n WHERE n.kichHoat = :kichHoat")
+    , @NamedQuery(name = "NguoiMua.findByTrangThai", query = "SELECT n FROM NguoiMua n WHERE n.trangThai = :trangThai")})
 public class NguoiMua implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -92,8 +93,16 @@ public class NguoiMua implements Serializable {
     @NotNull
     @Column(name = "trang_thai")
     private boolean trangThai;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiMua", fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_quan_huyen", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private QuanHuyen idQuanHuyen;
+    @JoinColumn(name = "id_thanh_pho", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ThanhPho idThanhPho;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiMua")
     private List<PhieuMuaHang> phieuMuaHangList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNguoiMua")
+    private List<DanhGia> danhGiaList;
 
     public NguoiMua() {
     }
@@ -186,6 +195,22 @@ public class NguoiMua implements Serializable {
         this.trangThai = trangThai;
     }
 
+    public QuanHuyen getIdQuanHuyen() {
+        return idQuanHuyen;
+    }
+
+    public void setIdQuanHuyen(QuanHuyen idQuanHuyen) {
+        this.idQuanHuyen = idQuanHuyen;
+    }
+
+    public ThanhPho getIdThanhPho() {
+        return idThanhPho;
+    }
+
+    public void setIdThanhPho(ThanhPho idThanhPho) {
+        this.idThanhPho = idThanhPho;
+    }
+
     @XmlTransient
     public List<PhieuMuaHang> getPhieuMuaHangList() {
         return phieuMuaHangList;
@@ -193,6 +218,15 @@ public class NguoiMua implements Serializable {
 
     public void setPhieuMuaHangList(List<PhieuMuaHang> phieuMuaHangList) {
         this.phieuMuaHangList = phieuMuaHangList;
+    }
+
+    @XmlTransient
+    public List<DanhGia> getDanhGiaList() {
+        return danhGiaList;
+    }
+
+    public void setDanhGiaList(List<DanhGia> danhGiaList) {
+        this.danhGiaList = danhGiaList;
     }
 
     @Override

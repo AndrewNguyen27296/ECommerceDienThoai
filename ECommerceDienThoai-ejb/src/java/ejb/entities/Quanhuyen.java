@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,16 +27,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "quan_huyen")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "QuanHuyen.findAll", query = "SELECT q FROM QuanHuyen q"),
-    @NamedQuery(name = "QuanHuyen.findById", query = "SELECT q FROM QuanHuyen q WHERE q.id = :id"),
-    @NamedQuery(name = "QuanHuyen.findByTenQuanHuyen", query = "SELECT q FROM QuanHuyen q WHERE q.tenQuanHuyen = :tenQuanHuyen"),
-    @NamedQuery(name = "QuanHuyen.findByLoai", query = "SELECT q FROM QuanHuyen q WHERE q.loai = :loai")})
+    @NamedQuery(name = "QuanHuyen.findAll", query = "SELECT q FROM QuanHuyen q")
+    , @NamedQuery(name = "QuanHuyen.findById", query = "SELECT q FROM QuanHuyen q WHERE q.id = :id")
+    , @NamedQuery(name = "QuanHuyen.findByTenQuanHuyen", query = "SELECT q FROM QuanHuyen q WHERE q.tenQuanHuyen = :tenQuanHuyen")
+    , @NamedQuery(name = "QuanHuyen.findByLoai", query = "SELECT q FROM QuanHuyen q WHERE q.loai = :loai")})
 public class QuanHuyen implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,12 +55,12 @@ public class QuanHuyen implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "loai")
     private String loai;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen")
+    private List<NguoiMua> nguoiMuaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen")
     private List<PhieuMuaHang> phieuMuaHangList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuanHuyen", fetch = FetchType.LAZY)
-    private List<PhuongXa> phuongXaList;
     @JoinColumn(name = "id_thanh_pho", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private ThanhPho idThanhPho;
 
     public QuanHuyen() {
@@ -102,21 +101,21 @@ public class QuanHuyen implements Serializable {
     }
 
     @XmlTransient
+    public List<NguoiMua> getNguoiMuaList() {
+        return nguoiMuaList;
+    }
+
+    public void setNguoiMuaList(List<NguoiMua> nguoiMuaList) {
+        this.nguoiMuaList = nguoiMuaList;
+    }
+
+    @XmlTransient
     public List<PhieuMuaHang> getPhieuMuaHangList() {
         return phieuMuaHangList;
     }
 
     public void setPhieuMuaHangList(List<PhieuMuaHang> phieuMuaHangList) {
         this.phieuMuaHangList = phieuMuaHangList;
-    }
-
-    @XmlTransient
-    public List<PhuongXa> getPhuongXaList() {
-        return phuongXaList;
-    }
-
-    public void setPhuongXaList(List<PhuongXa> phuongXaList) {
-        this.phuongXaList = phuongXaList;
     }
 
     public ThanhPho getIdThanhPho() {

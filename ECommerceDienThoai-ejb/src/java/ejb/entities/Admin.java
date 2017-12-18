@@ -6,7 +6,9 @@
 package ejb.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,28 +16,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "admin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
-    @NamedQuery(name = "Admin.findById", query = "SELECT a FROM Admin a WHERE a.id = :id"),
-    @NamedQuery(name = "Admin.findByEmail", query = "SELECT a FROM Admin a WHERE a.email = :email"),
-    @NamedQuery(name = "Admin.findByMatKhau", query = "SELECT a FROM Admin a WHERE a.matKhau = :matKhau"),
-    @NamedQuery(name = "Admin.findByHoTen", query = "SELECT a FROM Admin a WHERE a.hoTen = :hoTen"),
-    @NamedQuery(name = "Admin.findBySoDienThoai", query = "SELECT a FROM Admin a WHERE a.soDienThoai = :soDienThoai"),
-    @NamedQuery(name = "Admin.findBySoTaiKhoan", query = "SELECT a FROM Admin a WHERE a.soTaiKhoan = :soTaiKhoan"),
-    @NamedQuery(name = "Admin.findByDiaChi", query = "SELECT a FROM Admin a WHERE a.diaChi = :diaChi"),
-    @NamedQuery(name = "Admin.findByTrangThai", query = "SELECT a FROM Admin a WHERE a.trangThai = :trangThai")})
+    @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a")
+    , @NamedQuery(name = "Admin.findById", query = "SELECT a FROM Admin a WHERE a.id = :id")
+    , @NamedQuery(name = "Admin.findByEmail", query = "SELECT a FROM Admin a WHERE a.email = :email")
+    , @NamedQuery(name = "Admin.findByMatKhau", query = "SELECT a FROM Admin a WHERE a.matKhau = :matKhau")
+    , @NamedQuery(name = "Admin.findByHoTen", query = "SELECT a FROM Admin a WHERE a.hoTen = :hoTen")
+    , @NamedQuery(name = "Admin.findBySoDienThoai", query = "SELECT a FROM Admin a WHERE a.soDienThoai = :soDienThoai")
+    , @NamedQuery(name = "Admin.findBySoTaiKhoan", query = "SELECT a FROM Admin a WHERE a.soTaiKhoan = :soTaiKhoan")
+    , @NamedQuery(name = "Admin.findByDiaChi", query = "SELECT a FROM Admin a WHERE a.diaChi = :diaChi")
+    , @NamedQuery(name = "Admin.findByTrangThai", query = "SELECT a FROM Admin a WHERE a.trangThai = :trangThai")})
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -79,6 +83,10 @@ public class Admin implements Serializable {
     @NotNull
     @Column(name = "trang_thai")
     private boolean trangThai;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAdmin")
+    private List<PhieuNopPhat> phieuNopPhatList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAdmin")
+    private List<PhieuMuaTinOffline> phieuMuaTinOfflineList;
 
     public Admin() {
     }
@@ -160,6 +168,24 @@ public class Admin implements Serializable {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @XmlTransient
+    public List<PhieuNopPhat> getPhieuNopPhatList() {
+        return phieuNopPhatList;
+    }
+
+    public void setPhieuNopPhatList(List<PhieuNopPhat> phieuNopPhatList) {
+        this.phieuNopPhatList = phieuNopPhatList;
+    }
+
+    @XmlTransient
+    public List<PhieuMuaTinOffline> getPhieuMuaTinOfflineList() {
+        return phieuMuaTinOfflineList;
+    }
+
+    public void setPhieuMuaTinOfflineList(List<PhieuMuaTinOffline> phieuMuaTinOfflineList) {
+        this.phieuMuaTinOfflineList = phieuMuaTinOfflineList;
     }
 
     @Override

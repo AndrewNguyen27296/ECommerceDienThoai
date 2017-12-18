@@ -30,7 +30,7 @@ public class SanPhamViewModel {
     Boolean khangNuoc;
     String baoHanh;
     Integer tonKho;
-    Integer idNguoiBan;
+    //Integer idNguoiBan;
     Date ngayDang;
     Boolean trangThai;
     Boolean anHien;
@@ -171,13 +171,13 @@ public class SanPhamViewModel {
         this.tonKho = tonKho;
     }
 
-    public Integer getIdNguoiBan() {
-        return idNguoiBan;
-    }
-
-    public void setIdNguoiBan(Integer idNguoiBan) {
-        this.idNguoiBan = idNguoiBan;
-    }
+//    public Integer getIdNguoiBan() {
+//        return idNguoiBan;
+//    }
+//
+//    public void setIdNguoiBan(Integer idNguoiBan) {
+//        this.idNguoiBan = idNguoiBan;
+//    }
 
     public Date getNgayDang() {
         return ngayDang;

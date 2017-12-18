@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,15 +23,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "tinh_trang")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TinhTrang.findAll", query = "SELECT t FROM TinhTrang t"),
-    @NamedQuery(name = "TinhTrang.findById", query = "SELECT t FROM TinhTrang t WHERE t.id = :id"),
-    @NamedQuery(name = "TinhTrang.findByTenMoTa", query = "SELECT t FROM TinhTrang t WHERE t.tenMoTa = :tenMoTa")})
+    @NamedQuery(name = "TinhTrang.findAll", query = "SELECT t FROM TinhTrang t")
+    , @NamedQuery(name = "TinhTrang.findById", query = "SELECT t FROM TinhTrang t WHERE t.id = :id")
+    , @NamedQuery(name = "TinhTrang.findByTenMoTa", query = "SELECT t FROM TinhTrang t WHERE t.tenMoTa = :tenMoTa")})
 public class TinhTrang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +46,7 @@ public class TinhTrang implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "ten_mo_ta")
     private String tenMoTa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTinhTrang", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTinhTrang")
     private List<CtPhieuMuaHang> ctPhieuMuaHangList;
 
     public TinhTrang() {

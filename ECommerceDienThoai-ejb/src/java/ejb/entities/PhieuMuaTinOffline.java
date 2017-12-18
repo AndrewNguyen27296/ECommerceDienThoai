@@ -28,15 +28,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author HOME
  */
 @Entity
-@Table(name = "so_tin_ton")
+@Table(name = "phieu_mua_tin_offline")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SoTinTon.findAll", query = "SELECT s FROM SoTinTon s")
-    , @NamedQuery(name = "SoTinTon.findById", query = "SELECT s FROM SoTinTon s WHERE s.id = :id")
-    , @NamedQuery(name = "SoTinTon.findBySoTinTon", query = "SELECT s FROM SoTinTon s WHERE s.soTinTon = :soTinTon")
-    , @NamedQuery(name = "SoTinTon.findBySoTinDaDung", query = "SELECT s FROM SoTinTon s WHERE s.soTinDaDung = :soTinDaDung")
-    , @NamedQuery(name = "SoTinTon.findByNgayCapNhat", query = "SELECT s FROM SoTinTon s WHERE s.ngayCapNhat = :ngayCapNhat")})
-public class SoTinTon implements Serializable {
+    @NamedQuery(name = "PhieuMuaTinOffline.findAll", query = "SELECT p FROM PhieuMuaTinOffline p")
+    , @NamedQuery(name = "PhieuMuaTinOffline.findById", query = "SELECT p FROM PhieuMuaTinOffline p WHERE p.id = :id")
+    , @NamedQuery(name = "PhieuMuaTinOffline.findByGiaBan", query = "SELECT p FROM PhieuMuaTinOffline p WHERE p.giaBan = :giaBan")
+    , @NamedQuery(name = "PhieuMuaTinOffline.findByNgayMua", query = "SELECT p FROM PhieuMuaTinOffline p WHERE p.ngayMua = :ngayMua")})
+public class PhieuMuaTinOffline implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,33 +45,34 @@ public class SoTinTon implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "so_tin_ton")
-    private int soTinTon;
+    @Column(name = "gia_ban")
+    private long giaBan;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "so_tin_da_dung")
-    private int soTinDaDung;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ngay_cap_nhat")
+    @Column(name = "ngay_mua")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayCapNhat;
+    private Date ngayMua;
+    @JoinColumn(name = "id_admin", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Admin idAdmin;
+    @JoinColumn(name = "id_goi_tin", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private GoiTin idGoiTin;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
 
-    public SoTinTon() {
+    public PhieuMuaTinOffline() {
     }
 
-    public SoTinTon(Integer id) {
+    public PhieuMuaTinOffline(Integer id) {
         this.id = id;
     }
 
-    public SoTinTon(Integer id, int soTinTon, int soTinDaDung, Date ngayCapNhat) {
+    public PhieuMuaTinOffline(Integer id, long giaBan, Date ngayMua) {
         this.id = id;
-        this.soTinTon = soTinTon;
-        this.soTinDaDung = soTinDaDung;
-        this.ngayCapNhat = ngayCapNhat;
+        this.giaBan = giaBan;
+        this.ngayMua = ngayMua;
     }
 
     public Integer getId() {
@@ -83,28 +83,36 @@ public class SoTinTon implements Serializable {
         this.id = id;
     }
 
-    public int getSoTinTon() {
-        return soTinTon;
+    public long getGiaBan() {
+        return giaBan;
     }
 
-    public void setSoTinTon(int soTinTon) {
-        this.soTinTon = soTinTon;
+    public void setGiaBan(long giaBan) {
+        this.giaBan = giaBan;
     }
 
-    public int getSoTinDaDung() {
-        return soTinDaDung;
+    public Date getNgayMua() {
+        return ngayMua;
     }
 
-    public void setSoTinDaDung(int soTinDaDung) {
-        this.soTinDaDung = soTinDaDung;
+    public void setNgayMua(Date ngayMua) {
+        this.ngayMua = ngayMua;
     }
 
-    public Date getNgayCapNhat() {
-        return ngayCapNhat;
+    public Admin getIdAdmin() {
+        return idAdmin;
     }
 
-    public void setNgayCapNhat(Date ngayCapNhat) {
-        this.ngayCapNhat = ngayCapNhat;
+    public void setIdAdmin(Admin idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+
+    public GoiTin getIdGoiTin() {
+        return idGoiTin;
+    }
+
+    public void setIdGoiTin(GoiTin idGoiTin) {
+        this.idGoiTin = idGoiTin;
     }
 
     public NguoiBan getIdNguoiBan() {
@@ -125,10 +133,10 @@ public class SoTinTon implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SoTinTon)) {
+        if (!(object instanceof PhieuMuaTinOffline)) {
             return false;
         }
-        SoTinTon other = (SoTinTon) object;
+        PhieuMuaTinOffline other = (PhieuMuaTinOffline) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -137,7 +145,7 @@ public class SoTinTon implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.SoTinTon[ id=" + id + " ]";
+        return "ejb.entities.PhieuMuaTinOffline[ id=" + id + " ]";
     }
     
 }

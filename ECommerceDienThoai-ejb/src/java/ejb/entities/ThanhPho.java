@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,16 +25,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "thanh_pho")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ThanhPho.findAll", query = "SELECT t FROM ThanhPho t"),
-    @NamedQuery(name = "ThanhPho.findById", query = "SELECT t FROM ThanhPho t WHERE t.id = :id"),
-    @NamedQuery(name = "ThanhPho.findByTenThanhPho", query = "SELECT t FROM ThanhPho t WHERE t.tenThanhPho = :tenThanhPho"),
-    @NamedQuery(name = "ThanhPho.findByLoai", query = "SELECT t FROM ThanhPho t WHERE t.loai = :loai")})
+    @NamedQuery(name = "ThanhPho.findAll", query = "SELECT t FROM ThanhPho t")
+    , @NamedQuery(name = "ThanhPho.findById", query = "SELECT t FROM ThanhPho t WHERE t.id = :id")
+    , @NamedQuery(name = "ThanhPho.findByTenThanhPho", query = "SELECT t FROM ThanhPho t WHERE t.tenThanhPho = :tenThanhPho")
+    , @NamedQuery(name = "ThanhPho.findByLoai", query = "SELECT t FROM ThanhPho t WHERE t.loai = :loai")})
 public class ThanhPho implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,9 +53,11 @@ public class ThanhPho implements Serializable {
     @Size(min = 1, max = 250)
     @Column(name = "loai")
     private String loai;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho")
+    private List<NguoiMua> nguoiMuaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho")
     private List<PhieuMuaHang> phieuMuaHangList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThanhPho")
     private List<QuanHuyen> quanHuyenList;
 
     public ThanhPho() {
@@ -94,6 +95,15 @@ public class ThanhPho implements Serializable {
 
     public void setLoai(String loai) {
         this.loai = loai;
+    }
+
+    @XmlTransient
+    public List<NguoiMua> getNguoiMuaList() {
+        return nguoiMuaList;
+    }
+
+    public void setNguoiMuaList(List<NguoiMua> nguoiMuaList) {
+        this.nguoiMuaList = nguoiMuaList;
     }
 
     @XmlTransient

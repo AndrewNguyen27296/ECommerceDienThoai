@@ -16,7 +16,7 @@ import javax.validation.ValidatorFactory;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 public abstract class AbstractFacade<T> {
 
@@ -29,8 +29,7 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-
-    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     Validator validator = factory.getValidator();
     Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
     if(constraintViolations.size() > 0){
@@ -44,7 +43,7 @@ public abstract class AbstractFacade<T> {
     }else{
         getEntityManager().persist(entity);
     }
-}
+    }
 
     public void edit(T entity) {
         getEntityManager().merge(entity);

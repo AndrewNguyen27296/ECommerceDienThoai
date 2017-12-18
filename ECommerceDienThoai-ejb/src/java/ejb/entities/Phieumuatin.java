@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,22 +21,25 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "phieu_mua_tin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PhieuMuaTin.findAll", query = "SELECT p FROM PhieuMuaTin p"),
-    @NamedQuery(name = "PhieuMuaTin.findById", query = "SELECT p FROM PhieuMuaTin p WHERE p.id = :id"),
-    @NamedQuery(name = "PhieuMuaTin.findByGiaBan", query = "SELECT p FROM PhieuMuaTin p WHERE p.giaBan = :giaBan"),
-    @NamedQuery(name = "PhieuMuaTin.findByNgayMua", query = "SELECT p FROM PhieuMuaTin p WHERE p.ngayMua = :ngayMua"),
-    @NamedQuery(name = "PhieuMuaTin.findByPhuongThucThanhToan", query = "SELECT p FROM PhieuMuaTin p WHERE p.phuongThucThanhToan = :phuongThucThanhToan"),
-    @NamedQuery(name = "PhieuMuaTin.findByTrangThai", query = "SELECT p FROM PhieuMuaTin p WHERE p.trangThai = :trangThai")})
+    @NamedQuery(name = "PhieuMuaTin.findAll", query = "SELECT p FROM PhieuMuaTin p")
+    , @NamedQuery(name = "PhieuMuaTin.findById", query = "SELECT p FROM PhieuMuaTin p WHERE p.id = :id")
+    , @NamedQuery(name = "PhieuMuaTin.findByGiaBan", query = "SELECT p FROM PhieuMuaTin p WHERE p.giaBan = :giaBan")
+    , @NamedQuery(name = "PhieuMuaTin.findByNgayMua", query = "SELECT p FROM PhieuMuaTin p WHERE p.ngayMua = :ngayMua")
+    , @NamedQuery(name = "PhieuMuaTin.findByPhuongThucThanhToan", query = "SELECT p FROM PhieuMuaTin p WHERE p.phuongThucThanhToan = :phuongThucThanhToan")
+    , @NamedQuery(name = "PhieuMuaTin.findByTrangThai", query = "SELECT p FROM PhieuMuaTin p WHERE p.trangThai = :trangThai")
+    , @NamedQuery(name = "PhieuMuaTin.findByPaymentId", query = "SELECT p FROM PhieuMuaTin p WHERE p.paymentId = :paymentId")
+    , @NamedQuery(name = "PhieuMuaTin.findByPayerId", query = "SELECT p FROM PhieuMuaTin p WHERE p.payerId = :payerId")})
 public class PhieuMuaTin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +51,7 @@ public class PhieuMuaTin implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "gia_ban")
-    private float giaBan;
+    private long giaBan;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ngay_mua")
@@ -63,11 +65,21 @@ public class PhieuMuaTin implements Serializable {
     @NotNull
     @Column(name = "trang_thai")
     private boolean trangThai;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "payment_id")
+    private String paymentId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "payer_id")
+    private String payerId;
     @JoinColumn(name = "id_goi_tin", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private GoiTin idGoiTin;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
 
     public PhieuMuaTin() {
@@ -77,12 +89,14 @@ public class PhieuMuaTin implements Serializable {
         this.id = id;
     }
 
-    public PhieuMuaTin(Integer id, float giaBan, Date ngayMua, int phuongThucThanhToan, boolean trangThai) {
+    public PhieuMuaTin(Integer id, long giaBan, Date ngayMua, int phuongThucThanhToan, boolean trangThai, String paymentId, String payerId) {
         this.id = id;
         this.giaBan = giaBan;
         this.ngayMua = ngayMua;
         this.phuongThucThanhToan = phuongThucThanhToan;
         this.trangThai = trangThai;
+        this.paymentId = paymentId;
+        this.payerId = payerId;
     }
 
     public Integer getId() {
@@ -93,11 +107,11 @@ public class PhieuMuaTin implements Serializable {
         this.id = id;
     }
 
-    public float getGiaBan() {
+    public long getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(float giaBan) {
+    public void setGiaBan(long giaBan) {
         this.giaBan = giaBan;
     }
 
@@ -123,6 +137,22 @@ public class PhieuMuaTin implements Serializable {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public String getPayerId() {
+        return payerId;
+    }
+
+    public void setPayerId(String payerId) {
+        this.payerId = payerId;
     }
 
     public GoiTin getIdGoiTin() {

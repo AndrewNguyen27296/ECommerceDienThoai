@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,17 +25,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "goi_tin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GoiTin.findAll", query = "SELECT g FROM GoiTin g"),
-    @NamedQuery(name = "GoiTin.findById", query = "SELECT g FROM GoiTin g WHERE g.id = :id"),
-    @NamedQuery(name = "GoiTin.findByTenGoiTin", query = "SELECT g FROM GoiTin g WHERE g.tenGoiTin = :tenGoiTin"),
-    @NamedQuery(name = "GoiTin.findBySoTin", query = "SELECT g FROM GoiTin g WHERE g.soTin = :soTin"),
-    @NamedQuery(name = "GoiTin.findByGiaBan", query = "SELECT g FROM GoiTin g WHERE g.giaBan = :giaBan")})
+    @NamedQuery(name = "GoiTin.findAll", query = "SELECT g FROM GoiTin g")
+    , @NamedQuery(name = "GoiTin.findById", query = "SELECT g FROM GoiTin g WHERE g.id = :id")
+    , @NamedQuery(name = "GoiTin.findByTenGoiTin", query = "SELECT g FROM GoiTin g WHERE g.tenGoiTin = :tenGoiTin")
+    , @NamedQuery(name = "GoiTin.findBySoTin", query = "SELECT g FROM GoiTin g WHERE g.soTin = :soTin")
+    , @NamedQuery(name = "GoiTin.findByGiaBan", query = "SELECT g FROM GoiTin g WHERE g.giaBan = :giaBan")})
 public class GoiTin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,9 +56,11 @@ public class GoiTin implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "gia_ban")
-    private float giaBan;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGoiTin", fetch = FetchType.LAZY)
+    private long giaBan;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGoiTin")
     private List<PhieuMuaTin> phieuMuaTinList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGoiTin")
+    private List<PhieuMuaTinOffline> phieuMuaTinOfflineList;
 
     public GoiTin() {
     }
@@ -68,7 +69,7 @@ public class GoiTin implements Serializable {
         this.id = id;
     }
 
-    public GoiTin(Integer id, String tenGoiTin, int soTin, float giaBan) {
+    public GoiTin(Integer id, String tenGoiTin, int soTin, long giaBan) {
         this.id = id;
         this.tenGoiTin = tenGoiTin;
         this.soTin = soTin;
@@ -99,11 +100,11 @@ public class GoiTin implements Serializable {
         this.soTin = soTin;
     }
 
-    public float getGiaBan() {
+    public long getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(float giaBan) {
+    public void setGiaBan(long giaBan) {
         this.giaBan = giaBan;
     }
 
@@ -114,6 +115,15 @@ public class GoiTin implements Serializable {
 
     public void setPhieuMuaTinList(List<PhieuMuaTin> phieuMuaTinList) {
         this.phieuMuaTinList = phieuMuaTinList;
+    }
+
+    @XmlTransient
+    public List<PhieuMuaTinOffline> getPhieuMuaTinOfflineList() {
+        return phieuMuaTinOfflineList;
+    }
+
+    public void setPhieuMuaTinOfflineList(List<PhieuMuaTinOffline> phieuMuaTinOfflineList) {
+        this.phieuMuaTinOfflineList = phieuMuaTinOfflineList;
     }
 
     @Override

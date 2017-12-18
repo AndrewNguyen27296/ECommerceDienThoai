@@ -28,15 +28,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author HOME
  */
 @Entity
-@Table(name = "so_tin_ton")
+@Table(name = "phieu_nop_phat")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SoTinTon.findAll", query = "SELECT s FROM SoTinTon s")
-    , @NamedQuery(name = "SoTinTon.findById", query = "SELECT s FROM SoTinTon s WHERE s.id = :id")
-    , @NamedQuery(name = "SoTinTon.findBySoTinTon", query = "SELECT s FROM SoTinTon s WHERE s.soTinTon = :soTinTon")
-    , @NamedQuery(name = "SoTinTon.findBySoTinDaDung", query = "SELECT s FROM SoTinTon s WHERE s.soTinDaDung = :soTinDaDung")
-    , @NamedQuery(name = "SoTinTon.findByNgayCapNhat", query = "SELECT s FROM SoTinTon s WHERE s.ngayCapNhat = :ngayCapNhat")})
-public class SoTinTon implements Serializable {
+    @NamedQuery(name = "PhieuNopPhat.findAll", query = "SELECT p FROM PhieuNopPhat p")
+    , @NamedQuery(name = "PhieuNopPhat.findById", query = "SELECT p FROM PhieuNopPhat p WHERE p.id = :id")
+    , @NamedQuery(name = "PhieuNopPhat.findByNgayNopPhat", query = "SELECT p FROM PhieuNopPhat p WHERE p.ngayNopPhat = :ngayNopPhat")
+    , @NamedQuery(name = "PhieuNopPhat.findBySoTien", query = "SELECT p FROM PhieuNopPhat p WHERE p.soTien = :soTien")})
+public class PhieuNopPhat implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,33 +45,31 @@ public class SoTinTon implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "so_tin_ton")
-    private int soTinTon;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "so_tin_da_dung")
-    private int soTinDaDung;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ngay_cap_nhat")
+    @Column(name = "ngay_nop_phat")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayCapNhat;
+    private Date ngayNopPhat;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "so_tien")
+    private long soTien;
+    @JoinColumn(name = "id_admin", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Admin idAdmin;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
 
-    public SoTinTon() {
+    public PhieuNopPhat() {
     }
 
-    public SoTinTon(Integer id) {
+    public PhieuNopPhat(Integer id) {
         this.id = id;
     }
 
-    public SoTinTon(Integer id, int soTinTon, int soTinDaDung, Date ngayCapNhat) {
+    public PhieuNopPhat(Integer id, Date ngayNopPhat, long soTien) {
         this.id = id;
-        this.soTinTon = soTinTon;
-        this.soTinDaDung = soTinDaDung;
-        this.ngayCapNhat = ngayCapNhat;
+        this.ngayNopPhat = ngayNopPhat;
+        this.soTien = soTien;
     }
 
     public Integer getId() {
@@ -83,28 +80,28 @@ public class SoTinTon implements Serializable {
         this.id = id;
     }
 
-    public int getSoTinTon() {
-        return soTinTon;
+    public Date getNgayNopPhat() {
+        return ngayNopPhat;
     }
 
-    public void setSoTinTon(int soTinTon) {
-        this.soTinTon = soTinTon;
+    public void setNgayNopPhat(Date ngayNopPhat) {
+        this.ngayNopPhat = ngayNopPhat;
     }
 
-    public int getSoTinDaDung() {
-        return soTinDaDung;
+    public long getSoTien() {
+        return soTien;
     }
 
-    public void setSoTinDaDung(int soTinDaDung) {
-        this.soTinDaDung = soTinDaDung;
+    public void setSoTien(long soTien) {
+        this.soTien = soTien;
     }
 
-    public Date getNgayCapNhat() {
-        return ngayCapNhat;
+    public Admin getIdAdmin() {
+        return idAdmin;
     }
 
-    public void setNgayCapNhat(Date ngayCapNhat) {
-        this.ngayCapNhat = ngayCapNhat;
+    public void setIdAdmin(Admin idAdmin) {
+        this.idAdmin = idAdmin;
     }
 
     public NguoiBan getIdNguoiBan() {
@@ -125,10 +122,10 @@ public class SoTinTon implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SoTinTon)) {
+        if (!(object instanceof PhieuNopPhat)) {
             return false;
         }
-        SoTinTon other = (SoTinTon) object;
+        PhieuNopPhat other = (PhieuNopPhat) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -137,7 +134,7 @@ public class SoTinTon implements Serializable {
 
     @Override
     public String toString() {
-        return "ejb.entities.SoTinTon[ id=" + id + " ]";
+        return "ejb.entities.PhieuNopPhat[ id=" + id + " ]";
     }
     
 }

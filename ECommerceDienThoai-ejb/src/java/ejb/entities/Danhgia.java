@@ -9,7 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,16 +22,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author XinKaChu
+ * @author HOME
  */
 @Entity
 @Table(name = "danh_gia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DanhGia.findAll", query = "SELECT d FROM DanhGia d"),
-    @NamedQuery(name = "DanhGia.findById", query = "SELECT d FROM DanhGia d WHERE d.id = :id"),
-    @NamedQuery(name = "DanhGia.findBySoDiem", query = "SELECT d FROM DanhGia d WHERE d.soDiem = :soDiem"),
-    @NamedQuery(name = "DanhGia.findBySuDung", query = "SELECT d FROM DanhGia d WHERE d.suDung = :suDung")})
+    @NamedQuery(name = "DanhGia.findAll", query = "SELECT d FROM DanhGia d")
+    , @NamedQuery(name = "DanhGia.findById", query = "SELECT d FROM DanhGia d WHERE d.id = :id")
+    , @NamedQuery(name = "DanhGia.findBySoDiem", query = "SELECT d FROM DanhGia d WHERE d.soDiem = :soDiem")
+    , @NamedQuery(name = "DanhGia.findBySuDung", query = "SELECT d FROM DanhGia d WHERE d.suDung = :suDung")})
 public class DanhGia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,11 +49,11 @@ public class DanhGia implements Serializable {
     @Column(name = "su_dung")
     private boolean suDung;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
-    @JoinColumn(name = "id_don_hang", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private PhieuMuaHang idDonHang;
+    @JoinColumn(name = "id_nguoi_mua", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private NguoiMua idNguoiMua;
 
     public DanhGia() {
     }
@@ -101,12 +100,12 @@ public class DanhGia implements Serializable {
         this.idNguoiBan = idNguoiBan;
     }
 
-    public PhieuMuaHang getIdDonHang() {
-        return idDonHang;
+    public NguoiMua getIdNguoiMua() {
+        return idNguoiMua;
     }
 
-    public void setIdDonHang(PhieuMuaHang idDonHang) {
-        this.idDonHang = idDonHang;
+    public void setIdNguoiMua(NguoiMua idNguoiMua) {
+        this.idNguoiMua = idNguoiMua;
     }
 
     @Override
