@@ -54,4 +54,18 @@ public class SoTinTonBusiness {
             return 0;
         }
     }
+    
+    public SoTinTon laySoTinTonMoiNhatTheoNguoiBan(Integer id, Date thoiGian) {
+        try {
+            Query q = em.createQuery("FROM SoTinTon s "
+                    + "WHERE s.idNguoiBan.id = :id AND s.ngayCapNhat <= :date "
+                    + "ORDER BY s.ngayCapNhat DESC");
+            q.setParameter("id", id);
+            q.setParameter("date", thoiGian);
+            SoTinTon soTin = (SoTinTon) q.getResultList().get(0);
+            return soTin;
+        } catch (Exception ex) {
+            return new SoTinTon();
+        }
+    }
 }

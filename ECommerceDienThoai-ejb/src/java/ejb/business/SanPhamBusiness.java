@@ -59,4 +59,11 @@ public class SanPhamBusiness {
         qr.setParameter("kw", "%" + keywords + "%");
         return qr.getResultList();
     }
+    
+    public void capNhatSLKhiBiHuy(int id, int soluong) {
+        Query query = em.createQuery("UPDATE SanPham s SET s.soLuong=:s WHERE s.id=:id");
+        query.setParameter("id", id);
+        query.setParameter("s", soluong);
+        query.executeUpdate();
+    }
 }

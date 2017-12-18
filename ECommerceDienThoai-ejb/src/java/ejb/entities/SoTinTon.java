@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "SoTinTon.findById", query = "SELECT s FROM SoTinTon s WHERE s.id = :id")
     , @NamedQuery(name = "SoTinTon.findBySoTinTon", query = "SELECT s FROM SoTinTon s WHERE s.soTinTon = :soTinTon")
     , @NamedQuery(name = "SoTinTon.findBySoTinDaDung", query = "SELECT s FROM SoTinTon s WHERE s.soTinDaDung = :soTinDaDung")
-    , @NamedQuery(name = "SoTinTon.findByNgayCapNhat", query = "SELECT s FROM SoTinTon s WHERE s.ngayCapNhat = :ngayCapNhat")})
+    , @NamedQuery(name = "SoTinTon.findByNgayCapNhat", query = "SELECT s FROM SoTinTon s WHERE s.ngayCapNhat = :ngayCapNhat")
+    , @NamedQuery(name = "SoTinTon.findByTangGiam", query = "SELECT s FROM SoTinTon s WHERE s.tangGiam = :tangGiam")})
 public class SoTinTon implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +58,10 @@ public class SoTinTon implements Serializable {
     @Column(name = "ngay_cap_nhat")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayCapNhat;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tang_giam")
+    private int tangGiam;
     @JoinColumn(name = "id_nguoi_ban", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private NguoiBan idNguoiBan;
@@ -68,11 +73,12 @@ public class SoTinTon implements Serializable {
         this.id = id;
     }
 
-    public SoTinTon(Integer id, int soTinTon, int soTinDaDung, Date ngayCapNhat) {
+    public SoTinTon(Integer id, int soTinTon, int soTinDaDung, Date ngayCapNhat, int tangGiam) {
         this.id = id;
         this.soTinTon = soTinTon;
         this.soTinDaDung = soTinDaDung;
         this.ngayCapNhat = ngayCapNhat;
+        this.tangGiam = tangGiam;
     }
 
     public Integer getId() {
@@ -105,6 +111,14 @@ public class SoTinTon implements Serializable {
 
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public int getTangGiam() {
+        return tangGiam;
+    }
+
+    public void setTangGiam(int tangGiam) {
+        this.tangGiam = tangGiam;
     }
 
     public NguoiBan getIdNguoiBan() {

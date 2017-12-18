@@ -7,6 +7,7 @@ package admin.controllers;
 
 import ejb.business.CtPhieuMuaHangBusiness;
 import ejb.business.DanhGiaBusiness;
+import ejb.business.SoTinTonBusiness;
 import ejb.business.ThongKeBusiness;
 import ejb.entities.Admin;
 import ejb.entities.CauHinh;
@@ -18,6 +19,7 @@ import ejb.entities.NguoiMua;
 import ejb.entities.PhieuMuaHang;
 import ejb.entities.PhieuMuaTinOffline;
 import ejb.entities.PhieuNopPhat;
+import ejb.entities.SoTinTon;
 import ejb.sessions.CauHinhFacade;
 import ejb.sessions.DanhGiaFacade;
 import ejb.sessions.GoiTinFacade;
@@ -25,6 +27,7 @@ import ejb.sessions.NguoiBanFacade;
 import ejb.sessions.PhieuMuaHangFacade;
 import ejb.sessions.PhieuMuaTinOfflineFacade;
 import ejb.sessions.PhieuNopPhatFacade;
+import ejb.sessions.SoTinTonFacade;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,6 +66,8 @@ public class AdminController {
     DanhGiaFacade danhGiaFacade = (DanhGiaFacade) LookupFactory.lookupFacadeBean("DanhGiaFacade");
     DanhGiaBusiness danhGiaBusiness = (DanhGiaBusiness) LookupFactory.lookupBusinessBean("DanhGiaBusiness");
     ThongKeBusiness thongKeBusiness = (ThongKeBusiness) LookupFactory.lookupBusinessBean("ThongKeBusiness");
+    SoTinTonBusiness soTinTonBusiness = (SoTinTonBusiness) LookupFactory.lookupBusinessBean("SoTinTonBusiness");
+    SoTinTonFacade soTinTonFacade = (SoTinTonFacade) LookupFactory.lookupFacadeBean("SoTinTonFacade");
     
     @RequestMapping("login")
     public String login() {
@@ -229,7 +234,25 @@ public class AdminController {
         try {
             phieuMuaTinOfflineFacade.create(phieuMuaTinOffline);
             //Cập nhật số lượng tin tồn của Merchant
-            //nguoiBan.gS
+            if (soTinTonBusiness.laySoTinTheoNguoiBanVaThoiGian(nguoiBan.getId(), new Date()) == 0) {
+                SoTinTon soTinTon = new SoTinTon();
+                soTinTon.setIdNguoiBan(nguoiBan);
+                soTinTon.setNgayCapNhat(new Date());
+                soTinTon.setSoTinTon(goiTin.getSoTin());
+                soTinTon.setSoTinDaDung(0);
+                soTinTon.setTangGiam(goiTin.getSoTin());
+                soTinTonFacade.create(soTinTon);
+            }
+            else {
+                SoTinTon soTinTon = soTinTonBusiness.laySoTinTonMoiNhatTheoNguoiBan(nguoiBan.getId(), new Date());
+                SoTinTon new_soTinTon = new SoTinTon();
+                new_soTinTon.setIdNguoiBan(nguoiBan);
+                new_soTinTon.setNgayCapNhat(new Date());
+                new_soTinTon.setSoTinTon(soTinTon.getSoTinTon() + goiTin.getSoTin());
+                new_soTinTon.setSoTinDaDung(soTinTon.getSoTinDaDung());
+                new_soTinTon.setTangGiam(goiTin.getSoTin());
+                soTinTonFacade.create(new_soTinTon);
+            }
         } catch (Exception e) {
             throw e;
         }

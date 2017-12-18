@@ -5,9 +5,12 @@
  */
 package merchant.controllers;
 
+import ejb.business.SanPhamBusiness;
 import ejb.entities.CtPhieuMuaHang;
 import ejb.entities.NguoiBan;
+import ejb.entities.SanPham;
 import ejb.sessions.CtPhieuMuaHangFacade;
+import ejb.sessions.SanPhamFacade;
 import ejb.sessions.TinhTrangFacade;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +37,8 @@ public class MerchantBillController {
     
     CtPhieuMuaHangFacade ctPhieuMuaHangFacade = (CtPhieuMuaHangFacade) LookupFactory.lookupFacadeBean("CtPhieuMuaHangFacade");
     TinhTrangFacade tinhTrangFacade = (TinhTrangFacade) LookupFactory.lookupFacadeBean("TinhTrangFacade");
+    SanPhamFacade sanPhamFacade = (SanPhamFacade) LookupFactory.lookupFacadeBean("SanPhamFacade");
+    SanPhamBusiness sanPhamBusiness = (SanPhamBusiness) LookupFactory.lookupBusinessBean("SanPhamBusiness");
     
     @RequestMapping("history")
     public String bill(Model model, HttpSession httpSession){
@@ -58,6 +63,10 @@ public class MerchantBillController {
         ct.setIdTinhTrang(tinhTrangFacade.find(tinhTrang));
         if (tinhTrang.equals("TC")) {
             ct.setNgayGiaoHang(new Date());
+        }
+        if (tinhTrang.equals("DH")) {
+            int sl_moi = ct.getIdSanPham().getSoLuong() + ct.getSoLuongMua();
+            sanPhamBusiness.capNhatSLKhiBiHuy(ct.getIdSanPham().getId(), sl_moi);
         }
         ctPhieuMuaHangFacade.edit(ct);
         return "redirect:/merchant/bill/history.php";
