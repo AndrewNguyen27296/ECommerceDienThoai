@@ -6,6 +6,7 @@
 package web.services;
 
 import ejb.business.SoTinTonBusiness;
+import ejb.entities.GoiTin;
 import ejb.entities.NguoiBan;
 import ejb.entities.PhieuMuaTin;
 import ejb.entities.SoTinTon;
@@ -54,5 +55,9 @@ public class GoiTinService {
     public List<PhieuMuaTin> layDanhSachPhieuMuaTin(HttpSession httpSession){
         NguoiBan nguoiBan = (NguoiBan) httpSession.getAttribute("nguoiBan");
         return nguoiBan.getPhieuMuaTinList();
+    }
+    
+    public GoiTin timGoiTinTheoId(String id) {
+        return goiTinFacade.find(id);
     }
 }

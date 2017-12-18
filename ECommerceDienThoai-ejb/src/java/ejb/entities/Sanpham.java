@@ -427,7 +427,7 @@ public class SanPham implements Serializable {
     public void setIdNguoiBan(NguoiBan idNguoiBan) {
         this.idNguoiBan = idNguoiBan;
     }
-
+    
     @XmlTransient
     public List<CtPhieuMuaHang> getCtPhieuMuaHangList() {
         return ctPhieuMuaHangList;

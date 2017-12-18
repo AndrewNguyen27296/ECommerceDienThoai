@@ -43,8 +43,6 @@
                             <f:formatNumber type="number" value="${row.idGoiTin.giaBan}" pattern="###,###,###"/> VNĐ
                         </td>
                         
-                            
-                       
                         
                         <td> ${row.ngayMua} </td>
                         
