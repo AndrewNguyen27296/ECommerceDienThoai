@@ -69,27 +69,88 @@ public class PostService {
         return hangSanXuatFacade.findAll();
     }
 
-    public String dangTin(Model model,SanPhamViewModel spVM, MultipartFile hinhAnh, 
-             HttpSession httpSession) {
-        SanPham sp = new SanPham();
+//    public String dangTin(Model model,SanPhamViewModel spVM, MultipartFile hinhAnh, 
+//             HttpSession httpSession) {
+//        SanPham sp = new SanPham();
+//
+//            sp.setAnHien(true);
+//            sp.setBaoHanh(spVM.getBaoHanh());
+//            sp.setIdHangSanXuat(hangSanXuatFacade.find(spVM.getIdHangSanXuat()));
+//            sp.setIdNguoiBan((NguoiBan) httpSession.getAttribute("nguoiBan"));
+//            sp.setTenMay(spVM.getTenMay());
+//            sp.setGiaBan(spVM.getGiaBan());
+//            sp.setMoTa(spVM.getMoTa());
+//            sp.setKichThuocManHinh(spVM.getKichThuocManHinh());
+//            sp.setCpu(spVM.getCpu());
+//            sp.setTocDoCpu(spVM.getTocDoCPU());
+//            sp.setRam(spVM.getRam());
+//            sp.setBoNhoTrong(spVM.getBoNhoTrong());
+//            sp.setHeDieuHanh(spVM.getHeDieuHanh());
+//            sp.setCameraTruoc(spVM.getCameraTruoc());
+//            sp.setCameraSau(spVM.getCameraSau());
+//            sp.setDungLuongPin(spVM.getDungLuongPin());
+//            sp.setTonKho(spVM.getTonKho());
+//            sp.setNgayDang(new Date());
+//            sp.setSoLanXem(0);
+//            sp.setSoLanMua(0);
+//            sp.setTrangThai(true);
+//        try {
+//            //Kiểm tra xem ngta có upload hình ko
+//			if (hinhAnh.isEmpty()) {
+//				sp.setHinhAnh("assets/images/sorry-image-not-available.jpg");
+//			}
+//			else {
+//				//gán tên hình vào thuộc tinh
+//				sp.setHinhAnh(hinhAnh.getOriginalFilename());
+//				
+//				//Lưu file hình vào thư mục
+//				String path = app.getRealPath("assets/images/products/" + sp.getHinhAnh());
+//				hinhAnh.transferTo(new File(path));
+//			}
+//			sanPhamFacade.create(sp);
+//                        System.out.println("thanh cong");
+//			model.addAttribute("message", "Đăng tin thành công");
+//			
+//                        return "redirect:/merchant/post/new.php";
+//                        
+//        } catch (Exception e) {
+//            System.out.println("that bai");
+//            model.addAttribute("message", "Insert that bai");
+//        }
+//        return "merchant/home/post";
+//    }
 
+    public List<SanPham> layDanhSachSanPham() {
+        return sanPhamFacade.findAll();
+    }
+    
+    public String dangTin(Model model, String tenMay, MultipartFile hinhAnh, Integer giaBan,
+                Integer soLuong, Integer hangSanXuat, String moTa, String kichThuocManHinh,
+                String cpu, String tocDoCPU,
+                String RAM, String boNhoTrong,
+                String heDieuHanh, String cameraTruoc,
+                String cameraSau, String dungLuongPin, 
+                Boolean theNhoNgoai, Boolean chongNuoc,
+                String baoHanh, Integer tonKho,
+                HttpSession httpSession){
+                SanPham sp = new SanPham();
             sp.setAnHien(true);
-            sp.setBaoHanh(spVM.getBaoHanh());
-            sp.setIdHangSanXuat(hangSanXuatFacade.find(spVM.getIdHangSanXuat()));
+            sp.setBaoHanh(baoHanh);
+            sp.setIdHangSanXuat(hangSanXuatFacade.find(hangSanXuat));
             sp.setIdNguoiBan((NguoiBan) httpSession.getAttribute("nguoiBan"));
-            sp.setTenMay(spVM.getTenMay());
-            sp.setGiaBan(spVM.getGiaBan());
-            sp.setMoTa(spVM.getMoTa());
-            sp.setKichThuocManHinh(spVM.getKichThuocManHinh());
-            sp.setCpu(spVM.getCpu());
-            sp.setTocDoCpu(spVM.getTocDoCPU());
-            sp.setRam(spVM.getRam());
-            sp.setBoNhoTrong(spVM.getBoNhoTrong());
-            sp.setHeDieuHanh(spVM.getHeDieuHanh());
-            sp.setCameraTruoc(spVM.getCameraTruoc());
-            sp.setCameraSau(spVM.getCameraSau());
-            sp.setDungLuongPin(spVM.getDungLuongPin());
-            sp.setTonKho(spVM.getTonKho());
+            sp.setTenMay(tenMay);
+            sp.setGiaBan(giaBan);
+            sp.setMoTa(moTa);
+            sp.setKichThuocManHinh(kichThuocManHinh);
+            sp.setCpu(cpu);
+            sp.setTocDoCpu(tocDoCPU); 
+            sp.setRam(RAM);
+            sp.setBoNhoTrong(boNhoTrong);
+            sp.setHeDieuHanh(heDieuHanh);
+            sp.setCameraTruoc(cameraTruoc);
+            sp.setCameraSau(cameraSau);
+            sp.setDungLuongPin(dungLuongPin);
+            sp.setTonKho(tonKho);
             sp.setNgayDang(new Date());
             sp.setSoLanXem(0);
             sp.setSoLanMua(0);
@@ -108,7 +169,7 @@ public class PostService {
 				hinhAnh.transferTo(new File(path));
 			}
 			sanPhamFacade.create(sp);
-                        System.out.println("thanh cong");
+                        System.out.println("Đăng thành công");
 			model.addAttribute("message", "Đăng tin thành công");
 			
                         return "redirect:/merchant/post/new.php";
@@ -119,9 +180,4 @@ public class PostService {
         }
         return "merchant/home/post";
     }
-
-    public List<SanPham> layDanhSachSanPham() {
-        return sanPhamFacade.findAll();
-    }
-
 }

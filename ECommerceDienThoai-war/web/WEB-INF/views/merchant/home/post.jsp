@@ -31,13 +31,13 @@
         <p>Số gói tin còn lại của bạn: <span style="color:red;">${soTinTon}</span></p>
         
         ${message}
-        <form:form action="merchant/post/new.php" method="POST" enctype="multipart/form-data" class="form-horizontal" modelAttribute="sanPham">
+        <form action="merchant/post/new.php" method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="col-sm-6">
             <div class="row">
 		<div class="form-group">
                     <label class="control-label col-sm-3">Tên máy: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="tenMay" placeholder="Nhập tên máy..."/>
+                        <input name="tenMay" value="" type="text" class="form-control" required=""/>
                     </div>
 		</div>
             </div>
@@ -55,7 +55,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Giá bán: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="giaBan"  placeholder="Nhập giá bán..."/>
+                        <input type="number" class="form-control" required="" name="giaBan"  placeholder="Nhập giá bán..."/>
                     </div>
 		</div>
             </div>
@@ -64,11 +64,11 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Hãng sản xuất: </label>
                     <div class="col-sm-6">
-                        <form:select cssClass="form-control" required="" path="hangSanXuat">
+                        <select class="form-control" required="" name="hangSanXuat">
                             <c:forEach var="row" items="${hangSanXuat}">
                                 <option value="${row.id}">${row.tenHang}</option>
                             </c:forEach>
-                        </form:select>
+                        </select>
                     </div>
 		</div>
             </div>
@@ -77,7 +77,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Mô tả: </label>
                     <div class="col-sm-6">
-                        <form:textarea rows="4" cssClass="form-control" required="" path="moTa"  placeholder="Nhập mô tả..." ></form:textarea>
+                        <textarea rows="4" class="form-control" required="" name="moTa"  placeholder="Nhập mô tả..." ></textarea>
                     </div>
 		</div>
             </div>
@@ -86,7 +86,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Kích thước màn hình: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="kichThuocManHinh"  placeholder="Nhập kích thước..."/>
+                        <input type="text" class="form-control" required="" name="kichThuocManHinh"  placeholder="Nhập kích thước..."/>
                     </div>
 		</div>
             </div>
@@ -95,7 +95,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Cpu: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="cpu"  placeholder="Nhập tên cpu..."/>
+                        <input type="text" class="form-control" required="" name="cpu"  placeholder="Nhập tên cpu..."/>
                     </div>
 		</div>
             </div>
@@ -104,7 +104,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Tốc độ cpu: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="tocDoCPU"  placeholder="Nhập tốc độ cpu..."/>
+                        <input type="text" class="form-control" required="" name="tocDoCPU"  placeholder="Nhập tốc độ cpu..."/>
                     </div>
 		</div>
             </div>
@@ -115,7 +115,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">RAM: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="RAM"  placeholder="Nhập dung lượng RAM..."/>
+                        <input type="text" class="form-control" required="" name="RAM"  placeholder="Nhập dung lượng RAM..."/>
                     </div>
 		</div>
             </div>
@@ -124,7 +124,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Bộ nhớ trong: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="boNhoTrong"  placeholder="Nhập dung lượng bộ nhớ trong..."/>
+                        <input type="text" class="form-control" required="" name="boNhoTrong"  placeholder="Nhập dung lượng bộ nhớ trong..."/>
                     </div>
 		</div>
             </div>
@@ -133,7 +133,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Hệ điều hành: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="heDieuHanh"  placeholder="Nhập hệ điều hành..."/>
+                        <input type="text" class="form-control" required="" name="heDieuHanh"  placeholder="Nhập hệ điều hành..."/>
                     </div>
 		</div>
             </div>
@@ -142,7 +142,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Camera trước: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="cameraTruoc"  placeholder="Nhập camera trước..."/>
+                        <input type="text" class="form-control" required="" name="cameraTruoc"  placeholder="Nhập camera trước..."/>
                     </div>
 		</div>
             </div>
@@ -151,7 +151,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Camera sau: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="cameraSau"  placeholder="Nhập camera sau..."/>
+                        <input type="text" class="form-control" required="" name="cameraSau"  placeholder="Nhập camera sau..."/>
                     </div>
 		</div>
             </div>
@@ -160,7 +160,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Dung lượng pin: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="dungLuongPin"  placeholder="Nhập dung lượng pin..."/>
+                        <input type="text" class="form-control" required="" name="dungLuongPin"  placeholder="Nhập dung lượng pin..."/>
                     </div>
 		</div>
             </div>
@@ -169,10 +169,10 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Thẻ nhớ ngoài: </label>
                     <div class="col-sm-6">
-                        <form:select cssClass="form-control" required="" path="theNhoNgoai">
-                            <option>Có</option>
-                            <option>Không</option>
-                        </form:select>
+                        <select class="form-control" required="" name="theNhoNgoai">
+                            <option value="true">Có</option>
+                            <option value="falsé">Không</option>
+                        </select>
                     </div>
 		</div>
             </div>
@@ -181,10 +181,10 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Chống nước: </label>
                     <div class="col-sm-6">
-                        <form:select cssClass="form-control" required="" path="chongNuoc">
-                            <option>Có</option>
-                            <option>Không</option>
-                        </form:select>
+                        <select class="form-control" required="" name="chongNuoc">
+                            <option value="true">Có</option>
+                            <option value="false">Không</option>
+                        </select>
                     </div>
 		</div>
             </div>
@@ -193,7 +193,7 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Bảo hành: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="baoHanh"  placeholder="Nhập thời hạn bảo hành..."/>
+                        <input type="text" class="form-control" required="" name="baoHanh"  placeholder="Nhập thời hạn bảo hành..."/>
                     </div>
 		</div>
             </div>
@@ -202,17 +202,16 @@
 		<div class="form-group">
                     <label class="control-label col-sm-3">Tồn kho: </label>
                     <div class="col-sm-6">
-                        <form:input type="text" cssClass="form-control" required="" path="tonKho"  placeholder="Nhập số lượng sản phầm mà bạn có..."/>
+                        <input type="number" class="form-control" required="" name="tonKho"  placeholder="Nhập số lượng sản phầm mà bạn có..."/>
                     </div>
 		</div>
             </div>
             </div>
             
             <div class="text-center">
-                <button class="btn btn-danger" style="width:200px" type="submit"
-                        >Đăng tin</button>
+                <button class="btn btn-danger" style="width:200px" type="submit">Đăng tin</button>
             </div>
-        </form:form>
+        </form>
         
         
         

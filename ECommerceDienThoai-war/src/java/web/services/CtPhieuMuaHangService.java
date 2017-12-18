@@ -25,4 +25,8 @@ public class CtPhieuMuaHangService {
         //List<CtPhieuMuaHang> list = ctPhieuMuaHangBusiness.layChiTietTheoMaPhieuMuaHang(id);
         return ctPhieuMuaHangBusiness.layChiTietTheoMaPhieuMuaHang(id);
     }
+    
+    public List<CtPhieuMuaHang> layDanhSachCtPhieuMuaHang() {
+        return ctPhieuMuaHangFacade.findAll();
+    }
 }

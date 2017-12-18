@@ -5,8 +5,22 @@
  */
 package merchant.controllers;
 
+import ejb.entities.CtPhieuMuaHang;
+import ejb.entities.NguoiBan;
+import ejb.sessions.CtPhieuMuaHangFacade;
+import ejb.sessions.TinhTrangFacade;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import web.services.CtPhieuMuaHangService;
+import web.services.LookupFactory;
 
 /**
  *
@@ -15,8 +29,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("merchant/bill")
 public class MerchantBillController {
+    @Autowired
+    CtPhieuMuaHangService ctPhieuMuaHangService;
+    
+    CtPhieuMuaHangFacade ctPhieuMuaHangFacade = (CtPhieuMuaHangFacade) LookupFactory.lookupFacadeBean("CtPhieuMuaHangFacade");
+    TinhTrangFacade tinhTrangFacade = (TinhTrangFacade) LookupFactory.lookupFacadeBean("TinhTrangFacade");
+    
     @RequestMapping("history")
-    public String bill(){
+    public String bill(Model model, HttpSession httpSession){
+        NguoiBan nguoiBan = (NguoiBan) httpSession.getAttribute("nguoiBan");
+       // List<CtPhieuMuaHang> ctPhieuMuaHang =  ctPhieuMuaHangService.layDanhSachCtPhieuMuaHang();
+        model.addAttribute("ctPhieuMuaHang", nguoiBan.getCtPhieuMuaHangList());
         return "merchant/home/bill-history";
+    }
+    
+    @RequestMapping("detail/{id}")
+    public String detail(@PathVariable("id") Integer id,
+            Model model)
+    {
+        model.addAttribute("ctPhieuMuaHang", ctPhieuMuaHangFacade.find(id));
+        return "merchant/home/purchase-detail";
+    }
+    
+    @RequestMapping(value="detail/{id}", method = RequestMethod.POST)
+    public String detail(@PathVariable("id") Integer id,
+            @RequestParam("tinhTrang") String tinhTrang){
+        CtPhieuMuaHang ct = ctPhieuMuaHangFacade.find(id);
+        ct.setIdTinhTrang(tinhTrangFacade.find(tinhTrang));
+        if (tinhTrang.equals("TC")) {
+            ct.setNgayGiaoHang(new Date());
+        }
+        ctPhieuMuaHangFacade.edit(ct);
+        return "redirect:/merchant/bill/history.php";
     }
 }

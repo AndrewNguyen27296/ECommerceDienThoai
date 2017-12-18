@@ -4,7 +4,9 @@
     Author     : XinKaChu
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,39 +52,52 @@
             <div class="row">
                 <div class="panel panel-primary filterable">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Users</h3>
+                        <h3 class="panel-title">Chi tiết đơn hàng</h3>
                         <div class="pull-right">
-                            <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                            <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>Bộ lọc</button>
                         </div>
                     </div>
                     <table class="table">
                         <thead>
                             <tr class="filters">
-                                <th><input type="text" class="form-control" placeholder="#" disabled></th>
-                                <th><input type="text" class="form-control" placeholder="First Name" disabled></th>
-                                <th><input type="text" class="form-control" placeholder="Last Name" disabled></th>
-                                <th><input type="text" class="form-control" placeholder="Username" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Người Mua" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Sản Phẩm" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Số Lượng" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Thành Tiền" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Ngày Đặt" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Thành phố" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Quận" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Tình Trạng" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="" disabled></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="ct" items="${ctPhieuMuaHang}">
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>${ct.idPhieuMuaHang.tenNguoiNhan}</td>
+                                <td>${ct.idSanPham.tenMay}</td>
+                                <td>${ct.soLuongMua}</td>
+                                <td><fmt:formatNumber value="${ct.thanhTien}" pattern="###,###,### VND"/></td>
+                                <td><fmt:formatDate pattern="dd-MM-yyyy" value="${ct.idPhieuMuaHang.ngayDatHang}"></fmt:formatDate></td>
+                                <td>${ct.idPhieuMuaHang.idThanhPho.tenThanhPho}</td>
+                                <td>${ct.idPhieuMuaHang.idQuanHuyen.tenQuanHuyen}</td>
+                                <c:choose>
+                                    <c:when test="${ct.idTinhTrang.id == 'XL'}">
+                                        <td>Đang xử lý</td>
+                                    </c:when>
+                                    <c:when test="${ct.idTinhTrang.id == 'DG'}">
+                                        <td>Đang giao</td>
+                                    </c:when>
+                                    <c:when test="${ct.idTinhTrang.id == 'DH'}">
+                                        <td>Đã hủy</td>
+                                    </c:when>
+                                    <c:when test="${ct.idTinhTrang.id == 'TC'}">
+                                        <td>Thành công</td>
+                                    </c:when>
+                                </c:choose>
+                                <td><a href="merchant/bill/detail/${ct.id}.php" style="background-color: #fefefe;">Xem chi tiết</a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

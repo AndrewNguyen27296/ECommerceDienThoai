@@ -38,7 +38,7 @@
             </li>
 
             <li><a href="merchant/bill/history.php"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Quản lý đơn hàng</span><div class="clearfix"></div></a></li>
-            <li id="menu-academico" ><a href="charts.html"><i class="fa fa-bar-chart"></i><span>Thống kê</span><div class="clearfix"></div></a></li>
+            <li id="menu-academico" ><a href="merchant/statistic/by-product.php"><i class="fa fa-bar-chart"></i><span>Thống kê</span><div class="clearfix"></div></a></li>
 
             <!--            <li id="menu-academico" ><a href="errorpage.html"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><span>Error Page</span><div class="clearfix"></div></a></li>
                         <li id="menu-academico" ><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i><span> UI Components</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>

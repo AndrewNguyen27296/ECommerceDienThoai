@@ -4,6 +4,7 @@
     Author     : XinKaChu
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
@@ -91,7 +92,7 @@
             </div>
             <div id="products" class="row list-group">
                 
-                <div class="item  col-xs-4 col-lg-4">
+<!--                <div class="item  col-xs-4 col-lg-4">
                     <div class="thumbnail">
                         <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
                         <div class="caption">
@@ -111,8 +112,30 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 
+                <c:forEach var="sp" items="${sanPham}">
+                <div class="item  col-xs-4 col-lg-4">
+                    <div class="thumbnail" style="height: 420px;">
+                        <img class="group list-group-image" src="assets/images/products/${sp.hinhAnh}" alt="" />
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading">
+                                </h4>
+                            <p class="group inner list-group-item-text">
+                                ${sp.tenMay}</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead">
+                                        <fmt:formatNumber value="${sp.giaBan}" pattern="###,###,### VNĐ"></fmt:formatNumber></p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <a class="btn btn-success" href="http://www.jquery2dotnet.com">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
 <!--                <div class="item  col-xs-4 col-lg-4">
                     <div class="thumbnail">
                         <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />

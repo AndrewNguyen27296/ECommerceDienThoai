@@ -52,17 +52,47 @@ public class MerchantPostController {
     @RequestMapping("list")
     public String list(Model model, HttpSession httpSession) {
         NguoiBan nguoiBan = (NguoiBan) httpSession.getAttribute("nguoiBan");
-        model.addAttribute("sanPham", httpSession.getAttribute("sanPham"));
+        model.addAttribute("sanPham", nguoiBan.getSanPhamList());
         return "merchant/home/post-list";
     }
 
-    @RequestMapping(value = "new", method=RequestMethod.POST)
-    public String dangTin(Model model,
-            @ModelAttribute("sanPham")  SanPhamViewModel sanPhamVM,
+//    @RequestMapping(value = "new", method=RequestMethod.POST)
+//    public String dangTin(Model model,
+//            @ModelAttribute("sanPham")  SanPhamViewModel sanPhamVM,
+//            @RequestParam("hinhAnh") MultipartFile hinhAnh,
+//            
+//            HttpSession httpSession) {
+//        String temp = postService.dangTin(model, sanPhamVM, hinhAnh, httpSession);
+//        return "redirect:/merchant/home/post-list";
+//    }
+    
+    @RequestMapping(value="new", method=RequestMethod.POST)
+    public String dangTin(Model model, 
+            @RequestParam(value = "tenMay", required = true) String tenMay,
             @RequestParam("hinhAnh") MultipartFile hinhAnh,
-            
-            HttpSession httpSession) {
-        String temp = postService.dangTin(model, sanPhamVM, hinhAnh, httpSession);
+            @RequestParam("giaBan") Integer giaBan,
+            @RequestParam("soLuong") Integer soLuong,
+            @RequestParam("hangSanXuat") Integer hangSanXuat,
+            @RequestParam("moTa") String moTa,
+            @RequestParam("kichThuocManHinh") String kichThuocManHinh,
+            @RequestParam("cpu") String cpu,
+            @RequestParam("tocDoCPU") String tocDoCPU,
+            @RequestParam("RAM") String RAM,
+            @RequestParam("boNhoTrong") String boNhoTrong,
+            @RequestParam("heDieuHanh") String heDieuHanh,
+            @RequestParam("cameraTruoc") String cameraTruoc,
+            @RequestParam("cameraSau") String cameraSau,
+            @RequestParam("dungLuongPin") String dungLuongPin,
+            @RequestParam("theNhoNgoai") Boolean theNhoNgoai,
+            @RequestParam("chongNuoc") Boolean chongNuoc,
+            @RequestParam("baoHanh") String baoHanh,
+            @RequestParam("tonKho") Integer tonKho,
+            HttpSession httpSession){
+        String temp = postService.dangTin(model, tenMay, hinhAnh, giaBan,
+                soLuong, hangSanXuat, moTa, kichThuocManHinh, cpu, tocDoCPU,
+                RAM, boNhoTrong, heDieuHanh, cameraTruoc, cameraSau,
+                dungLuongPin, theNhoNgoai, chongNuoc, baoHanh, tonKho, httpSession);
         return "redirect:/merchant/home/post-list";
     }
+            
 }
