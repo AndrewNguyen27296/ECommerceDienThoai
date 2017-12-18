@@ -32,21 +32,21 @@
             <div class="form-group" >
                 <div class="radio">
                     <label>
-                        <input type="radio" name="package" class="goiTin" id="goi1" value="0.01">
+                        <input type="radio" name="package" class="goiTin" id="goi1" value="5">
                         Gói cơ bản - 100k/5 tin
                     </label>
                 </div>
 
                 <div class="radio">
                     <label>
-                        <input type="radio" name="package" class="goiTin" checked="true" id="goi2" value="0.02">
+                        <input type="radio" name="package" class="goiTin" checked="true" id="goi2" value="10">
                         Gói mặc định - 200k/10 tin
                     </label>
                 </div>
 
                 <div class="radio">
                     <label>
-                        <input type="radio" name="package" class="goiTin" id="goi3" value="0.03">
+                        <input type="radio" name="package" class="goiTin" id="goi3" value="15">
                         Gói nâng cao - 300k/15 tin
                     </label>
                 </div>
